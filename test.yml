@@ -1,0 +1,4 @@
+aa: 1
+cc: !include: '2.yml'
+bb: 2
+bc: !include-raw: '1.txt'
