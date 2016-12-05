@@ -46,8 +46,8 @@ if __name__ == '__main__':
     parser.add_argument('--call-graph', default = call_graph_flag)
     args = parser.parse_args()
 
-    include_graph_flag = args.include-graph
-    call_graph_flag = args.call-graph
+    include_graph_flag = args.include_graph
+    call_graph_flag = args.call_graph
 
     Loader.add_constructor('!include:', include_constructor)
     Loader.add_constructor('!include-raw:', include_raw_constructor)
