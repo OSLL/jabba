@@ -1,0 +1,11 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"test.yml"
+	"2.yml"
+	"3.yml"
+		"2.yml" -> "3.yml" [label=include]
+		"test.yml" -> "2.yml" [label=include]
+	"1.txt"
+		"test.yml" -> "1.txt" [label="include-raw"]
+}
