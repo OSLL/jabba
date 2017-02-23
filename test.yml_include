@@ -4,8 +4,8 @@ size="8,5"
 	"test.yml"
 	"2.yml"
 	"3.yml"
-		"2.yml" -> "3.yml" [label=include]
-		"test.yml" -> "2.yml" [label=include]
+		"2.yml" -> "3.yml" [label=<<B>include</B>> color=green]
+		"test.yml" -> "2.yml" [label=<<B>include</B>> color=green]
 	"1.txt"
-		"test.yml" -> "1.txt" [label="include-raw"]
+		"test.yml" -> "1.txt" [label=<<B>include-raw</B>> color=red]
 }
