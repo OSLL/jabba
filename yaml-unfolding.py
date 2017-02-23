@@ -10,6 +10,16 @@ include_graph = gv.Digraph(format='svg')
 include_graph.body.extend(['rankdir=LR', 'size="8,5"'])
 include_list = []
 
+'''
+All visual settings we want to specify for include graph
+'''
+include_graph_settings = {
+    'edges': {
+        'include_color': 'green',
+        'include_raw_color': 'red',
+    }
+}
+
 call_graph_flag = False
 call_graph = gv.Digraph(format='svg')
 call_graph.body.extend(['rankdir=LR', 'size="8,5"'])
@@ -21,7 +31,8 @@ def include_constructor(loader, node):
 def include_raw_constructor(loader, node):
     if include_graph_flag:
         include_graph.node(node.value)
-        include_graph.edge(include_list[-1],node.value, label='include-raw')
+        include_graph.edge(include_list[-1],node.value, 
+                label='<<B>include-raw</B>>', color=include_graph_settings['edges']['include_raw_color'])
     text = open(node.value, 'r').read()
     
     return text
@@ -36,7 +47,8 @@ def unfold_yaml(file_name):
 
     if include_graph_flag and len(include_list) >= 2:
         include_list.pop()
-        include_graph.edge(include_list[-1], file_name, label='include') 
+        include_graph.edge(include_list[-1], file_name, 
+                label='<<B>include</B>>', color=include_graph_settings['edges']['include_color'])
     return initial_dict
 
 if __name__ == '__main__':
@@ -60,7 +72,5 @@ if __name__ == '__main__':
         include_graph.render(export_name)
 
     if call_graph_flag:
-        
-
         export_name = basename(args.file) + '_call'
         call_graph.render(export_name)
