@@ -6,7 +6,8 @@ import graphviz as gv
 from os.path import basename
 import os
 
-from IncludeGraph import IncludeGraph
+from include_graph import IncludeGraph
+from file_index import FileIndex
 
 include_graph = IncludeGraph()
 
@@ -14,6 +15,8 @@ call_graph_flag = False
 call_graph = gv.Digraph(format='svg')
 call_graph.body.extend(['rankdir=LR', 'size="8,5"'])
 call_list = []
+
+file_indexer = None
 
 def include_constructor(loader, node):
     v = unfold_yaml(node.value)
@@ -65,20 +68,7 @@ def get_yaml_from_name(name):
     Slow version that will scan all files in the directory for each call
     '''
 
-    cwd = os.getcwd()
-
-    # FIXME: Because we run script in root project, we also need to specify directory where all
-    # configs are. Do we need another command line parameter for that, or can we infer it somehow?
-    for filename in os.listdir(cwd + "/maxscale_jobs"):
-        if filename.endswith(".yaml"):
-            file_yaml = unfold_yaml("maxscale_jobs/" + filename)
-            file_yaml = file_yaml[0]
-
-            if 'job' in file_yaml:
-                if file_yaml['job']['name'] == name:
-                    return file_yaml
-
-    return None
+    return file_index.get_by_name(name)
 
 def extract_call(call):
     call = call[0]
@@ -116,6 +106,11 @@ if __name__ == '__main__':
     Loader.add_constructor('!include:', include_constructor)
     Loader.add_constructor('!include-raw:', include_raw_constructor)
     Loader.add_constructor('!include', include_constructor)
+
+    # FIXME: Because we run script in root project, we also need to specify directory where all
+    # configs are. Do we need another command line parameter for that, or can we infer it somehow?
+    file_index = FileIndex(os.getcwd() + "/maxscale_jobs", unfold_yaml)
+
     unfolded_yaml = unfold_yaml(args.file)
     #print(dump(unfolded_yaml, default_flow_style=False))
 
