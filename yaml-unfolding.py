@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import collections
+
 from yaml import load, Loader, dump
 from argparse import ArgumentParser
 import graphviz as gv
@@ -17,6 +19,14 @@ call_graph.body.extend(['rankdir=LR', 'size="8,5"'])
 call_list = []
 
 file_indexer = None
+
+'''
+Tuple for storing calls
+project_name is a name of a job that is called
+call_config is a config of call file, i.e. trigger-builds
+project_config is a config of job that is been called
+'''
+CallObject = collections.namedtuple('CallObject', ['project_name', 'call_config', 'project_config'])
 
 def include_constructor(loader, node):
     v = unfold_yaml(node.value)
@@ -54,8 +64,7 @@ def unfold_yaml(file_name):
 
 def get_calls(file_name):
     '''
-    Reads file by given name and returns array of tuples in form
-    (job_name, job_yaml) for all calls
+    Reads file by given name and returns CallObject array
     '''
     
     file_dict = unfold_yaml(file_name)
@@ -70,13 +79,10 @@ def get_yaml_from_name(name):
 
     return file_index.get_by_name(name)
 
-def extract_call(call):
-    call = call[0]
-    project = call['project']
-    file_yaml = get_yaml_from_name(project)
-    return (call['project'], file_yaml)
-
 def get_calls_from_dict(file_dict):
+    '''
+    Processes unfolded yaml object to CallObject array
+    '''
 
     calls = []
 
@@ -93,11 +99,23 @@ def get_calls_from_dict(file_dict):
     return calls
     
 
+def extract_call(call):
+    '''
+    Creates CallObject from call file (i.e. trigger-builds)
+    '''
+    call = call[0]
+    project = call['project']
+    file_yaml = get_yaml_from_name(project)
+
+    call_object = CallObject(project_name=project, call_config=call, project_config=file_yaml)
+    return call_object
+
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--file')
     parser.add_argument('--include-graph', default = include_graph.active)
     parser.add_argument('--call-graph', default = call_graph_flag)
+    parser.add_argument('--yaml-root', default='/')
     args = parser.parse_args()
 
     include_graph.active = args.include_graph
@@ -109,12 +127,15 @@ if __name__ == '__main__':
 
     # FIXME: Because we run script in root project, we also need to specify directory where all
     # configs are. Do we need another command line parameter for that, or can we infer it somehow?
-    file_index = FileIndex(os.getcwd() + "/maxscale_jobs", unfold_yaml)
+    file_index = FileIndex(os.getcwd() + args.yaml_root, unfold_yaml)
 
     unfolded_yaml = unfold_yaml(args.file)
     #print(dump(unfolded_yaml, default_flow_style=False))
 
-    print(get_calls(args.file))
+    call_objects = get_calls(args.file)
+    print(call_objects[0].project_name)
+    print(call_objects[0].project_config)
+    print(call_objects[0].call_config)
 
     if include_graph.active: 
         export_name = basename(args.file) + '_include'
