@@ -1,6 +1,6 @@
 # jenkins_job_builder_visualization
 
-![include_graph_exmaple](https://raw.githubusercontent.com/OSLL/jenkins_job_builder_visualization/master/test.yml_include.png)
+![include_graph_example](https://raw.githubusercontent.com/OSLL/jenkins_job_builder_visualization/master/test.yml_include.png)
 
 ## Prerequisites
 ### Python 2

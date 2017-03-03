@@ -1,0 +1,7 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"test_call.yml"
+	"./call_test2.yml"
+		"test_call.yml" -> "./call_test2.yml" [label=<<B>include</B>> color=green]
+}

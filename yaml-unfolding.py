@@ -13,9 +13,7 @@ from call_graph import CallGraph
 from file_index import FileIndex
 
 include_graph = IncludeGraph()
-call_graph = None
 
-file_indexer = None
 
 '''
 Tuple for storing calls
@@ -47,6 +45,7 @@ def unfold_yaml(file_name):
     Also adds all included files as nodes to include graph. To disable this,
     set include_graph.active = False before calling
     '''
+
     include_graph.add_node(file_name)
     include_graph.add_to_list(file_name)
 
@@ -120,16 +119,17 @@ if __name__ == '__main__':
     parser.add_argument('--include-graph', default = include_graph.active)
     parser.add_argument('--call-graph', default = call_graph.active)
     parser.add_argument('--yaml-root', default='/')
-    args = parser.parse_args()
 
-    include_graph.active = args.include_graph
-    call_graph.active = args.call_graph
+    args = parser.parse_args()
 
     Loader.add_constructor('!include:', include_constructor)
     Loader.add_constructor('!include-raw:', include_raw_constructor)
     Loader.add_constructor('!include', include_constructor)
 
     file_index = FileIndex(os.getcwd() + args.yaml_root, unfold_yaml)
+
+    include_graph.active = args.include_graph
+    call_graph.active = args.call_graph
 
     unfolded_yaml = unfold_yaml(args.file)
     #print(dump(unfolded_yaml, default_flow_style=False))
