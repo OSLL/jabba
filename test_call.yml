@@ -2,3 +2,4 @@
     name: test_call
     builders:
         - !include './call_test2.yml'
+        - !include './call_test3.yml'

@@ -38,7 +38,7 @@ def include_raw_constructor(loader, node):
     
     return text
 
-def unfold_yaml(file_name):
+def unfold_yaml(file_name, is_root=False):
     '''
     Unfolds file by given name
 
@@ -115,10 +115,12 @@ if __name__ == '__main__':
     call_graph = CallGraph(get_calls=get_calls_from_dict, unfold=unfold_yaml)
 
     parser = ArgumentParser()
-    parser.add_argument('--file')
-    parser.add_argument('--include-graph', default = include_graph.active)
-    parser.add_argument('--call-graph', default = call_graph.active)
+    parser.add_argument('--files', nargs='+', required=True, type=str)
+    parser.add_argument('--include-graph', dest='include_graph', action='store_true')
+    parser.add_argument('--call-graph', dest='call_graph', action='store_true')
     parser.add_argument('--yaml-root', default='/')
+
+    parser.set_defaults(include_graph=False, call_graph=False)
 
     args = parser.parse_args()
 
@@ -131,14 +133,19 @@ if __name__ == '__main__':
     include_graph.active = args.include_graph
     call_graph.active = args.call_graph
 
-    unfolded_yaml = unfold_yaml(args.file)
-    #print(dump(unfolded_yaml, default_flow_style=False))
+    files = args.files
+    # main_file is the one we pass to include graph
+    main_file = args.files[0]
 
     if include_graph.active: 
-        export_name = basename(args.file) + '_include'
+        unfolded_yaml = unfold_yaml(main_file, is_root=True)
+        export_name = basename(args.files[0]) + '_include'
         include_graph.render(export_name)
 
     if call_graph.active:
-        export_name = basename(args.file) + '_call'
-        call_graph.unfold_file(args.file)
+        export_name = basename(main_file) + '_call'
+
+        for file_name in files:
+            call_graph.unfold_file(file_name)
+
         call_graph.render(export_name)

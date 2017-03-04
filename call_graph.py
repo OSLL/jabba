@@ -27,19 +27,26 @@ class CallGraph:
         self._graph = {}
         # Configs for files
         self._configs = {}
+        # Roots are the jobs that were passed to `unfold_file` method
+        # We need to treat them differently
+        self._roots = set()
 
     def add_call_object(self, call_object):
         self.add_node(call_object.project_name, call_object.project_config)
         self.add_edge(call_object.caller_name, call_object.project_name, call_object.call_config)
 
-    def add_node(self, name, project_config):
+    def add_node(self, name, project_config, is_root=False):
         if name not in self._graph:
             self._graph[name] = []
             self._configs[name] = project_config
+            
+        if is_root:
+            self._roots.add(name)
 
     def add_edge(self, from_name, to_name, call_config):
-        call_edge = CallEdge(to_name, call_config)
-        self._graph[from_name].append(call_edge)
+        if not self.has_edge(from_name, to_name):
+            call_edge = CallEdge(to_name, call_config)
+            self._graph[from_name].append(call_edge)
 
     def has_edge(self, from_name, to_name):
 
@@ -58,7 +65,7 @@ class CallGraph:
         yaml_config = self.unfold(path)
         name = yaml_config[0]['job']['name']
 
-        self.add_node(name, yaml_config)
+        self.add_node(name, yaml_config, is_root=True)
 
         # Queue
         q = []
@@ -77,6 +84,19 @@ class CallGraph:
                     q.append(c)
 
     def render(self, path):
-        for node in self._graph:
-            for edge in self._graph[node]:
-                print("{} --> {}".format(node, edge.project_name))
+        for node in self._roots:
+            self.render_node(node, color='red')
+
+        for node in self._graph.keys():
+            if node not in self._roots:
+                self.render_node(node)
+
+        self.graph.render(path)
+
+    def render_node(self, name, color='black'):
+        self.graph.node(name, color=color)
+
+        edges = self._graph[name]
+
+        for edge in edges:
+            self.graph.edge(name, edge.project_name, label='call')
