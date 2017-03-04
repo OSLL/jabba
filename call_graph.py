@@ -40,12 +40,13 @@ class CallGraph:
             self._graph[name] = []
             self._configs[name] = project_config
             
-            if is_root:
-                self._roots.add(name)
+        if is_root:
+            self._roots.add(name)
 
     def add_edge(self, from_name, to_name, call_config):
-        call_edge = CallEdge(to_name, call_config)
-        self._graph[from_name].append(call_edge)
+        if not self.has_edge(from_name, to_name):
+            call_edge = CallEdge(to_name, call_config)
+            self._graph[from_name].append(call_edge)
 
     def has_edge(self, from_name, to_name):
 
@@ -84,7 +85,7 @@ class CallGraph:
 
     def render(self, path):
         for node in self._roots:
-            self.render_node(node)
+            self.render_node(node, color='red')
 
         for node in self._graph.keys():
             if node not in self._roots:
@@ -92,8 +93,8 @@ class CallGraph:
 
         self.graph.render(path)
 
-    def render_node(self, name):
-        self.graph.node(name)
+    def render_node(self, name, color='black'):
+        self.graph.node(name, color=color)
 
         edges = self._graph[name]
 
