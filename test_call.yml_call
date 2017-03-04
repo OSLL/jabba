@@ -1,0 +1,11 @@
+digraph {
+rankdir=LR
+size="8,5"
+	test_call
+		test_call -> test_call2 [label=call]
+	test_call3
+		test_call3 -> test_call2 [label=call]
+	test_call2
+		test_call2 -> test_call [label=call]
+		test_call2 -> test_call3 [label=call]
+}

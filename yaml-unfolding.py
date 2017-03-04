@@ -38,7 +38,7 @@ def include_raw_constructor(loader, node):
     
     return text
 
-def unfold_yaml(file_name):
+def unfold_yaml(file_name, is_root=False):
     '''
     Unfolds file by given name
 
@@ -131,7 +131,7 @@ if __name__ == '__main__':
     include_graph.active = args.include_graph
     call_graph.active = args.call_graph
 
-    unfolded_yaml = unfold_yaml(args.file)
+    unfolded_yaml = unfold_yaml(args.file, is_root=True)
     #print(dump(unfolded_yaml, default_flow_style=False))
 
     if include_graph.active: 
