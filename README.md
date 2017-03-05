@@ -27,9 +27,17 @@ Script that substitute ALL includes inside yaml and creates svg graph of include
 ## Examples
 
 ### Include graph
-../yaml-unfolding/yaml-unfolding.py --files test.yml --include-graph
+../yaml_unfolding/main.py --files test.yml --include-graph
 
-../yaml-unfolding/yaml-unfolding.py --files maxscale_jobs/run_test.yaml --include-graph --yaml-root /maxscale_jobs
+../yaml_unfolding/main.py --files maxscale_jobs/run_test.yaml --include-graph --yaml-root maxscale_jobs/
 
 ### Call graph
-./yaml-unfolding.py --files test_call.yml --call-graph
+../yaml_unfolding/main.py --files maxscale_jons/build_all.yml --call-graph --yaml-root maxscale_jobs/
+
+## Testing
+
+To run all test, run the following commands
+```
+cd job_visualization
+python -m unittest discover
+```

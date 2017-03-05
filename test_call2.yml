@@ -1,4 +1,0 @@
-- job:
-    name: test_call2
-    builders:
-        - !include './call_test.yml'
