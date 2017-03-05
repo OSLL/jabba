@@ -1,3 +1,0 @@
-trigger-builds:
-    - project: 'test_call2'
-      key: 'value'

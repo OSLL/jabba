@@ -1,0 +1,4 @@
+- job:
+    name: single
+    builders:
+        - !include './test/test_call_graph/test_data/call_empty.yml'
