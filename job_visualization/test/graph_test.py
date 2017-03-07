@@ -1,5 +1,6 @@
 
 import unittest
+import abc
 
 class GraphTest(unittest.TestCase):
 
@@ -9,16 +10,7 @@ class GraphTest(unittest.TestCase):
         If ref graph is not found, generate it
         '''
 
-        export_name = self.yaml_root + main_file + self.ext
-
-        if self.type == 'include_graph':
-            unfolded_yaml = self.yaml_unfolder.unfold_yaml(self.test_data + main_file, is_root=True)
-            self.yaml_unfolder.include_graph.render(export_name)
-        elif self.type == 'call_graph':
-            self.yaml_unfolder.call_graph.unfold_file(self.test_data + main_file)
-            self.yaml_unfolder.call_graph.render(export_name)
-        else:
-            raise Exception("Unknown graph type {}".format(self.type))
+        self.setUpYamlUnfolder(main_file)
 
         with open(self.test_data + main_file + self.ext, 'r') as test_file:
 
@@ -37,4 +29,6 @@ class GraphTest(unittest.TestCase):
 
                     self.assertTrue(True)
 
-
+    @abc.abstractmethod
+    def setUpYamlUnfolder(self, main_file):
+        pass
