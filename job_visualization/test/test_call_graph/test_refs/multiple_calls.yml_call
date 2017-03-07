@@ -1,0 +1,9 @@
+digraph {
+rankdir=LR
+size="8,5"
+	multiple [color=red]
+		multiple -> empty [label=call]
+		multiple -> empty_2 [label=call]
+	empty [color=black]
+	empty_2 [color=black]
+}
