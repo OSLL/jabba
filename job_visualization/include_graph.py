@@ -1,5 +1,8 @@
 
 import graphviz as gv
+
+import collections
+
 '''
 All visual settings we want to specify for include graph
 '''
@@ -11,6 +14,9 @@ graph_settings = {
     }
 }
 
+# path - path that is passed to !include or !include_raw
+# settings - settings of the edge (label, color)
+IncludeEdge = collections.namedtuple('IncludeEdge', ['path', 'settings'])
 
 class IncludeGraph:
 
@@ -22,11 +28,29 @@ class IncludeGraph:
 
         self.include_list = []
 
-    def add_node(self, text):
-        if self.active:
-            self.graph.node(text)
+        # Internal graph
+        # Represented as hashmap (path -> edges) where edges is list of IncludeEdge objects
+        self._graph = {}
+
+    def add_node(self, name):
+        if not self.active:
+            return
+
+        if name not in self._graph:
+            self._graph[name] = []
 
     def add_edge(self, node_from, node_to, label, color):
+        if not self.active:
+            return
+
+        self.add_node(node_from)
+        self.add_node(node_to)
+
+        if self.has_edge(node_from, node_to):
+            return
+
+        edges = self._graph[node_from]
+
         if color == 'include_color':
             color = graph_settings['edges']['include_color']
         elif color == 'include_raw_color':
@@ -34,20 +58,51 @@ class IncludeGraph:
         else:
             color = graph_settings['edges']['default_color']
 
-        self.graph.edge(node_from, node_to, label=label, color=color)
+        edges.append(IncludeEdge(path=node_to, settings = {
+            'label': label,
+            'color': color
+        }))
+
+    def has_edge(self, from_node, to_node):
+        if not self.active:
+            return False
+
+        if not from_node in self._graph:
+            return False
+
+        edges = self._graph[from_node]
+
+        for edge in edges:
+            if edge.path == to_node:
+                return True
+
+        return False
 
     def add_edge_from_last_node(self, text, label, color):
-        if self.active:
-            self.add_edge(self.include_list[-1], text, label=label, color=color)
+        if not self.active:
+            return
+
+        self.add_edge(self.include_list[-1], text, label=label, color=color)
 
     def add_to_list(self, v):
         if self.active:
             self.include_list.append(v)
 
     def pop_from_list(self):
-        if self.active:
-            return self.include_list.pop()
+        if not self.active:
+            return
+
+        return self.include_list.pop()
 
     def render(self, file_to):
-        if self.active:
-            self.graph.render(file_to)
+        if not self.active:
+            return
+
+        for path in self._graph.keys():
+            self.graph.node(path)
+
+            for edge in self._graph[path]:
+                self.graph.edge(path, edge.path, label=edge.settings['label'], color=edge.settings['color'])
+
+        self.graph.render(file_to)
+
