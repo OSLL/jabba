@@ -35,6 +35,8 @@ if __name__ == '__main__':
         export_name = basename(args.files[0]) + '_include'
         yaml_unfolder.include_graph.render(export_name)
 
+        print("Generated include graph at {}.svg".format(export_name))
+
     if yaml_unfolder.call_graph.active:
         export_name = basename(main_file) + '_call'
 
@@ -42,3 +44,5 @@ if __name__ == '__main__':
             yaml_unfolder.call_graph.unfold_file(file_name)
 
         yaml_unfolder.call_graph.render(export_name)
+
+        print("Generated call graph at {}.svg".format(export_name))
