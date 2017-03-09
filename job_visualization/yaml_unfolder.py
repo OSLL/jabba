@@ -96,7 +96,10 @@ class YamlUnfolder:
         if type(file_dict) == dict:
             for key in file_dict:
                 if key == 'trigger-builds':
-                    calls.append(self.extract_call(file_dict['trigger-builds'], from_name))
+                    call = self.extract_call(file_dict['trigger-builds'], from_name)
+                    calls.append(call)
+                elif key == 'trigger-parameterized-builds':
+                    calls.append(self.extract_call(file_dict['trigger-parameterized-builds'], from_name))
                 else:
                     calls.extend(self.get_calls_from_dict(file_dict[key], from_name))
         elif type(file_dict) == list:

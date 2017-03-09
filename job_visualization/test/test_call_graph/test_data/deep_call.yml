@@ -1,0 +1,4 @@
+- job:
+    name: deep
+    builders:
+        - !include './test/test_call_graph/test_data/call_multiple_calls.yml'

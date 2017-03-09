@@ -78,7 +78,7 @@ class CallGraph:
 
             self.add_call_object(call)
 
-            calls = self.get_calls(call.project_config, call.project_name)
+            calls = self.get_calls(call.project_config.yaml, call.project_name)
 
             for c in calls:
                 if not self.has_edge(c.caller_name, c.project_name):
