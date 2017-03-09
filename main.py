@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    yaml_root = os.getcwd() + '/' + args.yaml_root
+    yaml_root = args.yaml_root
 
     yaml_unfolder = YamlUnfolder(root=yaml_root)
 

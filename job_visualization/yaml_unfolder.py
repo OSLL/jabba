@@ -78,7 +78,7 @@ class YamlUnfolder:
 
         return calls
 
-    def get_yaml_from_name(self, name):
+    def get_data_from_name(self, name):
         '''
         Finds .yaml config by given name
         Slow version that will scan all files in the directory for each call
@@ -112,8 +112,8 @@ class YamlUnfolder:
         '''
         call = call[0]
         project = call['project']
-        file_yaml = self.get_yaml_from_name(project)
+        file_data = self.get_data_from_name(project)
 
-        call_object = CallObject(project_name=project, call_config=call, project_config=file_yaml, caller_name=from_name)
+        call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)
         return call_object
 

@@ -1,9 +1,9 @@
 digraph {
 rankdir=LR
 size="8,5"
-	multiple [color=red]
-		multiple -> empty [label=call]
-		multiple -> empty_2 [label=call]
-	empty [color=black]
-	empty_2 [color=black]
+	"test/test_call_graph/test_data/multiple_calls.yml" [color=red]
+		"test/test_call_graph/test_data/multiple_calls.yml" -> "test/test_call_graph/test_data//empty.yml" [label=call]
+		"test/test_call_graph/test_data/multiple_calls.yml" -> "test/test_call_graph/test_data//empty_2.yml" [label=call]
+	"test/test_call_graph/test_data//empty.yml" [color=black]
+	"test/test_call_graph/test_data//empty_2.yml" [color=black]
 }
