@@ -21,8 +21,7 @@ def convert_path(path):
     if os.path.isabs(path):
         raise Exception("Cannot include file with absolute path {}. Please use relative path instead".format((path)))
 
-    if path.startswith("./"):
-        return path[2:]
+    path = os.path.normpath(path)
 
     return path
     

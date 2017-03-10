@@ -4,6 +4,8 @@ import graphviz as gv
 import collections
 from file_data import FileData
 
+import yaml_unfolder
+
 CallEdge = collections.namedtuple('CallEdge', ['project_name', 'call_confing'])
 
 class CallGraph:
@@ -103,4 +105,5 @@ class CallGraph:
             self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label='call')
 
     def get_path_from_name(self, name):
-        return self._configs[name].path
+        path = self._configs[name].path
+        return yaml_unfolder.convert_path(path)
