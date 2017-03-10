@@ -13,7 +13,7 @@ test_data = 'test/test_call_graph/test_data/'
 class TestGetCalls(unittest.TestCase):
 
     def setUp(self):
-        yaml_root = os.getcwd() + '/' + test_data
+        yaml_root = test_data
         self.yaml_unfolder = YamlUnfolder(root=yaml_root)
 
     def testEmpty(self):
