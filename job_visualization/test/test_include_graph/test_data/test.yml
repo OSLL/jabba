@@ -1,4 +1,4 @@
 aa: 1
-cc: !include: '2.yml'
+cc: !include: 'test/test_include_graph/test_data/2.yml'
 bb: 2
-bc: !include-raw: '1.txt'
+bc: !include-raw: 'test/test_include_graph/test_data/1.txt'

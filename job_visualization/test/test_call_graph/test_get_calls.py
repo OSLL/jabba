@@ -34,7 +34,5 @@ class TestGetCalls(unittest.TestCase):
         self.assertEqual(calls[0].project_name, 'empty')
         self.assertEqual(calls[1].project_name, 'empty_2')
 
-
-
 if __name__ == "__main__":
     unittest.main()

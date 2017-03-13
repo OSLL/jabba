@@ -27,17 +27,19 @@ Script that substitute ALL includes inside yaml and creates svg graph of include
 ## Examples
 
 ### Include graph
-../yaml_unfolding/main.py --files test.yml --include-graph
+../yaml_unfolding/main.py --files test/test_include_graph/test_data/test.yml --yaml-root -test/test_include_graph/test_data/ -include-graph
 
 ../yaml_unfolding/main.py --files maxscale_jobs/run_test.yaml --include-graph --yaml-root maxscale_jobs/
 
 ### Call graph
-../yaml_unfolding/main.py --files maxscale_jons/build_all.yml --call-graph --yaml-root maxscale_jobs/
+../yaml_unfolding/main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/run_test.yaml --call-graph --yaml-root maxscale_jobs/
 
 ## Testing
 
 To run all test, run the following commands
 ```
-cd job_visualization
-python -m unittest discover
+./run_test.sh
 ```
+
+To add new tests, create new config files in test_data, then add it in test_*_graph.py.
+When you first run tests, missing ref files will be generated and will be used as correct ref files in the next test runs. You can check ref files in `test_refs/` folder.
