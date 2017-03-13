@@ -3,13 +3,18 @@
 ![include_graph_example](https://raw.githubusercontent.com/OSLL/jenkins_job_builder_visualization/master/test.yml_include.png)
 
 ## Prerequisites
+
+```
+sudo apt-get install pygraphviz
+```
+
 ### Python 2
 ```
-sudo pip install graphviz
+sudo pip install graphviz pyyaml
 ```
 ### Python 3
 ```
-sudo pip3 install graphviz
+sudo pip3 install graphviz pyyaml
 ```
 
 If you see this error
