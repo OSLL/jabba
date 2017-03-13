@@ -3,4 +3,5 @@
 
     parameters:
         - !include 'test/test_include_graph/test_data/test.yml'
+        - !include './test/test_include_graph/test_data/test.yml'
         - !include 'test/test_include_graph/test_data/2.yml'
