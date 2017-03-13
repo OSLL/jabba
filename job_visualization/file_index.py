@@ -1,6 +1,9 @@
 
 import os
 
+import collections
+from file_data import FileData
+
 class FileIndex:
     """
     Indexes files for quick search by name or path
@@ -8,16 +11,20 @@ class FileIndex:
     def __init__(self, path, unfold):
         self.unfold = unfold
         self.path = path
+
+        # Dict: name -> (path, yaml)
         self.files = self.load_files(path)
 
     def load_files(self, path):
         files = {}
         for filename in os.listdir(path):
             if filename.endswith(".yaml") or filename.endswith(".yml"):
-                name, file_yaml = self.load_file(path + "/" + filename)
+                file_path = path + '/' + filename
+                name, file_yaml = self.load_file(file_path)
 
                 if name != None:
-                    files[name] = file_yaml
+                    file_data = FileData(path=file_path, yaml=file_yaml)
+                    files[name] = file_data
         return files
 
     def load_file(self, path):
