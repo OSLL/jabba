@@ -36,10 +36,24 @@ Script that substitute ALL includes inside yaml and creates svg graph of include
 
 ## Testing
 
-To run all test, run the following commands
+To run all the tests, run the following command
 ```
-./run_test.sh
+./scripts/run_tests.sh
 ```
 
-To add new tests, create new config files in test_data, then add it in test_*_graph.py.
-When you first run tests, missing ref files will be generated and will be used as correct ref files in the next test runs. You can check ref files in `test_refs/` folder.
+### Unit testing
+To run only unit tests, run
+```
+./scripts/run_unit_tests.sh
+```
+
+To add new tests, go to job_visualization/test folder.
+
+### Integration testing
+To run only integration tests, run
+```
+./scripts/run_integration_tests.sh
+```
+It will download all the data needed to run integration tests to `/tmp` folder.
+
+To add new test commands, add them to `integration_test_data/test_commands.txt`.
