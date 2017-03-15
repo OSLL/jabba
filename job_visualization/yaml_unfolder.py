@@ -5,7 +5,7 @@ import graphviz as gv
 import os
 
 from include_graph import IncludeGraph
-from call_graph import CallGraph
+import call_graph
 from file_index import FileIndex
 
 
@@ -21,8 +21,7 @@ def convert_path(path):
     if os.path.isabs(path):
         raise Exception("Cannot include file with absolute path {}. Please use relative path instead".format((path)))
 
-    if path.startswith("./"):
-        return path[2:]
+    path = os.path.normpath(path)
 
     return path
     
@@ -34,7 +33,7 @@ class YamlUnfolder:
         Loader.add_constructor('!include', self.include_constructor)
 
         self.include_graph = IncludeGraph()
-        self.call_graph = CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+        self.call_graph = call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
         self.file_index = FileIndex(root, self.unfold_yaml)
 
 
@@ -92,7 +91,7 @@ class YamlUnfolder:
 
         return calls
 
-    def get_yaml_from_name(self, name):
+    def get_data_from_name(self, name):
         '''
         Finds .yaml config by given name
         Slow version that will scan all files in the directory for each call
@@ -110,7 +109,10 @@ class YamlUnfolder:
         if type(file_dict) == dict:
             for key in file_dict:
                 if key == 'trigger-builds':
-                    calls.append(self.extract_call(file_dict['trigger-builds'], from_name))
+                    call = self.extract_call(file_dict['trigger-builds'], from_name)
+                    calls.append(call)
+                elif key == 'trigger-parameterized-builds':
+                    calls.append(self.extract_call(file_dict['trigger-parameterized-builds'], from_name))
                 else:
                     calls.extend(self.get_calls_from_dict(file_dict[key], from_name))
         elif type(file_dict) == list:
@@ -126,8 +128,8 @@ class YamlUnfolder:
         '''
         call = call[0]
         project = call['project']
-        file_yaml = self.get_yaml_from_name(project)
+        file_data = self.get_data_from_name(project)
 
-        call_object = CallObject(project_name=project, call_config=call, project_config=file_yaml, caller_name=from_name)
+        call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)
         return call_object
 
