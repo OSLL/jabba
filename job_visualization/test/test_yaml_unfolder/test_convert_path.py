@@ -24,3 +24,6 @@ class TestConvertPath(unittest.TestCase):
     def testConvertsRelativePath(self):
         self.assertEquals('file.yml', convert_path('./file.yml'))
         self.assertEquals('dir/file.yml', convert_path('./dir/file.yml'))
+
+    def testRemoveDuplicateSlashes(self):
+        self.assertEquals('dir/file.yml', convert_path('dir//file.yml'))

@@ -2,6 +2,9 @@
 import graphviz as gv
 
 import collections
+from file_data import FileData
+
+import yaml_unfolder
 
 CallEdge = collections.namedtuple('CallEdge', ['project_name', 'call_confing'])
 
@@ -65,7 +68,7 @@ class CallGraph:
         yaml_config = self.unfold(path)
         name = yaml_config[0]['job']['name']
 
-        self.add_node(name, yaml_config, is_root=True)
+        self.add_node(name, FileData(yaml=yaml_config, path=path), is_root=True)
 
         # Queue
         q = []
@@ -77,7 +80,7 @@ class CallGraph:
 
             self.add_call_object(call)
 
-            calls = self.get_calls(call.project_config, call.project_name)
+            calls = self.get_calls(call.project_config.yaml, call.project_name)
 
             for c in calls:
                 if not self.has_edge(c.caller_name, c.project_name):
@@ -94,9 +97,13 @@ class CallGraph:
         self.graph.render(path)
 
     def render_node(self, name, color='black'):
-        self.graph.node(name, color=color)
+        self.graph.node(self.get_path_from_name(name), color=color)
 
         edges = self._graph[name]
 
         for edge in edges:
-            self.graph.edge(name, edge.project_name, label='call')
+            self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label='call')
+
+    def get_path_from_name(self, name):
+        path = self._configs[name].path
+        return yaml_unfolder.convert_path(path)
