@@ -17,6 +17,15 @@ project_config is a config of job that is been called
 '''
 CallObject = collections.namedtuple('CallObject', ['project_name', 'call_config', 'project_config', 'caller_name'])
 
+def convert_path(path):
+    if os.path.isabs(path):
+        raise Exception("Cannot include file with absolute path {}. Please use relative path instead".format((path)))
+
+    if path.startswith("./"):
+        return path[2:]
+
+    return path
+    
 class YamlUnfolder:
 
     def __init__(self, root):
@@ -36,6 +45,8 @@ class YamlUnfolder:
 
     def include_raw_constructor(self, loader, node):
 
+        node.value = convert_path(node.value)
+
         self.include_graph.add_node(node.value)
         self.include_graph.add_edge_from_last_node(node.value, 
                     label='<<B>include-raw</B>>', color='include_raw_color')
@@ -53,6 +64,8 @@ class YamlUnfolder:
         set include_graph.active = False before calling
         '''
 
+        file_name = convert_path(file_name)
+
         self.include_graph.add_node(file_name)
         self.include_graph.add_to_list(file_name)
 
@@ -64,6 +77,7 @@ class YamlUnfolder:
                 self.include_graph.add_edge_from_last_node(file_name, 
                         label='<<B>include</B>>', color='include_color')
             return initial_dict
+
 
     def get_calls(self, file_name):
         '''

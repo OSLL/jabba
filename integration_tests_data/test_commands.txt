@@ -1,0 +1,3 @@
+main.py --files maxscale_jobs/build_all.yaml --call-graph --yaml-root maxscale_jobs/
+main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/
+main.py --files maxscale_jobs/build_all.yaml --include-graph --yaml-root maxscale_jobs/

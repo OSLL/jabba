@@ -22,7 +22,7 @@ class TestIncludeGraph(GraphTest):
         self.test_data = 'test/test_include_graph/test_data/'
         self.test_refs = 'test/test_include_graph/test_refs/'
 
-        self.yaml_root = os.getcwd() + '/' + self.test_data
+        self.yaml_root = self.test_data
         self.yaml_unfolder = YamlUnfolder(root=self.yaml_root)
         self.yaml_unfolder.include_graph.active = True
         self.ext = '_include'
