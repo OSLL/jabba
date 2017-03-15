@@ -1,11 +1,11 @@
 digraph {
 rankdir=LR
 size="8,5"
-	"test/test_include_graph/test_data/test.yml"
-	"test/test_include_graph/test_data/2.yml"
-	"test/test_include_graph/test_data/3.yml"
-		"test/test_include_graph/test_data/2.yml" -> "test/test_include_graph/test_data/3.yml" [label=<<B>include</B>> color=green]
-		"test/test_include_graph/test_data/test.yml" -> "test/test_include_graph/test_data/2.yml" [label=<<B>include</B>> color=green]
 	"test/test_include_graph/test_data/1.txt"
+	"test/test_include_graph/test_data/test.yml"
+		"test/test_include_graph/test_data/test.yml" -> "test/test_include_graph/test_data/2.yml" [label=<<B>include</B>> color=green]
 		"test/test_include_graph/test_data/test.yml" -> "test/test_include_graph/test_data/1.txt" [label=<<B>include-raw</B>> color=red]
+	"test/test_include_graph/test_data/3.yml"
+	"test/test_include_graph/test_data/2.yml"
+		"test/test_include_graph/test_data/2.yml" -> "test/test_include_graph/test_data/3.yml" [label=<<B>include</B>> color=green]
 }

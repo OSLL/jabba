@@ -5,7 +5,7 @@ import graphviz as gv
 import os
 
 from include_graph import IncludeGraph
-from call_graph import CallGraph
+import call_graph
 from file_index import FileIndex
 
 
@@ -33,7 +33,7 @@ class YamlUnfolder:
         Loader.add_constructor('!include', self.include_constructor)
 
         self.include_graph = IncludeGraph()
-        self.call_graph = CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+        self.call_graph = call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
         self.file_index = FileIndex(root, self.unfold_yaml)
 
 
