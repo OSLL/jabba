@@ -1,3 +1,8 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
 echo -e "\e[93mRunning integration tests\e[0m"
 
 ./scripts/download_maxscale_jobs.sh
