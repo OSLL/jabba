@@ -25,8 +25,15 @@ do
     cd $cwd
 done < <(cat "integration_tests_data/test_commands.txt")
 
-echo -e "\e[92mAll tests done\e[0m"
+echo -e "\e[93mAll tests done\e[0m"
 echo $(($total_ER + $total_OK))" tests run"
 echo $total_ER" errors"
+
+if [ $exit_code == 0 ]
+then
+    echo -e "\e[92mOK\e[0m"
+else
+    echo -e "\e[31mFAIL\e[0m"
+fi
 
 exit $exit_code
