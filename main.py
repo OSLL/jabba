@@ -14,6 +14,7 @@ if __name__ == '__main__':
     parser.add_argument('--include-graph', dest='include_graph', action='store_true')
     parser.add_argument('--call-graph', dest='call_graph', action='store_true')
     parser.add_argument('--yaml-root', default='')
+    parser.add_argument('--call-display', choices=['none', 'text', 'edge'], default='none')
 
     parser.set_defaults(include_graph=False, call_graph=False)
 
@@ -25,6 +26,8 @@ if __name__ == '__main__':
 
     yaml_unfolder.include_graph.active = args.include_graph
     yaml_unfolder.call_graph.active = args.call_graph
+
+    yaml_unfolder.call_graph.call_display = args.call_display
 
     files = args.files
     # main_file is the one we pass to include graph

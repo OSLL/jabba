@@ -1,0 +1,9 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"test/test_call_graph/test_data/params_call_none.yml" [color=red]
+		"test/test_call_graph/test_data/params_call_none.yml" -> "test/test_call_graph/test_data/empty_2.yml" [label=call]
+		"test/test_call_graph/test_data/params_call_none.yml" -> "test/test_call_graph/test_data/empty.yml" [label=call]
+	"test/test_call_graph/test_data/empty.yml" [color=black]
+	"test/test_call_graph/test_data/empty_2.yml" [color=black]
+}

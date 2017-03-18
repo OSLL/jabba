@@ -126,7 +126,7 @@ class YamlUnfolder:
         '''
         Creates CallObject from call file (i.e. trigger-builds)
         '''
-        call = call[0]
+        call = collections.defaultdict(lambda: None, call[0])
         project = call['project']
         file_data = self.get_data_from_name(project)
 
