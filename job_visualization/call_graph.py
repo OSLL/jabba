@@ -6,7 +6,7 @@ from file_data import FileData
 
 import yaml_unfolder
 
-CallEdge = collections.namedtuple('CallEdge', ['project_name', 'call_confing'])
+CallEdge = collections.namedtuple('CallEdge', ['project_name', 'call_config'])
 
 class CallGraph:
     '''
@@ -33,6 +33,12 @@ class CallGraph:
         # Roots are the jobs that were passed to `unfold_file` method
         # We need to treat them differently
         self._roots = set()
+
+        # How to display call information
+        # none - don't display
+        # text - display as plain text above the edge
+        # edge - display as node embeded in the edge
+        self.call_display = 'none'
 
     def add_call_object(self, call_object):
         self.add_node(call_object.project_name, call_object.project_config)
@@ -102,7 +108,58 @@ class CallGraph:
         edges = self._graph[name]
 
         for edge in edges:
-            self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label='call')
+            if self.call_display == 'none':
+                self.render_simple_edge(name, edge)
+            elif self.call_display == 'text':
+                self.render_edge_with_label(name, edge)
+            elif self.call_display == 'edge':
+                self.render_edge_with_node_label(name, edge)
+            else:
+                raise Exception('Incorrect call display option {}'.format(self.call_display))
+
+    def render_simple_edge(self, name, edge, label="call"):
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label)
+
+    def render_edge_with_label(self, name, edge):
+        props_to_display = self.extract_props(edge.call_config)
+
+        label = ''
+
+        for prop, value in props_to_display.items():
+            if value is not None:
+                label += "\l{}:{}".format(prop, value) 
+
+        if label == "":
+            label = "no params"
+
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label)
+
+    def render_edge_with_node_label(self, name, edge):
+        props_to_display = self.extract_props(edge.call_config)
+
+        label = "|".join("{}:{}".format(prop, value) for prop, value in props_to_display.items() if value is not None)
+
+        if label != "":
+            edge_node_name = "{}-{}".format(name, edge.project_name)
+
+            self.graph.node(edge_node_name, label=label, shape="record")
+
+            self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none")
+            self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name))
+
+        else:
+            self.render_simple_edge(name, edge, label="no params")
+
+    def extract_props(self, call_config):
+        '''
+        Extract all valuable properties to be displayed
+        '''
+
+        props = {}
+
+        props['same-node'] = call_config['same-node']
+
+        return props
 
     def get_path_from_name(self, name):
         path = self._configs[name].path
