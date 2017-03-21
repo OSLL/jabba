@@ -19,6 +19,8 @@ class TestGetCalls(unittest.TestCase):
     def testEmpty(self):
         calls = self.yaml_unfolder.get_calls(test_data + 'empty.yml')
 
+        print(calls)
+
         self.assertEqual(len(calls), 0)
 
     def testSingleCall(self):

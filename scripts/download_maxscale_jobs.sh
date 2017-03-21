@@ -7,7 +7,7 @@ if [ ! -e "/tmp/maxscale-jenkins-jobs" ]; then
     {
         git clone git@github.com:mariadb-corporation/maxscale-jenkins-jobs.git /tmp/maxscale-jenkins-jobs
         cd /tmp/maxscale-jenkins-jobs/
-        git checkout 2d47218a68899c814d0e83c181e239ba73f3dd7d
+        git checkout 89af41b82fa9b678bc305bb332df5bdd7b1359f9
     } &> /dev/null
 
     cd $cwd
