@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ ! -e "/tmp/maxscale-jenkins-jobs" ]; then
     echo -e "\e[92mCloning to /tmp/maxscale-jenkins-jobs\e[0m"
     cwd=$(pwd)
