@@ -2,10 +2,12 @@ digraph {
 rankdir=LR
 size="8,5"
 	"test/test_call_graph/test_data/params_call_edge.yml" [color=red]
-	"params_call_none-empty_2" [label="same-node:True" shape=record]
+	"params_call_none-empty_2" [label=<same-node:True> shape=record]
 		"test/test_call_graph/test_data/params_call_edge.yml" -> "params_call_none-empty_2" [arrowhead=none]
 		"params_call_none-empty_2" -> "test/test_call_graph/test_data/empty_2.yml"
-		"test/test_call_graph/test_data/params_call_edge.yml" -> "test/test_call_graph/test_data/empty.yml" [label="no params"]
+	"params_call_none-empty" [label=<same-node: <FONT color="red">not set</FONT>> shape=record]
+		"test/test_call_graph/test_data/params_call_edge.yml" -> "params_call_none-empty" [arrowhead=none]
+		"params_call_none-empty" -> "test/test_call_graph/test_data/empty.yml"
 	"test/test_call_graph/test_data/empty.yml" [color=black]
 	"test/test_call_graph/test_data/empty_2.yml" [color=black]
 }
