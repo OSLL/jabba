@@ -8,7 +8,8 @@ sys.path.append("../../")
 from yaml_unfolder import YamlUnfolder
 from test.graph_test import GraphTest
 
-class TestCallGraph(GraphTest):
+
+class TestLegend(GraphTest):
 
     def setUpYamlUnfolder(self, main_file):
         export_name = self.yaml_root + main_file + self.ext
@@ -17,18 +18,17 @@ class TestCallGraph(GraphTest):
         self.yaml_unfolder.call_graph.render(export_name)
 
     def setUp(self):
-        self.test_data = 'test/test_call_graph/test_data/'
-        self.test_refs = 'test/test_call_graph/test_refs/'
+        self.test_data = 'test/test_graph/test_data/'
+        self.test_refs = 'test/test_graph/test_refs/'
 
         self.yaml_root = self.test_data
         self.yaml_unfolder = YamlUnfolder(root=self.yaml_root)
+        self.yaml_unfolder.call_graph.draw_legend = True
+
         self.ext = '_call'
 
-    def testExample1(self):
-        self.run_test_for_file('multiple_calls.yml')
-
-    def testDeepExample(self):
-        self.run_test_for_file('deep_call.yml')
+    def testLegend(self):
+        self.run_test_for_file('test_legend.yml')
 
 if __name__ == "__main__":
     unittest.main()

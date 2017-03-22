@@ -15,8 +15,9 @@ if __name__ == '__main__':
     parser.add_argument('--call-graph', dest='call_graph', action='store_true')
     parser.add_argument('--yaml-root', default='')
     parser.add_argument('--call-display', choices=['none', 'text', 'edge'], default='none')
+    parser.add_argument('--legend', action='store_true', dest='draw_legend')
 
-    parser.set_defaults(include_graph=False, call_graph=False)
+    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False)
 
     args = parser.parse_args()
 
@@ -26,6 +27,9 @@ if __name__ == '__main__':
 
     yaml_unfolder.include_graph.active = args.include_graph
     yaml_unfolder.call_graph.active = args.call_graph
+
+    yaml_unfolder.include_graph.draw_legend = args.draw_legend
+    yaml_unfolder.call_graph.draw_legend = args.draw_legend
 
     yaml_unfolder.call_graph.call_display = args.call_display
 
