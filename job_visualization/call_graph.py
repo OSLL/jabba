@@ -48,7 +48,7 @@ class CallGraph(Graph):
 
     def init_legend(self):
         self.legend.add_item('publishers', {'color': 'green'})
-        self.legend.add_item('builders', {'color': 'red'})
+        self.legend.add_item('builders', {'color': 'blue'})
 
     def add_call_object(self, call_object):
         self.add_node(call_object.project_name, call_object.project_config)
@@ -175,7 +175,7 @@ class CallGraph(Graph):
             return {'color': 'green'}
 
         if edge.call_config['section'] == 'builders':
-            return {'color': 'red'}
+            return {'color': 'blue'}
 
         return {}
 

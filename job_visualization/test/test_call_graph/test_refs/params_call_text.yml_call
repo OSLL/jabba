@@ -2,8 +2,8 @@ digraph {
 rankdir=LR
 size="8,5"
 	"test/test_call_graph/test_data/params_call_text.yml" [color=red]
-		"test/test_call_graph/test_data/params_call_text.yml" -> "test/test_call_graph/test_data/empty_2.yml" [label="\lsame-node:True" color=red]
-		"test/test_call_graph/test_data/params_call_text.yml" -> "test/test_call_graph/test_data/empty.yml" [label="no params" color=red]
+		"test/test_call_graph/test_data/params_call_text.yml" -> "test/test_call_graph/test_data/empty_2.yml" [label="\lsame-node:True" color=blue]
+		"test/test_call_graph/test_data/params_call_text.yml" -> "test/test_call_graph/test_data/empty.yml" [label="no params" color=blue]
 	"test/test_call_graph/test_data/empty.yml" [color=black]
 	"test/test_call_graph/test_data/empty_2.yml" [color=black]
 }

@@ -27,8 +27,8 @@
 </g>
 <!-- test/test_graph/test_data/test_legend.yml&#45;&gt;test/test_graph/test_data/empty.yml -->
 <g id="edge1" class="edge"><title>test/test_graph/test_data/test_legend.yml&#45;&gt;test/test_graph/test_data/empty.yml</title>
-<path fill="none" stroke="red" d="M309.613,-18C336.516,-18 364.438,-18 391.13,-18"/>
-<polygon fill="red" stroke="red" points="391.295,-21.5001 401.295,-18 391.295,-14.5001 391.295,-21.5001"/>
+<path fill="none" stroke="blue" d="M309.613,-18C336.516,-18 364.438,-18 391.13,-18"/>
+<polygon fill="blue" stroke="blue" points="391.295,-21.5001 401.295,-18 391.295,-14.5001 391.295,-21.5001"/>
 <text text-anchor="middle" x="355.373" y="-21.8" font-family="Times,serif" font-size="14.00">call</text>
 </g>
 <!-- publishers&#45;1 -->
@@ -55,8 +55,8 @@
 </g>
 <!-- builders&#45;1&#45;&gt;builders&#45;2 -->
 <g id="edge3" class="edge"><title>builders&#45;1&#45;&gt;builders&#45;2</title>
-<path fill="none" stroke="red" d="M181.931,-78C248.631,-78 424.766,-78 501.229,-78"/>
-<polygon fill="red" stroke="red" points="501.335,-81.5001 511.335,-78 501.335,-74.5001 501.335,-81.5001"/>
+<path fill="none" stroke="blue" d="M181.931,-78C248.631,-78 424.766,-78 501.229,-78"/>
+<polygon fill="blue" stroke="blue" points="501.335,-81.5001 511.335,-78 501.335,-74.5001 501.335,-81.5001"/>
 <text text-anchor="middle" x="355.373" y="-81.8" font-family="Times,serif" font-size="14.00">builders</text>
 </g>
 </g>

@@ -21,8 +21,8 @@
 </g>
 <!-- test/test_call_graph/test_data/params_call_text.yml&#45;&gt;test/test_call_graph/test_data/empty_2.yml -->
 <g id="edge1" class="edge"><title>test/test_call_graph/test_data/params_call_text.yml&#45;&gt;test/test_call_graph/test_data/empty_2.yml</title>
-<path fill="none" stroke="red" d="M357.727,-54.273C409.324,-57.1843 466.09,-60.3873 517.01,-63.2604"/>
-<polygon fill="red" stroke="red" points="516.931,-66.7614 527.112,-63.8304 517.326,-59.7725 516.931,-66.7614"/>
+<path fill="none" stroke="blue" d="M357.727,-54.273C409.324,-57.1843 466.09,-60.3873 517.01,-63.2604"/>
+<polygon fill="blue" stroke="blue" points="516.931,-66.7614 527.112,-63.8304 517.326,-59.7725 516.931,-66.7614"/>
 <text text-anchor="middle" x="447.266" y="-64.8" font-family="Times,serif" font-size="14.00">same&#45;node:True</text>
 </g>
 <!-- test/test_call_graph/test_data/empty.yml -->
@@ -32,8 +32,8 @@
 </g>
 <!-- test/test_call_graph/test_data/params_call_text.yml&#45;&gt;test/test_call_graph/test_data/empty.yml -->
 <g id="edge2" class="edge"><title>test/test_call_graph/test_data/params_call_text.yml&#45;&gt;test/test_call_graph/test_data/empty.yml</title>
-<path fill="none" stroke="red" d="M357.727,-35.727C411.591,-32.6878 471.089,-29.3307 523.687,-26.3629"/>
-<polygon fill="red" stroke="red" points="523.981,-29.852 533.767,-25.7941 523.586,-22.8631 523.981,-29.852"/>
+<path fill="none" stroke="blue" d="M357.727,-35.727C411.591,-32.6878 471.089,-29.3307 523.687,-26.3629"/>
+<polygon fill="blue" stroke="blue" points="523.981,-29.852 533.767,-25.7941 523.586,-22.8631 523.981,-29.852"/>
 <text text-anchor="middle" x="447.266" y="-36.8" font-family="Times,serif" font-size="14.00">no params</text>
 </g>
 </g>

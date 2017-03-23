@@ -43,20 +43,20 @@
 </g>
 <!-- test/test_call_graph/test_data/sections.yml&#45;&gt;test/test_call_graph/test_data/empty.yml -->
 <g id="edge3" class="edge"><title>test/test_call_graph/test_data/sections.yml&#45;&gt;test/test_call_graph/test_data/empty.yml</title>
-<path fill="none" stroke="red" d="M227.186,-34.3493C269.416,-24.7633 325.45,-13.6173 375.772,-8.74563 530.118,6.19671 708.508,-1.43693 826.703,-9.95547"/>
-<polygon fill="red" stroke="red" points="826.652,-13.4611 836.882,-10.702 827.165,-6.47986 826.652,-13.4611"/>
+<path fill="none" stroke="blue" d="M227.186,-34.3493C269.416,-24.7633 325.45,-13.6173 375.772,-8.74563 530.118,6.19671 708.508,-1.43693 826.703,-9.95547"/>
+<polygon fill="blue" stroke="blue" points="826.652,-13.4611 836.882,-10.702 827.165,-6.47986 826.652,-13.4611"/>
 <text text-anchor="middle" x="557.755" y="-12.5456" font-family="Times,serif" font-size="14.00">call</text>
 </g>
 <!-- test/test_call_graph/test_data/multiple_calls.yml&#45;&gt;test/test_call_graph/test_data/empty_2.yml -->
 <g id="edge5" class="edge"><title>test/test_call_graph/test_data/multiple_calls.yml&#45;&gt;test/test_call_graph/test_data/empty_2.yml</title>
-<path fill="none" stroke="red" d="M694.436,-62.6439C735.147,-66.2139 779.823,-70.1317 820.633,-73.7105"/>
-<polygon fill="red" stroke="red" points="820.377,-77.2014 830.645,-74.5884 820.989,-70.2282 820.377,-77.2014"/>
+<path fill="none" stroke="blue" d="M694.436,-62.6439C735.147,-66.2139 779.823,-70.1317 820.633,-73.7105"/>
+<polygon fill="blue" stroke="blue" points="820.377,-77.2014 830.645,-74.5884 820.989,-70.2282 820.377,-77.2014"/>
 <text text-anchor="middle" x="767.739" y="-72.5456" font-family="Times,serif" font-size="14.00">call</text>
 </g>
 <!-- test/test_call_graph/test_data/multiple_calls.yml&#45;&gt;test/test_call_graph/test_data/empty.yml -->
 <g id="edge4" class="edge"><title>test/test_call_graph/test_data/multiple_calls.yml&#45;&gt;test/test_call_graph/test_data/empty.yml</title>
-<path fill="none" stroke="red" d="M704.824,-40.1323C741.547,-37.464 780.879,-34.6061 817.326,-31.9579"/>
-<polygon fill="red" stroke="red" points="817.805,-35.4324 827.525,-31.2168 817.298,-28.4508 817.805,-35.4324"/>
+<path fill="none" stroke="blue" d="M704.824,-40.1323C741.547,-37.464 780.879,-34.6061 817.326,-31.9579"/>
+<polygon fill="blue" stroke="blue" points="817.805,-35.4324 827.525,-31.2168 817.298,-28.4508 817.805,-35.4324"/>
 <text text-anchor="middle" x="767.739" y="-39.5456" font-family="Times,serif" font-size="14.00">call</text>
 </g>
 </g>
