@@ -1,8 +1,10 @@
 digraph {
 rankdir=LR
 size="8,5"
-	"test/test_call_graph/test_data/deep_call.yml" [color=red]
-		"test/test_call_graph/test_data/deep_call.yml" -> "test/test_call_graph/test_data/multiple_calls.yml" [label=call color=red]
+	"test/test_call_graph/test_data/sections.yml" [color=red]
+		"test/test_call_graph/test_data/sections.yml" -> "test/test_call_graph/test_data/multiple_calls.yml" [label=call]
+		"test/test_call_graph/test_data/sections.yml" -> "test/test_call_graph/test_data/empty_2.yml" [label=call color=green]
+		"test/test_call_graph/test_data/sections.yml" -> "test/test_call_graph/test_data/empty.yml" [label=call color=red]
 	"test/test_call_graph/test_data/multiple_calls.yml" [color=black]
 		"test/test_call_graph/test_data/multiple_calls.yml" -> "test/test_call_graph/test_data/empty.yml" [label=call color=red]
 		"test/test_call_graph/test_data/multiple_calls.yml" -> "test/test_call_graph/test_data/empty_2.yml" [label=call color=red]

@@ -2,7 +2,7 @@ digraph {
 rankdir=LR
 size="8,5"
 	"test/test_graph/test_data/test_legend.yml" [color=red]
-		"test/test_graph/test_data/test_legend.yml" -> "test/test_graph/test_data/empty.yml" [label=call]
+		"test/test_graph/test_data/test_legend.yml" -> "test/test_graph/test_data/empty.yml" [label=call color=red]
 	"test/test_graph/test_data/empty.yml" [color=black]
 	subgraph cluster_legend_wrapper {
 		subgraph cluster_legend {

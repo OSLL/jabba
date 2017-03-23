@@ -99,34 +99,49 @@ class YamlUnfolder:
 
         return self.file_index.get_by_name(name)
 
-    def get_calls_from_dict(self, file_dict, from_name):
+    def get_calls_from_dict(self, file_dict, from_name, settings={}):
         '''
         Processes unfolded yaml object to CallObject array
+
+        settings is a dict of settings for keeping information like
+        in what section we are right now (e.g. builders, publishers)
         '''
 
         calls = []
+        call_settings = dict(settings)
 
         if type(file_dict) == dict:
             for key in file_dict:
+
+                # Include all possible sections
+                # The way to draw them is defined in call graph
+                special_sections = {'builders', 'publishers', 'wrappers'}
+
+                if key in special_sections:
+                    call_settings['section'] = key
+
                 if key == 'trigger-builds':
-                    call = self.extract_call(file_dict['trigger-builds'], from_name)
+                    call = self.extract_call(file_dict['trigger-builds'], from_name, settings=call_settings)
                     calls.append(call)
                 elif key == 'trigger-parameterized-builds':
-                    calls.append(self.extract_call(file_dict['trigger-parameterized-builds'], from_name))
+                    calls.append(self.extract_call(file_dict['trigger-parameterized-builds'], from_name, settings=call_settings))
                 else:
-                    calls.extend(self.get_calls_from_dict(file_dict[key], from_name))
+                    calls.extend(self.get_calls_from_dict(file_dict[key], from_name, settings=call_settings))
         elif type(file_dict) == list:
             for value in file_dict:
-                calls.extend(self.get_calls_from_dict(value, from_name))
+                calls.extend(self.get_calls_from_dict(value, from_name, settings=call_settings))
 
         return calls
         
 
-    def extract_call(self, call, from_name):
+    def extract_call(self, call, from_name, settings):
         '''
         Creates CallObject from call file (i.e. trigger-builds)
         '''
         call = collections.defaultdict(lambda: None, call[0])
+
+        call['section'] = settings['section']
+
         project = call['project']
         file_data = self.get_data_from_name(project)
 

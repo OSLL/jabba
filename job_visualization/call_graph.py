@@ -123,19 +123,21 @@ class CallGraph(Graph):
         edges = self._graph[name]
 
         for edge in edges:
+            edge_settings = self.get_settings(edge)
+
             if self.call_display == 'none':
-                self.render_simple_edge(name, edge)
+                self.render_simple_edge(name, edge, edge_settings)
             elif self.call_display == 'text':
-                self.render_edge_with_label(name, edge)
+                self.render_edge_with_label(name, edge, edge_settings)
             elif self.call_display == 'edge':
-                self.render_edge_with_node_label(name, edge)
+                self.render_edge_with_node_label(name, edge, edge_settings)
             else:
                 raise Exception('Incorrect call display option {}'.format(self.call_display))
 
-    def render_simple_edge(self, name, edge, label="call"):
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label)
+    def render_simple_edge(self, name, edge, edge_settings, label="call"):
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label, **edge_settings)
 
-    def render_edge_with_label(self, name, edge):
+    def render_edge_with_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.call_config)
 
         label = ''
@@ -147,9 +149,9 @@ class CallGraph(Graph):
         if label == "":
             label = "no params"
 
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label)
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label, **edge_settings)
 
-    def render_edge_with_node_label(self, name, edge):
+    def render_edge_with_node_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.call_config)
 
         label = "|".join("{}:{}".format(prop, value) for prop, value in props_to_display.items() if value is not None)
@@ -159,11 +161,23 @@ class CallGraph(Graph):
 
             self.graph.node(edge_node_name, label=label, shape="record")
 
-            self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none")
-            self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name))
+            self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none", **edge_settings)
+            self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name), **edge_settings)
 
         else:
-            self.render_simple_edge(name, edge, label="no params")
+            self.render_simple_edge(name, edge, label="no params", edge_settings=edge_settings)
+
+    def get_settings(self, edge):
+        if 'section' not in edge.call_config:
+            return {}
+
+        if edge.call_config['section'] == 'publishers':
+            return {'color': 'green'}
+
+        if edge.call_config['section'] == 'builders':
+            return {'color': 'red'}
+
+        return {}
 
     def extract_props(self, call_config):
         '''

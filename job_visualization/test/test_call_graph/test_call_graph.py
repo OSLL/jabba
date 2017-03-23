@@ -30,5 +30,8 @@ class TestCallGraph(GraphTest):
     def testDeepExample(self):
         self.run_test_for_file('deep_call.yml')
 
+    def testSections(self):
+        self.run_test_for_file('sections.yml')
+
 if __name__ == "__main__":
     unittest.main()

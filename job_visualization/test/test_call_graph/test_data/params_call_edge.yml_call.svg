@@ -21,7 +21,7 @@
 </g>
 <!-- test/test_call_graph/test_data/params_call_edge.yml&#45;&gt;params_call_none&#45;empty_2 -->
 <g id="edge1" class="edge"><title>test/test_call_graph/test_data/params_call_edge.yml&#45;&gt;params_call_none&#45;empty_2</title>
-<path fill="none" stroke="black" d="M346.162,-50.5108C429.497,-56.9261 528.009,-64.5096 586.704,-69.028"/>
+<path fill="none" stroke="red" d="M346.162,-50.5108C429.497,-56.9261 528.009,-64.5096 586.704,-69.028"/>
 </g>
 <!-- test/test_call_graph/test_data/empty.yml -->
 <g id="node4" class="node"><title>test/test_call_graph/test_data/empty.yml</title>
@@ -30,8 +30,8 @@
 </g>
 <!-- test/test_call_graph/test_data/params_call_edge.yml&#45;&gt;test/test_call_graph/test_data/empty.yml -->
 <g id="edge3" class="edge"><title>test/test_call_graph/test_data/params_call_edge.yml&#45;&gt;test/test_call_graph/test_data/empty.yml</title>
-<path fill="none" stroke="black" d="M369.924,-30.7605C408.415,-28.9304 448.928,-27.0041 486.481,-25.2186"/>
-<polygon fill="black" stroke="black" points="486.652,-28.7145 496.474,-24.7434 486.319,-21.7224 486.652,-28.7145"/>
+<path fill="none" stroke="red" d="M369.924,-30.7605C408.415,-28.9304 448.928,-27.0041 486.481,-25.2186"/>
+<polygon fill="red" stroke="red" points="486.652,-28.7145 496.474,-24.7434 486.319,-21.7224 486.652,-28.7145"/>
 <text text-anchor="middle" x="438.265" y="-32.8" font-family="Times,serif" font-size="14.00">no params</text>
 </g>
 <!-- test/test_call_graph/test_data/empty_2.yml -->
@@ -41,8 +41,8 @@
 </g>
 <!-- params_call_none&#45;empty_2&#45;&gt;test/test_call_graph/test_data/empty_2.yml -->
 <g id="edge2" class="edge"><title>params_call_none&#45;empty_2&#45;&gt;test/test_call_graph/test_data/empty_2.yml</title>
-<path fill="none" stroke="black" d="M691.888,-73C726.062,-73 773.046,-73 819.718,-73"/>
-<polygon fill="black" stroke="black" points="819.982,-76.5001 829.982,-73 819.982,-69.5001 819.982,-76.5001"/>
+<path fill="none" stroke="red" d="M691.888,-73C726.062,-73 773.046,-73 819.718,-73"/>
+<polygon fill="red" stroke="red" points="819.982,-76.5001 829.982,-73 819.982,-69.5001 819.982,-76.5001"/>
 </g>
 </g>
 </svg>
