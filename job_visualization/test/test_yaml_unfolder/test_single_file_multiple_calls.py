@@ -21,18 +21,18 @@ class TestSingleFileMultipleCalls(unittest.TestCase):
                  }]
         }
 
-        calls = self.yaml_unfolder.get_calls_from_dict(test_dict, 'from_name')
+        calls = self.yaml_unfolder.get_calls_from_dict(test_dict, 'from_name', settings={'section': 'builders'})
 
         self.assertEquals(len(calls), 1)
 
-    def testSingleCall(self):
+    def testMultipleCalls(self):
         test_dict = {
                 'trigger-builds': [{
                     'project': ['name_1', 'name_2', 'name_3']
                  }]
         }
 
-        calls = self.yaml_unfolder.get_calls_from_dict(test_dict, 'from_name')
+        calls = self.yaml_unfolder.get_calls_from_dict(test_dict, 'from_name', settings={'section': 'builders'})
 
         self.assertEquals(len(calls), 3)
 
