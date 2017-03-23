@@ -110,9 +110,10 @@ class YamlUnfolder:
             for key in file_dict:
                 if key == 'trigger-builds':
                     call = self.extract_call(file_dict['trigger-builds'], from_name)
-                    calls.append(call)
+                    calls.extend(self.__get_calls(call))
                 elif key == 'trigger-parameterized-builds':
-                    calls.append(self.extract_call(file_dict['trigger-parameterized-builds'], from_name))
+                    call = self.extract_call(file_dict['trigger-parameterized-builds'], from_name)
+                    calls.extend(self.__get_calls(call))
                 else:
                     calls.extend(self.get_calls_from_dict(file_dict[key], from_name))
         elif type(file_dict) == list:
@@ -120,14 +121,36 @@ class YamlUnfolder:
                 calls.extend(self.get_calls_from_dict(value, from_name))
 
         return calls
+
+    def __get_calls(self, call):
+        if type(call) == list:
+            return call
+
+        return [call]
         
 
     def extract_call(self, call, from_name):
         '''
         Creates CallObject from call file (i.e. trigger-builds)
+
+        Returns a list of calls if there is more than one presented
         '''
+
         call = collections.defaultdict(lambda: None, call[0])
         project = call['project']
+
+        # If there is more than one call in a single file
+        if type(project) == list:
+            calls = []
+
+            for name in project:
+                calls.append(self.create_call(name, call, from_name))
+
+            return calls
+        else:
+            return self.create_call(project, call, from_name)
+
+    def create_call(self, project, call, from_name):
         file_data = self.get_data_from_name(project)
 
         call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)
