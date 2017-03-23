@@ -3,6 +3,8 @@ import graphviz as gv
 
 import collections
 
+from graph import Graph
+
 '''
 All visual settings we want to specify for include graph
 '''
@@ -18,9 +20,11 @@ graph_settings = {
 # settings - settings of the edge (label, color)
 IncludeEdge = collections.namedtuple('IncludeEdge', ['path', 'settings'])
 
-class IncludeGraph:
+class IncludeGraph(Graph):
 
     def __init__(self):
+        super(self.__class__, self).__init__()
+
         self.graph = gv.Digraph(format='svg')
         self.graph.body.extend(['rankdir=LR', 'size="8,5"'])
 
@@ -97,6 +101,8 @@ class IncludeGraph:
     def render(self, file_to):
         if not self.active:
             return
+
+        super(self.__class__, self).render()
 
         for path in self._graph.keys():
             self.graph.node(path)
