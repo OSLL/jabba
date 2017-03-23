@@ -110,22 +110,21 @@ class YamlUnfolder:
         calls = []
         call_settings = dict(settings)
 
+        # Include all possible sections
+        # The way to draw them is defined in call graph
+        special_sections = {'builders', 'publishers', 'wrappers'}
+
+        # Trigger flags
+        triggers = {'trigger-builds', 'trigger-parameterized-builds'}
+
         if type(file_dict) == dict:
             for key in file_dict:
-
-                # Include all possible sections
-                # The way to draw them is defined in call graph
-                special_sections = {'builders', 'publishers', 'wrappers'}
 
                 if key in special_sections:
                     call_settings['section'] = key
 
-                if key == 'trigger-builds':
-                    call = self.extract_call(file_dict['trigger-builds'], from_name, settings=call_settings)
-                    calls.extend(self.__get_calls(call))
-                elif key == 'trigger-parameterized-builds':
-                    call = self.extract_call(file_dict['trigger-parameterized-builds'], from_name, settings=call_settings)
-                    calls.extend(self.__get_calls(call))
+                if key in triggers:
+                    calls.extend(self.extract_call(file_dict[key], from_name, settings=call_settings))
                 else:
                     calls.extend(self.get_calls_from_dict(file_dict[key], from_name, settings=call_settings))
         elif type(file_dict) == list:
@@ -134,18 +133,12 @@ class YamlUnfolder:
 
         return calls
 
-    def __get_calls(self, call):
-        if type(call) == list:
-            return call
-
-        return [call]
-        
 
     def extract_call(self, call, from_name, settings):
         '''
         Creates CallObject from call file (i.e. trigger-builds)
 
-        Returns a list of calls if there is more than one presented
+        Returns a list of calls
         '''
 
         call = collections.defaultdict(lambda: None, call[0])
@@ -163,7 +156,7 @@ class YamlUnfolder:
 
             return calls
         else:
-            return self.create_call(project, call, from_name)
+            return [self.create_call(project, call, from_name)]
 
     def create_call(self, project, call, from_name):
         file_data = self.get_data_from_name(project)
