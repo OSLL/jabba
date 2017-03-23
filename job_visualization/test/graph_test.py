@@ -1,6 +1,7 @@
 
 import unittest
 import abc
+import os
 
 class GraphTest(unittest.TestCase):
 
@@ -9,6 +10,8 @@ class GraphTest(unittest.TestCase):
         Unfolds main_file, renders it. Finds ref graph for it and compares generated graph with ref graph
         If ref graph is not found, generate it
         '''
+
+        self.clean(main_file)
 
         self.setUpYamlUnfolder(main_file)
 
@@ -28,6 +31,15 @@ class GraphTest(unittest.TestCase):
                     ref_file.write(test_graph)
 
                     self.assertTrue(True)
+
+
+    def clean(self, main_file):
+        try:
+            os.remove(self.test_data + main_file + self.ext)
+            os.remove(self.test_data + main_file + self.ext + '.svg')
+        except OSError:
+            # Files were not created yet
+            pass
 
     @abc.abstractmethod
     def setUpYamlUnfolder(self, main_file):

@@ -99,35 +99,66 @@ class YamlUnfolder:
 
         return self.file_index.get_by_name(name)
 
-    def get_calls_from_dict(self, file_dict, from_name):
+    def get_calls_from_dict(self, file_dict, from_name, settings={}):
         '''
         Processes unfolded yaml object to CallObject array
+
+        settings is a dict of settings for keeping information like
+        in what section we are right now (e.g. builders, publishers)
         '''
 
         calls = []
+        call_settings = dict(settings)
+
+        # Include all possible sections
+        # The way to draw them is defined in call graph
+        special_sections = {'builders', 'publishers', 'wrappers'}
+
+        # Trigger flags
+        triggers = {'trigger-builds', 'trigger-parameterized-builds'}
 
         if type(file_dict) == dict:
             for key in file_dict:
-                if key == 'trigger-builds':
-                    call = self.extract_call(file_dict['trigger-builds'], from_name)
-                    calls.append(call)
-                elif key == 'trigger-parameterized-builds':
-                    calls.append(self.extract_call(file_dict['trigger-parameterized-builds'], from_name))
+
+                if key in special_sections:
+                    call_settings['section'] = key
+
+                if key in triggers:
+                    calls.extend(self.extract_call(file_dict[key], from_name, settings=call_settings))
                 else:
-                    calls.extend(self.get_calls_from_dict(file_dict[key], from_name))
+                    calls.extend(self.get_calls_from_dict(file_dict[key], from_name, settings=call_settings))
         elif type(file_dict) == list:
             for value in file_dict:
-                calls.extend(self.get_calls_from_dict(value, from_name))
+                calls.extend(self.get_calls_from_dict(value, from_name, settings=call_settings))
 
         return calls
-        
 
-    def extract_call(self, call, from_name):
+
+    def extract_call(self, call, from_name, settings):
         '''
         Creates CallObject from call file (i.e. trigger-builds)
+
+        Returns a list of calls
         '''
+
         call = collections.defaultdict(lambda: None, call[0])
+
+        call['section'] = settings['section']
+
         project = call['project']
+
+        # If there is more than one call in a single file
+        if type(project) == list:
+            calls = []
+
+            for name in project:
+                calls.append(self.create_call(name, call, from_name))
+
+            return calls
+        else:
+            return [self.create_call(project, call, from_name)]
+
+    def create_call(self, project, call, from_name):
         file_data = self.get_data_from_name(project)
 
         call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)

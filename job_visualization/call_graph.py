@@ -4,17 +4,21 @@ import graphviz as gv
 import collections
 from file_data import FileData
 
+from graph import Graph
 import yaml_unfolder
 
 CallEdge = collections.namedtuple('CallEdge', ['project_name', 'call_config'])
 
-class CallGraph:
+class CallGraph(Graph):
     '''
     Class for manipulating call graph
     Stores all graph with file configs for further analysis
     '''
  
     def __init__(self, get_calls, unfold):
+
+        super(self.__class__, self).__init__()
+
         self.active = False
         self.get_calls = get_calls
         self.unfold = unfold
@@ -38,10 +42,16 @@ class CallGraph:
         # none - don't display
         # text - display as plain text above the edge
         # edge - display as node embeded in the edge
-        self.call_display = 'none'
+        self.call_display = 'text'
 
         # Which parameters to display on call edges
         self.call_parameters = {}
+
+        self.init_legend()
+
+    def init_legend(self):
+        self.legend.add_item('publishers', {'color': 'green'})
+        self.legend.add_item('builders', {'color': 'blue'})
 
     def add_call_object(self, call_object):
         self.add_node(call_object.project_name, call_object.project_config)
@@ -103,7 +113,12 @@ class CallGraph:
             if node not in self._roots:
                 self.render_node(node)
 
+        # Because of the way GraphViz position clusters
+        # we have to draw the base graph after the main graph
+        super(self.__class__, self).render()
+
         self.graph.render(path)
+
 
     def render_node(self, name, color='black'):
         self.graph.node(self.get_path_from_name(name), color=color)
@@ -111,19 +126,21 @@ class CallGraph:
         edges = self._graph[name]
 
         for edge in edges:
+            edge_settings = self.get_settings(edge)
+
             if self.call_display == 'none':
-                self.render_simple_edge(name, edge)
+                self.render_simple_edge(name, edge, edge_settings)
             elif self.call_display == 'text':
-                self.render_edge_with_label(name, edge)
+                self.render_edge_with_label(name, edge, edge_settings)
             elif self.call_display == 'edge':
-                self.render_edge_with_node_label(name, edge)
+                self.render_edge_with_node_label(name, edge, edge_settings)
             else:
                 raise Exception('Incorrect call display option {}'.format(self.call_display))
 
-    def render_simple_edge(self, name, edge, label="call"):
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label)
+    def render_simple_edge(self, name, edge, edge_settings, label="call"):
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label, **edge_settings)
 
-    def render_edge_with_label(self, name, edge):
+    def render_edge_with_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.call_config)
 
         label = '<'
@@ -134,9 +151,9 @@ class CallGraph:
 
         label += '>'
 
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label)
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label, **edge_settings)
 
-    def render_edge_with_node_label(self, name, edge):
+    def render_edge_with_node_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.call_config)
 
         label = '<'
@@ -147,14 +164,26 @@ class CallGraph:
 
         self.graph.node(edge_node_name, label=label, shape="record")
 
-        self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none")
-        self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name))
+        self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none", **edge_settings)
+        self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name), **edge_settings)
 
     def get_label(self, prop, value):
         if value is None:
             return '{}: <FONT color="red">{}</FONT>'.format(prop, "not set")
         else:
             return "{}:{}".format(prop, value)
+
+    def get_settings(self, edge):
+        if 'section' not in edge.call_config:
+            return {}
+
+        if edge.call_config['section'] == 'publishers':
+            return {'color': 'green'}
+
+        if edge.call_config['section'] == 'builders':
+            return {'color': 'blue'}
+
+        return {}
 
     def extract_props(self, call_config):
         '''
