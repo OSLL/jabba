@@ -15,9 +15,10 @@ class CallGraph(Graph):
     Stores all graph with file configs for further analysis
     '''
  
-    def __init__(self, get_calls, unfold):
+    def __init__(self, rank_dir, get_calls, unfold):
 
-        super(self.__class__, self).__init__()
+        super(self.__class__, self).__init__(rank_dir)
+
 
         self.active = False
         self.get_calls = get_calls
@@ -25,7 +26,11 @@ class CallGraph(Graph):
 
         # Graphviz graph
         self.graph = gv.Digraph(format='svg')
-        self.graph.body.extend(['rankdir=LR', 'size="8,5"'])
+
+        if self.rank_dir == 'left-right':
+            self.graph.body.extend(['rankdir=LR'])
+
+        self.graph.body.extend(['size="8,5"'])
 
         self.call_list = []
 

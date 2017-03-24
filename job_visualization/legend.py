@@ -17,7 +17,10 @@ class Legend(object):
             legend.node("{}-1".format(name), label="")
             legend.node("{}-2".format(name), label="")
 
-            legend.edge("{}-1".format(name), "{}-2".format(name), label=name, **settings)
+            # format label so it doesn't overlap with edge
+            label = "  {}".format(name)
+
+            legend.edge("{}-1".format(name), "{}-2".format(name), label=label, **settings)
 
         legend_wrapper = gv.Digraph('cluster_legend_wrapper')
         legend_wrapper.subgraph(legend)

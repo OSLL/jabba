@@ -9,10 +9,10 @@ size="8,5"
 		label="Legend"
 			"publishers-1" [label=""]
 			"publishers-2" [label=""]
-				"publishers-1" -> "publishers-2" [label=publishers color=green]
+				"publishers-1" -> "publishers-2" [label="  publishers" color=green]
 			"builders-1" [label=""]
 			"builders-2" [label=""]
-				"builders-1" -> "builders-2" [label=builders color=blue]
+				"builders-1" -> "builders-2" [label="  builders" color=blue]
 		}
 	style=invis
 	}

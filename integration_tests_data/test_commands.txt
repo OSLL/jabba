@@ -6,3 +6,4 @@ main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml -
 main.py --files maxscale_jobs/build_all.yaml --call-graph --yaml-root maxscale_jobs/ --call-display edge
 main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/ --call-display edge
 main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/ --legend
+main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/ --legend --rank-dir up-down

@@ -1,0 +1,4 @@
+- job:
+    name: rank_dir_ud
+    builders:
+        - !include './test/test_graph/test_data/call_empty.yml'
