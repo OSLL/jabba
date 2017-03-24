@@ -149,7 +149,10 @@ class YamlUnfolder:
 
         call = collections.defaultdict(lambda: None, call[0])
 
-        call['section'] = settings['section']
+        try:
+            call['section'] = settings['section']
+        except KeyError:
+            call['section'] = ''
 
         project = call['project']
 

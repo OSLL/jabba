@@ -1,0 +1,9 @@
+- job:
+    name: multiple_triggers
+    steps:
+        - trigger-builds:
+            - project: empty
+              same-node: true
+        - trigger-builds:
+            - project: deep
+              block: true

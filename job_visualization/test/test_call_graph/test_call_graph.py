@@ -33,5 +33,8 @@ class TestCallGraph(GraphTest):
     def testSections(self):
         self.run_test_for_file('sections.yml')
 
+    def testMultipleTriggers(self):
+        self.run_test_for_file('multiple_triggers.yml')
+
 if __name__ == "__main__":
     unittest.main()
