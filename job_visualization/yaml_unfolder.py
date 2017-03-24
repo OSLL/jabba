@@ -25,7 +25,7 @@ def convert_path(path):
 
     return path
     
-class YamlUnfolder:
+class YamlUnfolder(object):
 
     def __init__(self, root, rank_dir=None):
         Loader.add_constructor('!include:', self.include_constructor)

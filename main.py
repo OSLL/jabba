@@ -6,6 +6,7 @@ from os.path import basename
 
 from job_visualization import YamlUnfolder
 from job_visualization import FileIndex
+from job_visualization import ConfigParser
 
 if __name__ == '__main__':
 
@@ -17,11 +18,16 @@ if __name__ == '__main__':
     parser.add_argument('--call-display', choices=['none', 'text', 'edge'], default='text')
     parser.add_argument('--rank-dir', choices=['left-right', 'up-down'], default='left-right')
     parser.add_argument('--call-parameters', nargs='+', type=str)
-    parser.add_argument('--legend', action='store_true', dest='draw_legend')
+    parser.add_argument('--legend', action='store_true', dest='legend')
+    parser.add_argument('--config', default=ConfigParser.default_config)
 
     parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[])
 
     args = parser.parse_args()
+
+    config_parser = ConfigParser(args.config)
+
+    args = config_parser.merge_args(args)
 
     yaml_root = args.yaml_root
 
@@ -30,8 +36,8 @@ if __name__ == '__main__':
     yaml_unfolder.include_graph.active = args.include_graph
     yaml_unfolder.call_graph.active = args.call_graph
 
-    yaml_unfolder.include_graph.draw_legend = args.draw_legend
-    yaml_unfolder.call_graph.draw_legend = args.draw_legend
+    yaml_unfolder.include_graph.draw_legend = args.legend
+    yaml_unfolder.call_graph.draw_legend = args.legend
 
     yaml_unfolder.call_graph.call_display = args.call_display
     yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
