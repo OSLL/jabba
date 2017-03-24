@@ -14,10 +14,11 @@ if __name__ == '__main__':
     parser.add_argument('--include-graph', dest='include_graph', action='store_true')
     parser.add_argument('--call-graph', dest='call_graph', action='store_true')
     parser.add_argument('--yaml-root', default='')
-    parser.add_argument('--call-display', choices=['none', 'text', 'edge'], default='none')
+    parser.add_argument('--call-display', choices=['none', 'text', 'edge'], default='text')
+    parser.add_argument('--call-parameters', nargs='+', type=str)
     parser.add_argument('--legend', action='store_true', dest='draw_legend')
 
-    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False)
+    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[])
 
     args = parser.parse_args()
 
@@ -32,6 +33,7 @@ if __name__ == '__main__':
     yaml_unfolder.call_graph.draw_legend = args.draw_legend
 
     yaml_unfolder.call_graph.call_display = args.call_display
+    yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
 
     files = args.files
     # main_file is the one we pass to include graph

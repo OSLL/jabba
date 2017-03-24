@@ -42,7 +42,10 @@ class CallGraph(Graph):
         # none - don't display
         # text - display as plain text above the edge
         # edge - display as node embeded in the edge
-        self.call_display = 'none'
+        self.call_display = 'text'
+
+        # Which parameters to display on call edges
+        self.call_parameters = {}
 
         self.init_legend()
 
@@ -140,32 +143,35 @@ class CallGraph(Graph):
     def render_edge_with_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.call_config)
 
-        label = ''
+        label = '<'
 
         for prop, value in props_to_display.items():
-            if value is not None:
-                label += "\l{}:{}".format(prop, value) 
+            label += self.get_label(prop, value)
+            label += "<BR/>"
 
-        if label == "":
-            label = "no params"
+        label += '>'
 
         self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label, **edge_settings)
 
     def render_edge_with_node_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.call_config)
 
-        label = "|".join("{}:{}".format(prop, value) for prop, value in props_to_display.items() if value is not None)
+        label = '<'
+        label += "|".join(self.get_label(prop, value) for prop, value in props_to_display.items()) 
+        label += '>'
 
-        if label != "":
-            edge_node_name = "{}-{}".format(name, edge.project_name)
+        edge_node_name = "{}-{}".format(name, edge.project_name)
 
-            self.graph.node(edge_node_name, label=label, shape="record")
+        self.graph.node(edge_node_name, label=label, shape="record")
 
-            self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none", **edge_settings)
-            self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name), **edge_settings)
+        self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none", **edge_settings)
+        self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name), **edge_settings)
 
+    def get_label(self, prop, value):
+        if value is None:
+            return '{}: <FONT color="red">{}</FONT>'.format(prop, "not set")
         else:
-            self.render_simple_edge(name, edge, label="no params", edge_settings=edge_settings)
+            return "{}:{}".format(prop, value)
 
     def get_settings(self, edge):
         if 'section' not in edge.call_config:
@@ -186,9 +192,16 @@ class CallGraph(Graph):
 
         props = {}
 
-        props['same-node'] = call_config['same-node']
+        for param in self.call_parameters:
+            if param in call_config:
+                props[param] = call_config[param]
+            else:
+                props[param] = None
 
         return props
+
+    def should_display_prop(self, prop):
+        return prop in self.call_parameters
 
     def get_path_from_name(self, name):
         path = self._configs[name].path
