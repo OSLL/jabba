@@ -27,13 +27,19 @@ def convert_path(path):
     
 class YamlUnfolder:
 
-    def __init__(self, root, rank_dir='left-right'):
+    def __init__(self, root, rank_dir=None):
         Loader.add_constructor('!include:', self.include_constructor)
         Loader.add_constructor('!include-raw:', self.include_raw_constructor)
         Loader.add_constructor('!include', self.include_constructor)
 
-        self.include_graph = IncludeGraph(rank_dir)
-        self.call_graph = call_graph.CallGraph(rank_dir=rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+        # Each graph should be able to have its own default rank_dir parameter
+        if rank_dir is None:
+            self.include_graph = IncludeGraph()
+            self.call_graph = call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+        else:
+            self.include_graph = IncludeGraph(rank_dir)
+            self.call_graph = call_graph.CallGraph(rank_dir=rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+
         self.file_index = FileIndex(root, self.unfold_yaml)
 
 

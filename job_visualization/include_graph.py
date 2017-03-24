@@ -22,7 +22,7 @@ IncludeEdge = collections.namedtuple('IncludeEdge', ['path', 'settings'])
 
 class IncludeGraph(Graph):
 
-    def __init__(self, rank_dir):
+    def __init__(self, rank_dir='left-right'):
         super(self.__class__, self).__init__(rank_dir)
 
         self.graph = gv.Digraph(format='svg')

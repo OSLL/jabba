@@ -15,7 +15,7 @@ class CallGraph(Graph):
     Stores all graph with file configs for further analysis
     '''
  
-    def __init__(self, rank_dir, get_calls, unfold):
+    def __init__(self, get_calls, unfold, rank_dir='left-right'):
 
         super(self.__class__, self).__init__(rank_dir)
 
