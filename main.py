@@ -7,6 +7,7 @@ from os.path import basename
 from job_visualization import YamlUnfolder
 from job_visualization import FileIndex
 from job_visualization import ConfigParser
+from job_visualization import synonym_parser
 
 if __name__ == '__main__':
 
@@ -20,14 +21,17 @@ if __name__ == '__main__':
     parser.add_argument('--call-parameters', nargs='+', type=str)
     parser.add_argument('--legend', action='store_true', dest='legend')
     parser.add_argument('--config', default=ConfigParser.default_config)
+    parser.add_argument('--synonyms', nargs='+', type=str)
 
-    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[])
+    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[])
 
     args = parser.parse_args()
 
     config_parser = ConfigParser(args.config)
 
     args = config_parser.merge_args(args)
+
+    synonyms = synonym_parser.parse_synonyms(args.synonyms)
 
     yaml_root = args.yaml_root
 
@@ -41,6 +45,8 @@ if __name__ == '__main__':
 
     yaml_unfolder.call_graph.call_display = args.call_display
     yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
+
+    yaml_unfolder.synonyms = synonyms
 
     files = args.files
     # main_file is the one we pass to include graph

@@ -1,0 +1,66 @@
+
+def parse_synonyms(synonyms):
+    '''
+    Parse an array of string from argparser
+    to SynonymSet
+    '''
+    syns_str = ''.join(synonyms)
+
+    syns_str = syns_str.replace(' ', '')
+    
+    syn_set = SynonymSet()
+
+    # to check if we are parsing inside the parenthesis
+    inside_set = False
+    current_syn = ''
+    current_syn_set = set()
+
+    for char in syns_str:
+        if char == '{':
+            inside_set = True
+            current_syn_set = set()
+            continue
+
+        if char == '}':
+            inside_set = False
+            current_syn_set.add(current_syn)
+
+            syn_set.add_set(current_syn_set)
+
+            current_syn = ''
+
+            continue
+
+        if not inside_set:
+            raise Exception("Incorrect synonyms {}".format(syns_str))
+
+        if char == ',':
+            if current_syn == '':
+                raise Exception("Incorrect synonyms {}".format(syns_str))
+
+            current_syn_set.add(current_syn)
+            current_syn = ''
+
+            continue
+
+        current_syn += char
+
+    return syn_set
+
+class SynonymSet:
+
+    def __init__(self):
+        self.synonyms = []
+
+    def add_set(self, s):
+        self.synonyms.append(s)
+
+    def are_synonyms(self, param_1, param_2):
+        for syn_set in self.synonyms:
+            if param_1 in syn_set and param_2 in syn_set:
+                return True
+
+        return False
+
+    def __str__(self):
+        return ':'.join(repr(syn_set) for syn_set in self.synonyms)
