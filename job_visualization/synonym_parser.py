@@ -1,9 +1,10 @@
 
-def parse_synonyms(synonyms):
+def parse_from_args(synonyms):
     '''
     Parse an array of string from argparser
     to SynonymSet
     '''
+
     syns_str = ''.join(synonyms)
 
     syns_str = syns_str.replace(' ', '')
@@ -44,6 +45,19 @@ def parse_synonyms(synonyms):
             continue
 
         current_syn += char
+
+    return syn_set
+
+def parse_from_array(arr):
+    syn_set = SynonymSet()
+
+    for synonyms in arr:
+        _set = set()
+
+        for synonym in synonyms:
+            _set.add(synonym)
+
+        syn_set.add_set(_set)
 
     return syn_set
 

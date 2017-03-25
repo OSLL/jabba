@@ -11,6 +11,7 @@ if [ ! -e "/tmp/maxscale-jenkins-jobs" ]; then
 
         cd $cwd
         cp  integration_tests_data/.jjv_config.yml /tmp/maxscale-jenkins-jobs/.jjv_config.yml 
+        cp  integration_tests_data/.config_with_synonyms.yml /tmp/maxscale-jenkins-jobs/.config_with_synonyms.yml 
     } &> /dev/null
 
     cd $cwd

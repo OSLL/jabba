@@ -29,9 +29,10 @@ if __name__ == '__main__':
 
     config_parser = ConfigParser(args.config)
 
-    args = config_parser.merge_args(args)
+    if args.synonyms != []:
+        args.synonyms = synonym_parser.parse_from_args(args.synonyms)
 
-    synonyms = synonym_parser.parse_synonyms(args.synonyms)
+    args = config_parser.merge_args(args)
 
     yaml_root = args.yaml_root
 
@@ -46,7 +47,7 @@ if __name__ == '__main__':
     yaml_unfolder.call_graph.call_display = args.call_display
     yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
 
-    yaml_unfolder.synonyms = synonyms
+    yaml_unfolder.synonyms = args.synonyms
 
     files = args.files
     # main_file is the one we pass to include graph

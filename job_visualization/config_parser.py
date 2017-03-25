@@ -2,6 +2,7 @@
 import os
 
 import yaml_unfolder
+import synonym_parser
 
 class ConfigParser(yaml_unfolder.YamlUnfolder):
     default_config = '.jjv_config.yml'
@@ -22,6 +23,9 @@ class ConfigParser(yaml_unfolder.YamlUnfolder):
 
     def merge_args(self, args):
         for arg, value in self.args.items():
+            if arg == 'synonyms':
+                value = synonym_parser.parse_from_array(value)
+
             setattr(args, arg, value)
 
         return args
