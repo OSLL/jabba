@@ -1,12 +1,17 @@
 import collections
 
-from yaml import load, Loader, dump
+import ruamel.yaml
+from ruamel.yaml import load, Loader, dump
+
 import graphviz as gv
 import os
 
 from include_graph import IncludeGraph
 import call_graph
 from file_index import FileIndex
+
+import warnings
+warnings.simplefilter('ignore', ruamel.yaml.error.UnsafeLoaderWarning)
 
 
 '''
