@@ -47,5 +47,9 @@ class TestCallDisplay(GraphTest):
         self.yaml_unfolder.call_graph.call_parameters = {'same-node', 'node-parameters'}
         self.run_test_for_file('multiple_params.yml')
 
+    def testCallOrder(self):
+        self.yaml_unfolder.call_graph.call_parameters = {'call-order'}
+        self.run_test_for_file('order_call.yml')
+
 if __name__ == "__main__":
     unittest.main()

@@ -23,7 +23,7 @@ if __name__ == '__main__':
     parser.add_argument('--config', default=ConfigParser.default_config)
     parser.add_argument('--synonyms', nargs='+', type=str)
 
-    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[])
+    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False)
 
     args = parser.parse_args()
 
