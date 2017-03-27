@@ -8,7 +8,10 @@ class Graph(object):
     Abstract class for render graphs
     """
 
-    def __init__(self):
+    def __init__(self, rank_dir):
+
+        self.rank_dir = rank_dir
+
         self.legend = Legend()
 
         self.draw_legend = False
