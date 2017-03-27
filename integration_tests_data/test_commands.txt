@@ -1,9 +1,11 @@
 main.py --files maxscale_jobs/build_all.yaml --call-graph --yaml-root maxscale_jobs/
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/
-main.py --files maxscale_jobs/build_all.yaml --include-graph --yaml-root maxscale_jobs/
-main.py --files maxscale_jobs/build_all.yaml --call-graph --yaml-root maxscale_jobs/
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/
-main.py --files maxscale_jobs/build_all.yaml --call-graph --yaml-root maxscale_jobs/ --call-display edge
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/ --call-display edge
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/ --legend
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --yaml-root maxscale_jobs/ --legend --rank-dir up-down
+main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph 
+main.py --files maxscale_jobs/build_all.yaml --include-graph 
+main.py --files maxscale_jobs/build_all.yaml --call-graph 
+main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph 
+main.py --files maxscale_jobs/build_all.yaml --call-graph --call-display edge
+main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --call-display edge
+main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --legend
+main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --legend --rank-dir up-down
+main.py --files maxscale_jobs/build_all.yaml --call-graph --config .config_with_synonyms.yml
+main.py --files maxscale_jobs/build_all.yaml --call-graph --synonyms {same-node, node-parameters} {a, b, c}

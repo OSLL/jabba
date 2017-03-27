@@ -1,0 +1,11 @@
+yaml_root: maxscale_jobs
+synonyms:
+    -
+        - same-node
+        - node-parameters
+    - 
+        - one
+        - two
+        - thre
+    -
+        - single

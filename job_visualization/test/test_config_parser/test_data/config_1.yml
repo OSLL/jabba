@@ -1,0 +1,5 @@
+yaml_root: root-directory
+legend: True
+call_parameters:
+    - same-node
+    - node-parameters
