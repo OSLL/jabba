@@ -99,8 +99,24 @@ class CallGraph(Graph):
 
         q.extend(self.get_calls(yaml_config, name))
 
+        # What is the order of current call in call config
+        current_order = 1
+
+        # What is the name of the last caller
+        # If the caller is the same, that means we are processing the call from the same caller
+        # so we need to increase current_call
+        current_caller = ''
+
         while len(q) != 0:
             call = q.pop(0)
+
+            if call.caller_name != current_caller:
+                current_order = 1
+                current_caller = call.caller_name
+            else:
+                current_order += 1
+
+            call.call_config['call-order'] = current_order
 
             self.add_call_object(call)
 

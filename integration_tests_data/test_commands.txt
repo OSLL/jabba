@@ -9,3 +9,4 @@ main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml -
 main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --legend --rank-dir up-down
 main.py --files maxscale_jobs/build_all.yaml --call-graph --config .config_with_synonyms.yml
 main.py --files maxscale_jobs/build_all.yaml --call-graph --synonyms {same-node, node-parameters} {a, b, c}
+main.py --files maxscale_jobs/build_all.yaml --call-graph --call-parameters call-order

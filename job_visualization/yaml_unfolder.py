@@ -1,12 +1,17 @@
 import collections
 
-from yaml import load, Loader, dump
+import ruamel.yaml
+from ruamel.yaml import load, Loader, dump
+
 import graphviz as gv
 import os
 
 from include_graph import IncludeGraph
 import call_graph
 from file_index import FileIndex
+
+import warnings
+warnings.simplefilter('ignore', ruamel.yaml.error.UnsafeLoaderWarning)
 
 
 '''
@@ -149,7 +154,10 @@ class YamlUnfolder(object):
 
         call = collections.defaultdict(lambda: None, call[0])
 
-        call['section'] = settings['section']
+        try:
+            call['section'] = settings['section']
+        except KeyError:
+            call['section'] = ''
 
         project = call['project']
 
