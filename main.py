@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     parser = ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('--files', nargs='+', required=True, type=str, help='List of files that graphs will be build for. Every such file will be marked red on resulring graph')
+    parser.add_argument('--files', nargs='+', required=True, type=str, help='List of files that graphs will be build for. Every such file will be marked red on the resulting graph')
     parser.add_argument('--include-graph', dest='include_graph', action='store_true', help='Whether to build the include graph')
     parser.add_argument('--call-graph', dest='call_graph', action='store_true', help='Whether to build the call graph')
     parser.add_argument('--yaml-root', default='', help='Root directory that is used for resolving relative includes')
