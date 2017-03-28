@@ -55,28 +55,34 @@ if __name__ == '__main__':
 
     if yaml_unfolder.include_graph.active: 
         for name in files:
+            if os.path.isdir(name):
+                continue
+
             yaml_unfolder.unfold_yaml(name, is_root=True)
             yaml_unfolder.reset()
         
         if export_name is None:
-            export_name = basename(files[0]) + '_include'
+            include_export_name = basename(files[0]) + '_include'
         else:
-            export_name = "{}_include".format(export_name)
+            include_export_name = "{}_include".format(export_name)
 
-        yaml_unfolder.include_graph.render(export_name)
+        yaml_unfolder.include_graph.render(include_export_name)
 
-        print("Generated include graph at {}.svg".format(export_name))
+        print("Generated include graph at {}.svg".format(include_export_name))
 
     if yaml_unfolder.call_graph.active:
         if export_name is None:
-            export_name = basename(files[0]) + '_call'
+            call_export_name = basename(files[0]) + '_call'
         else:
-            export_name = "{}_call".format(export_name)
+            call_export_name = "{}_call".format(export_name)
 
 
-        for file_name in files:
-            yaml_unfolder.call_graph.unfold_file(file_name)
+        for name in files:
+            if os.path.isdir(name):
+                continue
 
-        yaml_unfolder.call_graph.render(export_name)
+            yaml_unfolder.call_graph.unfold_file(name)
 
-        print("Generated call graph at {}.svg".format(export_name))
+        yaml_unfolder.call_graph.render(call_export_name)
+
+        print("Generated call graph at {}.svg".format(call_export_name))
