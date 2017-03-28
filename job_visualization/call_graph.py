@@ -90,7 +90,12 @@ class CallGraph(Graph):
 
     def unfold_file(self, path):
         yaml_config = self.unfold(path)
-        name = yaml_config[0]['job']['name']
+
+        try:
+            name = yaml_config[0]['job']['name']
+        except:
+            print("Warning: building call graph for not a job {}".format(yaml_config))
+            return
 
         self.add_node(name, FileData(yaml=yaml_config, path=path), is_root=True)
 

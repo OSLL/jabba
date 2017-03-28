@@ -116,3 +116,5 @@ class IncludeGraph(Graph):
 
         self.graph.render(file_to)
 
+    def reset(self):
+        self.include_list = []

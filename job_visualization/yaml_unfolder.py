@@ -178,3 +178,5 @@ class YamlUnfolder(object):
         call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)
         return call_object
 
+    def reset(self):
+        self.include_graph.reset()

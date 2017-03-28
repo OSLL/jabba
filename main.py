@@ -22,6 +22,7 @@ if __name__ == '__main__':
     parser.add_argument('--legend', action='store_true', dest='legend')
     parser.add_argument('--config', default=ConfigParser.default_config)
     parser.add_argument('--synonyms', nargs='+', type=str)
+    parser.add_argument('--name', default=None, type=str)
 
     parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False)
 
@@ -50,18 +51,28 @@ if __name__ == '__main__':
     yaml_unfolder.synonyms = args.synonyms
 
     files = args.files
-    # main_file is the one we pass to include graph
-    main_file = args.files[0]
+    export_name = args.name
 
     if yaml_unfolder.include_graph.active: 
-        unfolded_yaml = yaml_unfolder.unfold_yaml(main_file, is_root=True)
-        export_name = basename(args.files[0]) + '_include'
+        for name in files:
+            yaml_unfolder.unfold_yaml(name, is_root=True)
+            yaml_unfolder.reset()
+        
+        if export_name is None:
+            export_name = basename(files[0]) + '_include'
+        else:
+            export_name = "{}_include".format(export_name)
+
         yaml_unfolder.include_graph.render(export_name)
 
         print("Generated include graph at {}.svg".format(export_name))
 
     if yaml_unfolder.call_graph.active:
-        export_name = basename(main_file) + '_call'
+        if export_name is None:
+            export_name = basename(files[0]) + '_call'
+        else:
+            export_name = "{}_call".format(export_name)
+
 
         for file_name in files:
             yaml_unfolder.call_graph.unfold_file(file_name)
