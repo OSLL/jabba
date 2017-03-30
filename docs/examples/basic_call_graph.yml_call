@@ -1,0 +1,7 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"basic_call_graph.yml" [color=red]
+		"basic_call_graph.yml" -> "cleanup.yml" [label=<> color=blue]
+	"cleanup.yml" [color=black]
+}

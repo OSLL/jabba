@@ -1,0 +1,7 @@
+- job:
+    name: build_all
+    builders:
+        trigger-builds:
+            - project: 'cleanup'
+              condition: UNSTABLE_OR_WORSE
+              same-node: True

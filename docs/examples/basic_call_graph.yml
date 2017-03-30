@@ -1,0 +1,5 @@
+- job:
+    name: build_all
+    builders:
+        trigger-builds:
+            - project: 'cleanup'
