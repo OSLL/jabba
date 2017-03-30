@@ -1,0 +1,6 @@
+# build.yaml
+
+- job:
+    name: build_all
+    parameters:
+        - !include 'value.yaml'
