@@ -3,7 +3,7 @@ import graphviz as gv
 
 import collections
 
-from graph import Graph
+from .graph import Graph
 
 '''
 All visual settings we want to specify for include graph

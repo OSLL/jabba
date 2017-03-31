@@ -5,7 +5,7 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from yaml_unfolder import YamlUnfolder
+from job_visualization.yaml_unfolder import YamlUnfolder
 from test.graph_test import GraphTest
 
 

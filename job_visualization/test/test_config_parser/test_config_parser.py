@@ -8,7 +8,7 @@ from argparse import Namespace
 sys.path.append("../")
 sys.path.append("../../")
 
-from config_parser import ConfigParser
+from job_visualization.config_parser import ConfigParser
 
 class TestConfigParser(unittest.TestCase):
 

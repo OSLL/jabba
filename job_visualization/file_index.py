@@ -2,7 +2,7 @@
 import os
 
 import collections
-from file_data import FileData
+from .file_data import FileData
 
 class FileIndex:
     """

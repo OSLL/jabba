@@ -1,8 +1,8 @@
 
 import os
 
-import yaml_unfolder
-import synonym_parser
+from . import yaml_unfolder
+from . import synonym_parser
 
 class ConfigParser(yaml_unfolder.YamlUnfolder):
     default_config = '.jjv_config.yml'

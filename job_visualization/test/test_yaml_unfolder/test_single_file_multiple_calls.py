@@ -6,8 +6,8 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from yaml_unfolder import YamlUnfolder
-from yaml_unfolder import convert_path
+from job_visualization.yaml_unfolder import YamlUnfolder
+from job_visualization.yaml_unfolder import convert_path
 
 class TestSingleFileMultipleCalls(unittest.TestCase):
 
