@@ -1,4 +1,27 @@
+class SynonymSet:
 
+    def __init__(self):
+        self.synonyms = []
+
+    def add_set(self, s):
+        self.synonyms.append(s)
+
+    def get_synonyms(self, param):
+        for syn_set in self.synonyms:
+            if param in syn_set:
+                return syn_set
+
+        return {}
+
+    def are_synonyms(self, param_1, param_2):
+        for syn_set in self.synonyms:
+            if param_1 in syn_set and param_2 in syn_set:
+                return True
+
+        return False
+
+    def __str__(self):
+        return ':'.join(repr(syn_set) for syn_set in self.synonyms)
 def parse_from_args(synonyms):
     '''
     Parse an array of string from argparser
@@ -61,20 +84,3 @@ def parse_from_array(arr):
 
     return syn_set
 
-class SynonymSet:
-
-    def __init__(self):
-        self.synonyms = []
-
-    def add_set(self, s):
-        self.synonyms.append(s)
-
-    def are_synonyms(self, param_1, param_2):
-        for syn_set in self.synonyms:
-            if param_1 in syn_set and param_2 in syn_set:
-                return True
-
-        return False
-
-    def __str__(self):
-        return ':'.join(repr(syn_set) for syn_set in self.synonyms)

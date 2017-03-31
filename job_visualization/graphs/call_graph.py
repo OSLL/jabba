@@ -91,6 +91,10 @@ class CallGraph(Graph):
     def unfold_file(self, path):
         yaml_config = self.unfold(path)
 
+        self.unfold_config(path, yaml_config)
+
+    def unfold_config(self, path, yaml_config):
+
         try:
             name = yaml_config[0]['job']['name']
         except:

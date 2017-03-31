@@ -12,4 +12,4 @@ main.py --files maxscale_jobs/build_all.yaml --call-graph --synonyms {same-node,
 main.py --files maxscale_jobs/build_all.yaml --call-graph --call-parameters call-order
 main.py  --include-graph --name all_files --files maxscale_jobs/*.yaml
 main.py  --call-graph --name all_files --files maxscale_jobs/*.yaml
-main.py --analysis func1:arg func2:arg=5:arg2=True --files maxscale_jobs/build.yaml 
+main.py --analysis parameters_present:same-node --synonyms {same-node, node-parameters}

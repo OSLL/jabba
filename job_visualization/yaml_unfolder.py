@@ -26,6 +26,7 @@ class YamlUnfolder(object):
         Loader.add_constructor('!include-raw:', self.include_raw_constructor)
         Loader.add_constructor('!include', self.include_constructor)
 
+
         # Each graph should be able to have its own default rank_dir parameter
         if rank_dir is None:
             self.include_graph = graphs.include_graph.IncludeGraph()
@@ -34,8 +35,7 @@ class YamlUnfolder(object):
             self.include_graph = graphs.include_graph.IncludeGraph(rank_dir)
             self.call_graph = graphs.call_graph.CallGraph(rank_dir=rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
 
-        self.file_index = FileIndex(root, self.unfold_yaml)
-
+        self.file_index = FileIndex(path=root, unfold=self.unfold_yaml)
 
     def include_constructor(self, loader, node):
         v = self.unfold_yaml(node.value)
