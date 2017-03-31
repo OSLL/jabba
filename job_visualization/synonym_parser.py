@@ -22,6 +22,7 @@ class SynonymSet:
 
     def __str__(self):
         return ':'.join(repr(syn_set) for syn_set in self.synonyms)
+
 def parse_from_args(synonyms):
     '''
     Parse an array of string from argparser

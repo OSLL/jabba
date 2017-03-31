@@ -1,0 +1,6 @@
+- job:
+    name: publisher
+
+    builders:
+        - trigger-builds:
+            - project: 'test'

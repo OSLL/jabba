@@ -1,0 +1,3 @@
+trigger-builds:
+    - project: 'publisher'
+      node-parameters: true

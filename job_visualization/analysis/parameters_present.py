@@ -1,4 +1,8 @@
 
+import collections
+
+Error = collections.namedtuple('Error', ['caller', 'edge', 'parameter'])
+
 def parameters_present(options, **kwargs):
     synonyms = options['synonyms']
     call_graph = options['call_graph']
@@ -9,34 +13,37 @@ def parameters_present(options, **kwargs):
         for edge in edges:
             call_config = edge.call_config
 
-            for req_key, req_value in kwargs.items():
+            for req_param, req_value in kwargs.items():
                 found = False
 
-                for key, value in call_config.items():
-                    if synonyms.are_synonyms(key, req_key):
+                for param, value in call_config.items():
+                    if synonyms.are_synonyms(param, req_param):
                         found = True
                         break
 
                 if not found:
-                    result.add(node, edge, req_key)
+                    result.add(node, edge, req_param)
 
     return result
 
 class _Result:
     def __init__(self):
-        self.failures = []
+        self.errors = []
 
-    def add(self, node, edge, key):
-        self.failures.append((node, edge, key))
+    def add(self, node, edge, parameter):
+        self.errors.append(Error(caller=node, edge=edge, parameter=parameter))
 
     def __str__(self):
         ret = "Parameters present test\n---------\n"
 
-        if len(self.failures) == 0:
+        if len(self.errors) == 0:
             ret += "OK"
             return ret
 
-        for node, edge, key in self.failures:
-            ret += "{} calls {} without the required parameter {} (or synonyms)\n".format(node, edge.call_config['project'], key)
+        for error in self.errors:
+            caller = error.caller
+            edge = error.edge
+            parameter = error.parameter
+            ret += "{} calls {} without the required parameter {} (or synonyms)\n".format(caller, edge.call_config['project'], parameter)
 
         return ret

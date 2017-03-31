@@ -1,0 +1,6 @@
+- job:
+    name: build
+
+    builders:
+        - !include './test/test_analysis/parameters_present/call_test.yml'
+
