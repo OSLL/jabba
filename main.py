@@ -7,6 +7,7 @@ import os
 from os.path import basename
 
 from job_visualization import YamlUnfolder
+from job_visualization import Analyzer
 from job_visualization import FileIndex
 from job_visualization import ConfigParser
 from job_visualization import synonym_parser
@@ -26,8 +27,9 @@ if __name__ == '__main__':
     parser.add_argument('--config', default=ConfigParser.default_config, help='Path to file used as config. Every option from config is overriden if set from command line parameters')
     parser.add_argument('--synonyms', nargs='+', type=str, help='Sets of synonyms that should be considered the same. Every synonym set should be inside curly braces {}, every synonym inside set should be separated with comma')
     parser.add_argument('--name', default=None, type=str, help='Export name. Include graphs will contain _include suffix. Call graphs will contain _call suffix. If not set, export name will be derived from the first file passed to --files')
+    parser.add_argument('--analysis', nargs='+', type=str, help='Analysis functions and arguments in the format "func1;arg1=5;arg2 func2;arg1;arg2=True func3"')
 
-    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False)
+    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False, analysis=[])
 
     args = parser.parse_args()
 
@@ -51,7 +53,9 @@ if __name__ == '__main__':
     yaml_unfolder.call_graph.call_display = args.call_display
     yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
 
-    yaml_unfolder.synonyms = args.synonyms
+    analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms)
+    analyzer.run()
+    analyzer.print_result()
 
     files = args.files
     export_name = args.name
