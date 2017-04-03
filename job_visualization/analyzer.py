@@ -4,10 +4,11 @@ from . import graphs
 from . import analysis
 from .analysis import parse_analyzer_arguments
 from .util import is_job_config
+from .synonym_parser import SynonymSet
 
 class Analyzer(YamlUnfolder):
 
-    def __init__(self, root, synonyms, arguments, file_index):
+    def __init__(self, root, arguments, file_index, synonyms=SynonymSet()):
         super(self.__class__, self).__init__(root=root)
 
         self.arguments = parse_analyzer_arguments(arguments)
@@ -27,6 +28,7 @@ class Analyzer(YamlUnfolder):
     def create_include_graph(self):
         for name, file_data in self.file_index.files.items():
             self.unfold_yaml(file_data.path)
+            self.include_graph.reset()
 
         self.include_graph.render("testing_include")
 
@@ -45,7 +47,8 @@ class Analyzer(YamlUnfolder):
         options = {
             'synonyms': self.synonyms,
             'include_graph': self.include_graph,
-            'call_graph': self.call_graph
+            'call_graph': self.call_graph,
+            'file_index': self.file_index
         }
 
         for argument in self.arguments:

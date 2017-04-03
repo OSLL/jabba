@@ -1,0 +1,5 @@
+- job:
+    name: used_2
+
+    including:
+        - !include 'test/test_analysis/unused_configs/used_3.yml'
