@@ -1,18 +1,15 @@
 import collections
 
-import ruamel.yaml
-from ruamel.yaml import load, Loader, dump
+import yaml
+from yaml import load, Loader, dump
 
 import graphviz as gv
 import os
 
-from include_graph import IncludeGraph
-import call_graph
-from file_index import FileIndex
+from . import graphs
+from .file_index import FileIndex
 
-import warnings
-warnings.simplefilter('ignore', ruamel.yaml.error.UnsafeLoaderWarning)
-
+from .util import convert_path
 
 '''
 Tuple for storing calls
@@ -21,15 +18,7 @@ call_config is a config of call file, i.e. trigger-builds
 project_config is a config of job that is been called
 '''
 CallObject = collections.namedtuple('CallObject', ['project_name', 'call_config', 'project_config', 'caller_name'])
-
-def convert_path(path):
-    if os.path.isabs(path):
-        raise Exception("Cannot include file with absolute path {}. Please use relative path instead".format((path)))
-
-    path = os.path.normpath(path)
-
-    return path
-    
+   
 class YamlUnfolder(object):
 
     def __init__(self, root, rank_dir=None):
@@ -37,16 +26,16 @@ class YamlUnfolder(object):
         Loader.add_constructor('!include-raw:', self.include_raw_constructor)
         Loader.add_constructor('!include', self.include_constructor)
 
+
         # Each graph should be able to have its own default rank_dir parameter
         if rank_dir is None:
-            self.include_graph = IncludeGraph()
-            self.call_graph = call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+            self.include_graph = graphs.include_graph.IncludeGraph()
+            self.call_graph = graphs.call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
         else:
-            self.include_graph = IncludeGraph(rank_dir)
-            self.call_graph = call_graph.CallGraph(rank_dir=rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+            self.include_graph = graphs.include_graph.IncludeGraph(rank_dir)
+            self.call_graph = graphs.call_graph.CallGraph(rank_dir=rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
 
-        self.file_index = FileIndex(root, self.unfold_yaml)
-
+        self.file_index = FileIndex(path=root, unfold=self.unfold_yaml)
 
     def include_constructor(self, loader, node):
         v = self.unfold_yaml(node.value)
@@ -178,3 +167,5 @@ class YamlUnfolder(object):
         call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)
         return call_object
 
+    def reset(self):
+        self.include_graph.reset()

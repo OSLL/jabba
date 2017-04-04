@@ -2,10 +2,10 @@
 import graphviz as gv
 
 import collections
-from file_data import FileData
+from ..file_data import FileData
 
-from graph import Graph
-import yaml_unfolder
+from .graph import Graph
+from ..util import convert_path
 
 CallEdge = collections.namedtuple('CallEdge', ['project_name', 'call_config'])
 
@@ -90,7 +90,16 @@ class CallGraph(Graph):
 
     def unfold_file(self, path):
         yaml_config = self.unfold(path)
-        name = yaml_config[0]['job']['name']
+
+        self.unfold_config(path, yaml_config)
+
+    def unfold_config(self, path, yaml_config):
+
+        try:
+            name = yaml_config[0]['job']['name']
+        except:
+            print("Warning: building call graph for not a job {}".format(yaml_config))
+            return
 
         self.add_node(name, FileData(yaml=yaml_config, path=path), is_root=True)
 
@@ -226,4 +235,4 @@ class CallGraph(Graph):
 
     def get_path_from_name(self, name):
         path = self._configs[name].path
-        return yaml_unfolder.convert_path(path)
+        return convert_path(path)

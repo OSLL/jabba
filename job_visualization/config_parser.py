@@ -1,14 +1,15 @@
 
 import os
 
-import yaml_unfolder
-import synonym_parser
+from . import yaml_unfolder
+from . import synonym_parser
 
 class ConfigParser(yaml_unfolder.YamlUnfolder):
     default_config = '.jjv_config.yml'
 
     def __init__(self, config):
-        super(self.__class__, self).__init__(root='.')
+        yaml_unfolder.YamlUnfolder.__init__(self, root='.')
+        #super(self.__class__, self).__init__(root='.')
 
         self.include_graph.active = False
         self.call_graph.active = False

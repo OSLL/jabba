@@ -6,7 +6,7 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from yaml_unfolder import YamlUnfolder
+from job_visualization.yaml_unfolder import YamlUnfolder
 
 test_data = 'test/test_call_graph/test_data/'
 

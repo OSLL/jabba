@@ -1,0 +1,5 @@
+- job:
+    name: test
+
+    publishers:
+        - !include './test/test_analysis/parameters_present/call_publisher.yml'

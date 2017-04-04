@@ -1,0 +1,10 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"test/test_analysis/parameters_present/test.yml" [color=red]
+		"test/test_analysis/parameters_present/test.yml" -> "test/test_analysis/parameters_present/publisher.yml" [label=<> color=green]
+	"test/test_analysis/parameters_present/publisher.yml" [color=red]
+		"test/test_analysis/parameters_present/publisher.yml" -> "test/test_analysis/parameters_present/test.yml" [label=<> color=blue]
+	"test/test_analysis/parameters_present/build.yml" [color=red]
+		"test/test_analysis/parameters_present/build.yml" -> "test/test_analysis/parameters_present/test.yml" [label=<> color=blue]
+}

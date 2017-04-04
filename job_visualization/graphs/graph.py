@@ -1,7 +1,7 @@
 
 import graphviz as gv
 
-from legend import Legend
+from .legend import Legend
 
 class Graph(object):
     """

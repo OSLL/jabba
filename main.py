@@ -1,29 +1,35 @@
 #!/usr/bin/env python
 
+import argparse
 from argparse import ArgumentParser
+
 import os
 from os.path import basename
 
 from job_visualization import YamlUnfolder
+from job_visualization import Analyzer
 from job_visualization import FileIndex
 from job_visualization import ConfigParser
 from job_visualization import synonym_parser
 
 if __name__ == '__main__':
 
-    parser = ArgumentParser()
-    parser.add_argument('--files', nargs='+', required=True, type=str)
-    parser.add_argument('--include-graph', dest='include_graph', action='store_true')
-    parser.add_argument('--call-graph', dest='call_graph', action='store_true')
-    parser.add_argument('--yaml-root', default='')
-    parser.add_argument('--call-display', choices=['none', 'text', 'edge'], default='text')
-    parser.add_argument('--rank-dir', choices=['left-right', 'up-down'], default='left-right')
-    parser.add_argument('--call-parameters', nargs='+', type=str)
-    parser.add_argument('--legend', action='store_true', dest='legend')
-    parser.add_argument('--config', default=ConfigParser.default_config)
-    parser.add_argument('--synonyms', nargs='+', type=str)
+    parser = ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False)
+    parser.add_argument('--files', nargs='+', type=str, help='List of files that graphs will be build for. Every such file will be marked red on the resulting graph')
+    parser.add_argument('--include-graph', dest='include_graph', action='store_true', help='Whether to build the include graph')
+    parser.add_argument('--call-graph', dest='call_graph', action='store_true', help='Whether to build the call graph')
+    parser.add_argument('--yaml-root', default='', help='Root directory that is used for resolving relative includes')
+    parser.add_argument('--call-display', choices=['none', 'text', 'edge'], default='text', help='How to display information about calls in call graph')
+    parser.add_argument('--rank-dir', choices=['left-right', 'up-down'], default='left-right', help='How to display a graph. If left-right is selected, all edges will be drawn from left to right. If up-down is selected, all edges will be drawn from up to bottom')
+    parser.add_argument('--call-parameters', nargs='+', type=str, help='Call parameters to display on call edges')
+    parser.add_argument('--legend', action='store_true', dest='legend', help='Whether to draw a legend or not')
+    parser.add_argument('--config', default=ConfigParser.default_config, help='Path to file used as config. Every option from config is overriden if set from command line parameters')
+    parser.add_argument('--synonyms', nargs='+', type=str, help='Sets of synonyms that should be considered the same. Every synonym set should be inside curly braces {}, every synonym inside set should be separated with comma')
+    parser.add_argument('--name', default=None, type=str, help='Export name. Include graphs will contain _include suffix. Call graphs will contain _call suffix. If not set, export name will be derived from the first file passed to --files')
+    parser.add_argument('--analysis', nargs='+', type=str, help='Analysis functions and arguments in the format "func1;arg1=5;arg2 func2;arg1;arg2=True func3"')
+
+    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False, analysis=[])
 
     args = parser.parse_args()
 
@@ -47,25 +53,45 @@ if __name__ == '__main__':
     yaml_unfolder.call_graph.call_display = args.call_display
     yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
 
-    yaml_unfolder.synonyms = args.synonyms
+    # Nothing to analyze
+    if len(args.analysis) > 0:
+        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index)
+        analyzer.run()
+        analyzer.print_result()
 
     files = args.files
-    # main_file is the one we pass to include graph
-    main_file = args.files[0]
+    export_name = args.name
 
     if yaml_unfolder.include_graph.active: 
-        unfolded_yaml = yaml_unfolder.unfold_yaml(main_file, is_root=True)
-        export_name = basename(args.files[0]) + '_include'
-        yaml_unfolder.include_graph.render(export_name)
+        for name in files:
+            if os.path.isdir(name):
+                continue
 
-        print("Generated include graph at {}.svg".format(export_name))
+            yaml_unfolder.unfold_yaml(name, is_root=True)
+            yaml_unfolder.reset()
+        
+        if export_name is None:
+            include_export_name = basename(files[0]) + '_include'
+        else:
+            include_export_name = "{}_include".format(export_name)
+
+        yaml_unfolder.include_graph.render(include_export_name)
+
+        print("Generated include graph at {}.svg".format(include_export_name))
 
     if yaml_unfolder.call_graph.active:
-        export_name = basename(main_file) + '_call'
+        if export_name is None:
+            call_export_name = basename(files[0]) + '_call'
+        else:
+            call_export_name = "{}_call".format(export_name)
 
-        for file_name in files:
-            yaml_unfolder.call_graph.unfold_file(file_name)
 
-        yaml_unfolder.call_graph.render(export_name)
+        for name in files:
+            if os.path.isdir(name):
+                continue
 
-        print("Generated call graph at {}.svg".format(export_name))
+            yaml_unfolder.call_graph.unfold_file(name)
+
+        yaml_unfolder.call_graph.render(call_export_name)
+
+        print("Generated call graph at {}.svg".format(call_export_name))

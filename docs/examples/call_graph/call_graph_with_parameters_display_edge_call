@@ -1,0 +1,9 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"call_graph_with_parameters.yaml" [color=red]
+	"build_all-cleanup" [label=<same-node:True> shape=record]
+		"call_graph_with_parameters.yaml" -> "build_all-cleanup" [arrowhead=none color=blue]
+		"build_all-cleanup" -> "cleanup.yml" [color=blue]
+	"cleanup.yml" [color=black]
+}

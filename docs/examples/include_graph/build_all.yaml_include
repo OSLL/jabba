@@ -1,0 +1,7 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"value.yaml"
+	"build_all.yaml"
+		"build_all.yaml" -> "value.yaml" [label=<<B>include</B>> color=green]
+}
