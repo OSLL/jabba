@@ -40,6 +40,13 @@ class IncludeGraph(Graph):
         # Represented as hashmap (path -> edges) where edges is list of IncludeEdge objects
         self._graph = {}
 
+        self.init_legend()
+
+    def init_legend(self):
+        self.legend.add_item('include', {'color': 'green'})
+        self.legend.add_item('include-raw', {'color': 'red'})
+
+
     def add_node(self, name):
         if not self.active:
             return
@@ -106,13 +113,13 @@ class IncludeGraph(Graph):
         if not self.active:
             return
 
-        super(self.__class__, self).render()
-
         for path in self._graph.keys():
             self.graph.node(path)
 
             for edge in self._graph[path]:
                 self.graph.edge(path, edge.path, label=edge.settings['label'], color=edge.settings['color'])
+
+        super(self.__class__, self).render()
 
         self.graph.render(file_to)
 
