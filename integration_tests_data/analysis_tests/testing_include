@@ -7,11 +7,6 @@ size="8,5"
 	"call_job2.yml"
 	".jjv_config.yml"
 	"job3.yml"
-		"job3.yml" -> "job2.yml" [label=<<B>include</B>> color=green]
-		"job3.yml" -> "call_job3.yml" [label=<<B>include</B>> color=green]
-		"job3.yml" -> "job.yml" [label=<<B>include</B>> color=green]
-		"job3.yml" -> "call_job2.yml" [label=<<B>include</B>> color=green]
-		"job3.yml" -> ".jjv_config.yml" [label=<<B>include</B>> color=green]
 	"job.yml"
 		"job.yml" -> "call_job2.yml" [label=<<B>include</B>> color=green]
 }

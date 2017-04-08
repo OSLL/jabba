@@ -1,4 +1,6 @@
 
+from .result import Result
+from os.path import basename
 
 def unused_configs(options, **kwargs):
 
@@ -10,7 +12,7 @@ def unused_configs(options, **kwargs):
     result = _Result()
 
     for config, edges in include_graph._graph.items():
-        if config not in used_configs:
+        if config not in used_configs and is_not_hidden(config): 
             result.add(config)
 
     return result
@@ -29,7 +31,10 @@ def get_used_configs(include_graph, call_graph):
 
     return configs
 
-class _Result:
+def is_not_hidden(config):
+    return not basename(config).startswith('.')
+
+class _Result(Result):
 
     def __init__(self):
         self.errors = []

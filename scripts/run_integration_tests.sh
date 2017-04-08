@@ -34,7 +34,7 @@ do
 
     if !(eval "${cwd}${command}")
     then echo error; exit_code=1; total_ER=$(($total_ER+1))
-    else total_OK=$(($total_OK+1)); echo "OK"; fi
+    else total_OK=$(($total_OK+1)); fi
 
     cd $cwd
 done < <(cat "integration_tests_data/analysis_test_commands.txt")
