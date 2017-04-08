@@ -1,0 +1,7 @@
+- job:
+    name: job
+
+    buiders:
+        - shell: |
+            echo test
+            echo second line
