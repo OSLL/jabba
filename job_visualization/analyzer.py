@@ -30,8 +30,6 @@ class Analyzer(YamlUnfolder):
             self.unfold_yaml(file_data.path)
             self.include_graph.reset()
 
-        self.include_graph.render("testing_include")
-
     def create_call_graph(self):
         for name, file_data in self.file_index.files.items():
             if not is_job_config(file_data.yaml):
@@ -39,8 +37,6 @@ class Analyzer(YamlUnfolder):
 
             self.call_graph.unfold_config(file_data.path, file_data.yaml)
         
-        self.call_graph.render("testing")
-
     def run(self):
         self.results = []
 
