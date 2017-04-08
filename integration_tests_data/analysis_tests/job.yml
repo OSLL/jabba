@@ -1,0 +1,5 @@
+- job:
+    name: job
+
+    publishers:
+        - !include './call_job2.yml'

@@ -1,0 +1,9 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"job.yml" [color=red]
+		"job.yml" -> "job2.yml" [label=<> color=green]
+	"job3.yml" [color=red]
+	"job2.yml" [color=red]
+		"job2.yml" -> "job3.yml" [label=<> color=blue]
+}

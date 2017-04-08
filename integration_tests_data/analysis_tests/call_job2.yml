@@ -1,0 +1,3 @@
+trigger-builds:
+    - project: 'job2'
+      same-node: true

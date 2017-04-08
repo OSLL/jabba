@@ -25,6 +25,21 @@ do
     cd $cwd
 done < <(cat "integration_tests_data/test_commands.txt")
 
+echo -e "\e[93mRunning analysis integration tests\e[0m"
+
+while read command
+do 
+    cd $cwd/integration_tests_data/analysis_tests
+    echo running ${command}
+
+    if !(eval "${cwd}${command}")
+    then echo error; exit_code=1; total_ER=$(($total_ER+1))
+    else total_OK=$(($total_OK+1)); echo "OK"; fi
+
+    cd $cwd
+done < <(cat "integration_tests_data/analysis_test_commands.txt")
+
+
 echo -e "\e[93mAll tests done\e[0m"
 echo $(($total_ER + $total_OK))" tests run"
 echo $total_ER" errors"
