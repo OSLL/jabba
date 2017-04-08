@@ -6,6 +6,8 @@ from argparse import ArgumentParser
 import os
 from os.path import basename
 
+import sys
+
 from job_visualization import YamlUnfolder
 from job_visualization import Analyzer
 from job_visualization import FileIndex
@@ -53,12 +55,6 @@ if __name__ == '__main__':
     yaml_unfolder.call_graph.call_display = args.call_display
     yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
 
-    # Nothing to analyze
-    if len(args.analysis) > 0:
-        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index)
-        analyzer.run()
-        analyzer.print_result()
-
     files = args.files
     export_name = args.name
 
@@ -95,3 +91,14 @@ if __name__ == '__main__':
         yaml_unfolder.call_graph.render(call_export_name)
 
         print("Generated call graph at {}.svg".format(call_export_name))
+
+    # Creating analyzer takes a couple of seconds for building include and call graphs of whole project
+    # No need to create analyzer if there is nothing to analyze
+    if len(args.analysis) > 0:
+        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index)
+        analyzer.run()
+        analyzer.print_result()
+
+        if not analyzer.is_ok():
+            sys.exit(1)
+

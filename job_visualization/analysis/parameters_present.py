@@ -1,6 +1,8 @@
 
 import collections
 
+from .result import Result
+
 Error = collections.namedtuple('Error', ['caller', 'edge', 'parameter'])
 
 def parameters_present(options, **kwargs):
@@ -26,7 +28,7 @@ def parameters_present(options, **kwargs):
 
     return result
 
-class _Result:
+class _Result(Result):
     def __init__(self):
         self.errors = []
 

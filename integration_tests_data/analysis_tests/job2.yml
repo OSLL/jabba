@@ -1,0 +1,5 @@
+- job:
+    name: job2
+
+    builders:
+        - !include './call_job3.yml'

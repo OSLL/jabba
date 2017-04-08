@@ -59,6 +59,9 @@ class Analyzer(YamlUnfolder):
             result = func(options=options, **argument.arguments)
             self.results.append(result)
 
+    def is_ok(self):
+        return all(result.is_ok() for result in self.results)
+
     def print_result(self):
         for result in self.results:
             print(result)
