@@ -9,6 +9,7 @@ import os
 
 from . import graphs
 from .file_index import FileIndex
+from .file_data import FileData
 from .graphs import Edge
 
 from .util import convert_path
@@ -38,16 +39,37 @@ class YamlUnfolder(object):
         Loader.add_constructor('!include-raw:', self.include_raw_constructor)
         Loader.add_constructor('!include', self.include_constructor)
 
+        self.root = root
+        self.rank_dir = rank_dir
 
+        # While initing include graph 'unfold_yaml' is called
+        # but we don't want it since it is not inited yet
+        self.add_to_include_graph = False
+        self.init_file_index()
+        self.add_to_include_graph = True
+
+        self.init_include_graph()
+
+        self.init_call_graph()
+
+        
+    def init_include_graph(self):
         # Each graph should be able to have its own default rank_dir parameter
-        if rank_dir is None:
+        if self.rank_dir is None:
             self.include_graph = graphs.include_graph.IncludeGraph()
+        else:
+            self.include_graph = graphs.include_graph.IncludeGraph(self.rank_dir)
+
+    def init_file_index(self):
+        self.file_index = FileIndex(path=self.root, unfold=self.unfold_yaml, load_files=False)
+        self.file_index.files = self.file_index.load_files(self.root)
+
+    def init_call_graph(self):
+        if self.rank_dir is None:
             self.call_graph = graphs.call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
         else:
-            self.include_graph = graphs.include_graph.IncludeGraph(rank_dir)
-            self.call_graph = graphs.call_graph.CallGraph(rank_dir=rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+            self.call_graph = graphs.call_graph.CallGraph(rank_dir=self.rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
 
-        self.file_index = FileIndex(path=root, unfold=self.unfold_yaml)
 
     def include_constructor(self, loader, node):
         v = self.unfold_yaml(node.value)
@@ -58,9 +80,10 @@ class YamlUnfolder(object):
 
         node.value = convert_path(node.value)
 
-        self.include_graph.add_node(node.value)
-        self.include_graph.add_edge_from_last_node(node.value, 
-                    label='<<B>include-raw</B>>', color='include_raw_color')
+        if self.add_to_include_graph:
+            self.include_graph.add_node(node.value)
+            self.include_graph.add_edge_from_last_node(node.value, 
+                        label='<<B>include-raw</B>>', color='include_raw_color')
 
         with open(node.value, 'r') as f:
             text = f.read()
@@ -77,16 +100,19 @@ class YamlUnfolder(object):
 
         file_name = convert_path(file_name)
 
-        self.include_graph.add_node(file_name)
-        self.include_graph.add_to_list(file_name)
+        if self.add_to_include_graph:
+            self.include_graph.add_node(file_name)
+            self.include_graph.add_to_list(file_name)
+
 
         with open(file_name, 'r') as f:
             initial_dict = load(f)
 
-            if len(self.include_graph.include_list) >= 2:
+            if self.add_to_include_graph and len(self.include_graph.include_list) >= 2:
                 self.include_graph.pop_from_list()
                 self.include_graph.add_edge_from_last_node(file_name, 
                         label='<<B>include</B>>', color='include_color')
+
             return initial_dict
 
 

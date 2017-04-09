@@ -29,9 +29,6 @@ def parameters_present(options, **kwargs):
     return result
 
 class _Result(Result):
-    def __init__(self):
-        self.errors = []
-
     def add(self, node, edge, parameter):
         self.errors.append(Error(caller=node, edge=edge, parameter=parameter))
 

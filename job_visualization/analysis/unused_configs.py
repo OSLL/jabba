@@ -36,9 +36,6 @@ def is_not_hidden(config):
 
 class _Result(Result):
 
-    def __init__(self):
-        self.errors = []
-
     def add(self, config):
         self.errors.append(config)
 
