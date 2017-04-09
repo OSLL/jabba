@@ -9,16 +9,21 @@ import os
 
 from . import graphs
 from .file_index import FileIndex
+from .graphs import Edge
 
 from .util import convert_path
 
 '''
-Tuple for storing calls
 project_name is a name of a job that is called
 call_config is a config of call file, i.e. trigger-builds
 project_config is a config of job that is been called
 '''
-CallObject = collections.namedtuple('CallObject', ['project_name', 'call_config', 'project_config', 'caller_name'])
+class CallEdge(Edge):
+    def __init__(self, to, call_config, project_config, caller_name):
+        super(self.__class__, self).__init__(to, call_config)
+
+        self.project_config = project_config
+        self.caller_name = caller_name
 
 def ordered_constructor(loader, node):
     loader.flatten_mapping(node)
@@ -87,7 +92,7 @@ class YamlUnfolder(object):
 
     def get_calls(self, file_name):
         '''
-        Reads file by given name and returns CallObject array
+        Reads file by given name and returns CallEdge array
         '''
         
         file_dict = self.unfold_yaml(file_name)
@@ -108,7 +113,7 @@ class YamlUnfolder(object):
 
     def get_calls_from_dict(self, file_dict, from_name, settings={}):
         '''
-        Processes unfolded yaml object to CallObject array
+        Processes unfolded yaml object to CallEdge array
 
         settings is a dict of settings for keeping information like
         in what section we are right now (e.g. builders, publishers)
@@ -143,7 +148,7 @@ class YamlUnfolder(object):
 
     def extract_call(self, call, from_name, settings):
         '''
-        Creates CallObject from call file (i.e. trigger-builds)
+        Creates CallEdge from call file (i.e. trigger-builds)
 
         Returns a list of calls
         '''
@@ -171,7 +176,7 @@ class YamlUnfolder(object):
     def create_call(self, project, call, from_name):
         file_data = self.get_data_from_name(project)
 
-        call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)
+        call_object = CallEdge(to=project, call_config=call, project_config=file_data, caller_name=from_name)
         return call_object
 
     def reset(self):

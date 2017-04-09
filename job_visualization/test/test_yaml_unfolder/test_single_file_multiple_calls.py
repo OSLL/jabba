@@ -36,6 +36,6 @@ class TestSingleFileMultipleCalls(unittest.TestCase):
 
         self.assertEquals(len(calls), 3)
 
-        self.assertEquals(calls[0].project_name, 'name_1')
-        self.assertEquals(calls[1].project_name, 'name_2')
-        self.assertEquals(calls[2].project_name, 'name_3')
+        self.assertEquals(calls[0].to, 'name_1')
+        self.assertEquals(calls[1].to, 'name_2')
+        self.assertEquals(calls[2].to, 'name_3')

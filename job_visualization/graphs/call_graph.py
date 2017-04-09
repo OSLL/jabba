@@ -5,9 +5,9 @@ import collections
 from ..file_data import FileData
 
 from .graph import Graph
-from ..util import convert_path
+from .edge import Edge
 
-CallEdge = collections.namedtuple('CallEdge', ['project_name', 'call_config'])
+from ..util import convert_path
 
 class CallGraph(Graph):
     '''
@@ -59,8 +59,8 @@ class CallGraph(Graph):
         self.legend.add_item('builders', {'color': 'blue'})
 
     def add_call_object(self, call_object):
-        self.add_node(call_object.project_name, call_object.project_config)
-        self.add_edge(call_object.caller_name, call_object.project_name, call_object.call_config)
+        self.add_node(call_object.to, call_object.project_config)
+        self.add_edge(call_object.caller_name, call_object.to, call_object.settings)
 
     def add_node(self, name, project_config, is_root=False):
         if name not in self._graph:
@@ -70,9 +70,9 @@ class CallGraph(Graph):
         if is_root:
             self._roots.add(name)
 
-    def add_edge(self, from_name, to_name, call_config):
+    def add_edge(self, from_name, to_name, settings):
         if not self.has_edge(from_name, to_name):
-            call_edge = CallEdge(to_name, call_config)
+            call_edge = Edge(to=to_name, settings=settings)
             self._graph[from_name].append(call_edge)
 
     def has_edge(self, from_name, to_name):
@@ -83,7 +83,7 @@ class CallGraph(Graph):
             return False
 
         for edge in edges:
-            if edge.project_name == to_name:
+            if edge.to == to_name:
                 return True
         else:
             return False
@@ -125,14 +125,14 @@ class CallGraph(Graph):
             else:
                 current_order += 1
 
-            call.call_config['call-order'] = current_order
+            call.settings['call-order'] = current_order
 
             self.add_call_object(call)
 
-            calls = self.get_calls(call.project_config.yaml, call.project_name)
+            calls = self.get_calls(call.project_config.yaml, call.to)
 
             for c in calls:
-                if not self.has_edge(c.caller_name, c.project_name):
+                if not self.has_edge(c.caller_name, c.to):
                     q.append(c)
 
     def render(self, path):
@@ -168,10 +168,10 @@ class CallGraph(Graph):
                 raise Exception('Incorrect call display option {}'.format(self.call_display))
 
     def render_simple_edge(self, name, edge, edge_settings, label="call"):
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label, **edge_settings)
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
 
     def render_edge_with_label(self, name, edge, edge_settings):
-        props_to_display = self.extract_props(edge.call_config)
+        props_to_display = self.extract_props(edge.settings)
 
         label = '<'
 
@@ -181,21 +181,21 @@ class CallGraph(Graph):
 
         label += '>'
 
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.project_name), label=label, **edge_settings)
+        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
 
     def render_edge_with_node_label(self, name, edge, edge_settings):
-        props_to_display = self.extract_props(edge.call_config)
+        props_to_display = self.extract_props(edge.settings)
 
         label = '<'
         label += "|".join(self.get_label(prop, value) for prop, value in props_to_display.items()) 
         label += '>'
 
-        edge_node_name = "{}-{}".format(name, edge.project_name)
+        edge_node_name = "{}-{}".format(name, edge.to)
 
         self.graph.node(edge_node_name, label=label, shape="record")
 
         self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none", **edge_settings)
-        self.graph.edge(edge_node_name, self.get_path_from_name(edge.project_name), **edge_settings)
+        self.graph.edge(edge_node_name, self.get_path_from_name(edge.to), **edge_settings)
 
     def get_label(self, prop, value):
         if value is None:
@@ -204,18 +204,18 @@ class CallGraph(Graph):
             return "{}:{}".format(prop, value)
 
     def get_settings(self, edge):
-        if 'section' not in edge.call_config:
+        if 'section' not in edge.settings:
             return {}
 
-        if edge.call_config['section'] == 'publishers':
+        if edge.settings['section'] == 'publishers':
             return {'color': 'green'}
 
-        if edge.call_config['section'] == 'builders':
+        if edge.settings['section'] == 'builders':
             return {'color': 'blue'}
 
         return {}
 
-    def extract_props(self, call_config):
+    def extract_props(self, settings):
         '''
         Extract all valuable properties to be displayed
         '''
@@ -223,8 +223,8 @@ class CallGraph(Graph):
         props = {}
 
         for param in self.call_parameters:
-            if param in call_config:
-                props[param] = call_config[param]
+            if param in settings:
+                props[param] = settings[param]
             else:
                 props[param] = None
 

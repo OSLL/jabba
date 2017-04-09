@@ -25,14 +25,14 @@ class TestGetCalls(unittest.TestCase):
         calls = self.yaml_unfolder.get_calls(test_data + 'single_call.yml')
 
         self.assertEqual(len(calls), 1)
-        self.assertEqual(calls[0].project_name, 'empty')
+        self.assertEqual(calls[0].to, 'empty')
 
     def testMultipleCalls(self):
         calls = self.yaml_unfolder.get_calls(test_data + 'multiple_calls.yml')
 
         self.assertEqual(len(calls), 2)
-        self.assertEqual(calls[0].project_name, 'empty')
-        self.assertEqual(calls[1].project_name, 'empty_2')
+        self.assertEqual(calls[0].to, 'empty')
+        self.assertEqual(calls[1].to, 'empty_2')
 
 if __name__ == "__main__":
     unittest.main()

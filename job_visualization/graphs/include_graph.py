@@ -4,6 +4,7 @@ import graphviz as gv
 import collections
 
 from .graph import Graph
+from .edge import Edge
 
 '''
 All visual settings we want to specify for include graph
@@ -15,10 +16,6 @@ graph_settings = {
         'default_color': 'black'
     }
 }
-
-# path - path that is passed to !include or !include_raw
-# settings - settings of the edge (label, color)
-IncludeEdge = collections.namedtuple('IncludeEdge', ['path', 'settings'])
 
 class IncludeGraph(Graph):
 
@@ -73,7 +70,7 @@ class IncludeGraph(Graph):
         else:
             color = graph_settings['edges']['default_color']
 
-        edges.append(IncludeEdge(path=node_to, settings = {
+        edges.append(Edge(to=node_to, settings = {
             'label': label,
             'color': color
         }))
@@ -88,7 +85,7 @@ class IncludeGraph(Graph):
         edges = self._graph[from_node]
 
         for edge in edges:
-            if edge.path == to_node:
+            if edge.to == to_node:
                 return True
 
         return False
@@ -117,7 +114,7 @@ class IncludeGraph(Graph):
             self.graph.node(path)
 
             for edge in self._graph[path]:
-                self.graph.edge(path, edge.path, label=edge.settings['label'], color=edge.settings['color'])
+                self.graph.edge(path, edge.to, label=edge.settings['label'], color=edge.settings['color'])
 
         super(self.__class__, self).render()
 

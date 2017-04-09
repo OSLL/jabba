@@ -27,7 +27,7 @@ def get_used_configs(include_graph, call_graph):
 
     for node, edges in include_graph._graph.items():
         for edge in edges:
-            configs.add(edge.path)
+            configs.add(edge.to)
 
     return configs
 

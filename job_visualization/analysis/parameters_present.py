@@ -13,7 +13,7 @@ def parameters_present(options, **kwargs):
 
     for node, edges in call_graph._graph.items():
         for edge in edges:
-            call_config = edge.call_config
+            call_config = edge.settings
 
             for req_param, req_value in kwargs.items():
                 found = False
