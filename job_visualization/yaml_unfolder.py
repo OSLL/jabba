@@ -1,4 +1,5 @@
 import collections
+from collections import OrderedDict
 
 import yaml
 from yaml import load, Loader, dump
@@ -18,10 +19,16 @@ call_config is a config of call file, i.e. trigger-builds
 project_config is a config of job that is been called
 '''
 CallObject = collections.namedtuple('CallObject', ['project_name', 'call_config', 'project_config', 'caller_name'])
+
+def ordered_constructor(loader, node):
+    loader.flatten_mapping(node)
+    pairs = loader.construct_pairs(node)
+    return OrderedDict(pairs)
    
 class YamlUnfolder(object):
 
     def __init__(self, root, rank_dir=None):
+        Loader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, ordered_constructor)
         Loader.add_constructor('!include:', self.include_constructor)
         Loader.add_constructor('!include-raw:', self.include_raw_constructor)
         Loader.add_constructor('!include', self.include_constructor)
@@ -117,7 +124,7 @@ class YamlUnfolder(object):
         # Trigger flags
         triggers = {'trigger-builds', 'trigger-parameterized-builds'}
 
-        if type(file_dict) == dict:
+        if type(file_dict) == dict or type(file_dict) == OrderedDict:
             for key in file_dict:
 
                 if key in special_sections:
