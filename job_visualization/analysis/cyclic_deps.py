@@ -74,11 +74,11 @@ def remove_repetitions(cycles):
     ret = []
 
     for cycle in cycles:
-        cycle = frozenset(cycle)
+        cycle_set = frozenset(cycle)
 
-        if cycle not in seen:
+        if cycle_set not in seen:
             ret.append(cycle)
-            seen.add(cycle)
+            seen.add(cycle_set)
 
     return ret
 
