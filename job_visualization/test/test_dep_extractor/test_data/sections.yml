@@ -1,0 +1,9 @@
+- job:
+    name: sections
+
+    builders:
+        - !include './test/test_call_graph/test_data/call_empty.yml'
+    publishers:
+        - !include './test/test_call_graph/test_data/call_empty_2.yml'
+    wrappers:
+        - !include './test/test_call_graph/test_data/call_multiple_calls.yml'

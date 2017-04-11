@@ -18,15 +18,15 @@ class TestParametersPresent(unittest.TestCase):
         self.yaml_unfolder = YamlUnfolder(root=self.test_data)
 
     def testParametersPresent(self):
-        file_index = FileIndex(self.test_data, unfold=self.yaml_unfolder.unfold_yaml)
-
         synonyms = SynonymSet()
         synonyms.add_set({'same-node', 'node-parameters'})
 
         arguments = ["parameters_present:same-node"]
 
-        analyzer = Analyzer(root=self.test_data, synonyms=synonyms, arguments=arguments, file_index=file_index)
+        analyzer = Analyzer(root=self.test_data, synonyms=synonyms, arguments=arguments, file_index=self.yaml_unfolder.file_index, dep_extractor=self.yaml_unfolder.dep_extractor)
         analyzer.run()
+
+        self.assertEqual(len(analyzer.results), 1)
 
         result = analyzer.results[0]
 

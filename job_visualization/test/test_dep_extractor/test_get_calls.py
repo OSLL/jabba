@@ -6,29 +6,31 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization.yaml_unfolder import YamlUnfolder
+from job_visualization import FileIndex, DepExtractor
 
 test_data = 'test/test_call_graph/test_data/'
 
 class TestGetCalls(unittest.TestCase):
 
     def setUp(self):
-        yaml_root = test_data
-        self.yaml_unfolder = YamlUnfolder(root=yaml_root)
+        self.file_index = FileIndex(test_data)
+        self.file_index.load_files(test_data)
+
+        self.dep_extractor = DepExtractor(self.file_index)
 
     def testEmpty(self):
-        calls = self.yaml_unfolder.get_calls(test_data + 'empty.yml')
+        calls = self.dep_extractor.get_calls('empty')
 
         self.assertEqual(len(calls), 0)
 
     def testSingleCall(self):
-        calls = self.yaml_unfolder.get_calls(test_data + 'single_call.yml')
+        calls = self.dep_extractor.get_calls('single')
 
         self.assertEqual(len(calls), 1)
         self.assertEqual(calls[0].to, 'empty')
 
     def testMultipleCalls(self):
-        calls = self.yaml_unfolder.get_calls(test_data + 'multiple_calls.yml')
+        calls = self.dep_extractor.get_calls('multiple')
 
         self.assertEqual(len(calls), 2)
         self.assertEqual(calls[0].to, 'empty')

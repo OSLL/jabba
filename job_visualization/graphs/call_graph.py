@@ -15,14 +15,11 @@ class CallGraph(Graph):
     Stores all graph with file configs for further analysis
     '''
  
-    def __init__(self, get_calls, unfold, rank_dir='left-right'):
+    def __init__(self, dep_extractor, file_index, rank_dir='left-right'):
 
-        super(self.__class__, self).__init__(rank_dir)
-
+        super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
 
         self.active = False
-        self.get_calls = get_calls
-        self.unfold = unfold
 
         # Graphviz graph
         self.graph = gv.Digraph(format='svg')
@@ -89,15 +86,15 @@ class CallGraph(Graph):
             return False
 
     def unfold_file(self, path):
-        yaml_config = self.unfold(path)
+        yaml_config = self.file_index.unfold_yaml(path)
 
         self.unfold_config(path, yaml_config)
 
     def unfold_config(self, path, yaml_config):
 
         try:
-            name = yaml_config[0]['job']['name']
-        except:
+            name = self.file_index.get_job_name(yaml_config)
+        except KeyError:
             print("Warning: building call graph for not a job {}".format(yaml_config))
             return
 
@@ -106,7 +103,7 @@ class CallGraph(Graph):
         # Queue
         q = []
 
-        q.extend(self.get_calls(yaml_config, name))
+        q.extend(self.dep_extractor.get_calls(name))
 
         # What is the order of current call in call config
         current_order = 1
@@ -129,7 +126,7 @@ class CallGraph(Graph):
 
             self.add_call_object(call)
 
-            calls = self.get_calls(call.project_config.yaml, call.to)
+            calls = self.dep_extractor.get_calls(call.to)
 
             for c in calls:
                 if not self.has_edge(c.caller_name, c.to):

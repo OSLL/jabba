@@ -11,7 +11,7 @@ def convert_path(path):
  
 def is_job_config(config):
     try:
-        if config[0]['job']['name'] is not None:
+        if config['config']['job']['name'] is not None:
             return True
     except KeyError:
         return False
@@ -21,3 +21,9 @@ def is_job_config(config):
         return False
 
     return False
+
+def extract_from_config(config):
+    if isinstance(config, dict) and 'config' in config:
+        return config['config']
+
+    return config

@@ -1,0 +1,2 @@
+trigger-parameterized-builds:
+    - project: 'empty_2'

@@ -3,6 +3,8 @@ from collections import OrderedDict
 from os.path import splitext, exists
 from os import makedirs
 
+from .util import extract_from_config
+
 def export_shell(file_index, to_dir):
     if not exists(to_dir):
         makedirs(to_dir)
@@ -19,6 +21,8 @@ def export_from_file(file_data, to_dir):
 
     for i in range(len(shells)):
         shell = shells[i]
+
+        shell = extract_from_config(shell)
 
         if len(shells) == 1:
             file_name = "{}/{}.sh".format(to_dir, flatten_path(path))

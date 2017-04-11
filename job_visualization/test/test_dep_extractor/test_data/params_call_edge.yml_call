@@ -1,0 +1,13 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"test/test_call_graph/test_data/params_call_edge.yml" [color=red]
+	"params_call_edge-empty_2" [label=<same-node:True> shape=record]
+		"test/test_call_graph/test_data/params_call_edge.yml" -> "params_call_edge-empty_2" [arrowhead=none color=blue]
+		"params_call_edge-empty_2" -> "test/test_call_graph/test_data/empty_2.yml" [color=blue]
+	"params_call_edge-empty" [label=<same-node: <FONT color="red">not set</FONT>> shape=record]
+		"test/test_call_graph/test_data/params_call_edge.yml" -> "params_call_edge-empty" [arrowhead=none color=blue]
+		"params_call_edge-empty" -> "test/test_call_graph/test_data/empty.yml" [color=blue]
+	"test/test_call_graph/test_data/empty.yml" [color=black]
+	"test/test_call_graph/test_data/empty_2.yml" [color=black]
+}
