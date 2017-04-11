@@ -1,4 +1,3 @@
-
 from .result import Result
 
 def cyclic_deps(options, **kwargs):
@@ -17,10 +16,13 @@ def cyclic_test(graph):
 
     for node, edges in graph._graph.items():
         if node not in visited:
+
             cycle = find_cycle(graph._graph, node, visited)
 
             if cycle is not None:
                 cycles.append(cycle)
+
+    cycles = remove_repetitions(cycles)
 
     return cycles
 
@@ -33,10 +35,10 @@ def find_cycle(graph, node, visited):
 # Simple DFS
 # Current stack keeps path from the root to the current node
 def _find_cycle(graph, node, visited, current_stack):
+    visited.add(node)
+
     if node in current_stack:
         return unwrap_cycle(node, current_stack)
-
-    visited.add(node)
 
     current_stack.append(node)
 
@@ -66,6 +68,23 @@ def unwrap_cycle(node, stack):
 
     return cycle
 
+def remove_repetitions(cycles):
+    seen = set()
+
+    ret = []
+
+    for cycle in cycles:
+        cycle = frozenset(cycle)
+
+        if cycle not in seen:
+            ret.append(cycle)
+            seen.add(cycle)
+
+    return ret
+
+def format_cycle(cycle):
+    return " -> ".join(cycle)
+
 class _IncludeResult(Result):
     def __init__(self, cycles):
         super(self.__class__, self).__init__()
@@ -74,7 +93,18 @@ class _IncludeResult(Result):
             self.add(cycle)
 
     def __str__(self):
-        return str(self.errors)
+        ret = "Cyclic dependencies in include graph test\n"
+
+        if self.is_ok():
+            ret += "OK"
+
+            return ret
+
+        for error in self.errors:
+            ret += "Found cycle {}\n".format(format_cycle(error))
+
+        return ret
+
 
 class _CallResult(Result):
     def __init__(self, cycles):
@@ -85,8 +115,17 @@ class _CallResult(Result):
             self.add(cycle)
 
     def __str__(self):
-        return str(self.errors)
+        ret = "Cyclic dependencies in call graph test\n"
 
+        if self.is_ok():
+            ret += "OK"
+
+            return ret
+
+        for error in self.errors:
+            ret += "Found cycle {}\n".format(format_cycle(error))
+
+        return ret
 
 class _Result(Result):
     def __init__(self, include_result, call_result):
