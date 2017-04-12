@@ -23,8 +23,9 @@ class FileIndex:
     """
     Indexes files for quick search by name or path
     """
-    def __init__(self, path):
+    def __init__(self, path, verbose=0):
         self.path = path
+        self.verbose = verbose
 
         # name -> config for quick look up by job name
         self.jobs = {}
@@ -46,6 +47,9 @@ class FileIndex:
 
 
     def load_files(self, path):
+        if self.verbose == 2:
+            print("Indexing {}".format(path))
+
         for filename in os.listdir(path):
 
             file_path = path + "/" + filename

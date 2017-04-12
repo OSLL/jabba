@@ -13,16 +13,17 @@ from .dep_extractor import DepExtractor
   
 class YamlUnfolder(object):
 
-    def __init__(self, root, rank_dir=None):
+    def __init__(self, root, rank_dir=None, verbose=0):
 
         self.initing = True
 
+        self.verbose = verbose
         self.root = root
         self.rank_dir = rank_dir
 
         self.init_file_index()
 
-        self.dep_extractor = DepExtractor(self.file_index)
+        self.dep_extractor = DepExtractor(self.file_index, verbose=verbose)
 
         self.init_include_graph()
 
@@ -31,7 +32,7 @@ class YamlUnfolder(object):
         self.initing = False
 
     def init_file_index(self):
-        self.file_index = FileIndex(path=self.root)
+        self.file_index = FileIndex(path=self.root, verbose=self.verbose)
         self.file_index.load_files(self.root)
 
     def init_include_graph(self):

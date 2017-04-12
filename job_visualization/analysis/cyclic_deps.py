@@ -93,7 +93,7 @@ class _CallResult(Result):
             self.add(cycle)
 
     def __str__(self):
-        ret = "Cyclic dependencies in call graph test\n"
+        ret = "\nCyclic dependencies in call graph test\n-------------\n"
 
         if self.is_ok():
             ret += "OK"

@@ -31,8 +31,9 @@ IncludeInfo = namedtuple('IncludeInfo', ['type', 'path'])
  
 class DepExtractor(object):
 
-    def __init__(self, file_index):
+    def __init__(self, file_index, verbose=0):
         self.file_index = file_index
+        self.verbose = verbose
 
     '''
     ==============

@@ -40,7 +40,7 @@ class _Result(Result):
         self.errors.append(config)
 
     def __str__(self):
-        ret = "Unused configs test\n---------\n"
+        ret = "\nUnused configs test\n---------\n"
 
         if len(self.errors) == 0:
             ret += "OK"

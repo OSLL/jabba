@@ -33,7 +33,7 @@ class _Result(Result):
         self.errors.append(Error(caller=node, edge=edge, parameter=parameter))
 
     def __str__(self):
-        ret = "Parameters present test\n---------\n"
+        ret = "\nParameters present test\n---------\n"
 
         if len(self.errors) == 0:
             ret += "OK"
