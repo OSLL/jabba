@@ -7,7 +7,6 @@ sys.path.append("../")
 sys.path.append("../../")
 
 from job_visualization import Analyzer
-from job_visualization import FileIndex
 from job_visualization import SynonymSet
 from job_visualization.yaml_unfolder import YamlUnfolder
 
