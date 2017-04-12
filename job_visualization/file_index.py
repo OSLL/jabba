@@ -11,6 +11,7 @@ import collections
 from .file_data import FileData
 from .util import is_job_config, convert_path
 
+from .analysis.cyclic_deps import format_cycle
 from .dep_extractor import IncludeInfo, include_flag
 
 def ordered_constructor(loader, node):
@@ -119,7 +120,12 @@ class FileIndex:
         # Found cycle
         if path in self.unfolding_stack:
             cyclic_call = self.unfolding_stack[-1]
-            raise Exception("Cyclic include found. {} includes {}".format(path, cyclic_call))
+
+            cycle = self.unfolding_stack[self.unfolding_stack.index(cyclic_call):]
+
+            cycle = [path] + cycle + [path]
+
+            raise Exception("Cyclic include found. {}".format(format_cycle(cycle)))
 
         self.unfolding_stack.append(path)
 
