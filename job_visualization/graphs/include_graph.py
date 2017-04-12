@@ -22,18 +22,18 @@ class IncludeGraph(Graph):
     def __init__(self, dep_extractor, file_index, rank_dir='left-right'):
         super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
 
-        self.graph = gv.Digraph(format='svg')
+        self.gv_graph = gv.Digraph(format='svg')
 
         if self.rank_dir == 'left-right':
-            self.graph.body.extend(['rankdir=LR'])
+            self.gv_graph.body.extend(['rankdir=LR'])
 
-        self.graph.body.extend(['size="8,5"'])
+        self.gv_graph.body.extend(['size="8,5"'])
 
         self.active = False
 
         # Internal graph
         # Represented as hashmap (path -> edges) where edges is list of IncludeEdge objects
-        self._graph = {}
+        self.graph = {}
 
         self.init_legend()
 
@@ -46,8 +46,8 @@ class IncludeGraph(Graph):
         if not self.active:
             return
 
-        if name not in self._graph:
-            self._graph[name] = []
+        if name not in self.graph:
+            self.graph[name] = []
 
     def add_edge(self, node_from, node_to, type):
         if not self.active:
@@ -60,7 +60,7 @@ class IncludeGraph(Graph):
         if self.has_edge(node_from, node_to):
             return
 
-        edges = self._graph[node_from]
+        edges = self.graph[node_from]
 
         if type == 'include':
             color = graph_settings['edges']['include_color']
@@ -81,10 +81,10 @@ class IncludeGraph(Graph):
         if not self.active:
             return False
 
-        if not from_node in self._graph:
+        if not from_node in self.graph:
             return False
 
-        edges = self._graph[from_node]
+        edges = self.graph[from_node]
 
         for edge in edges:
             if edge.to == to_node:
@@ -128,12 +128,13 @@ class IncludeGraph(Graph):
         if not self.active:
             return
 
-        for path in self._graph.keys():
-            self.graph.node(path)
+        for path in self.graph.keys():
+            self.gv_graph.node(path)
 
-            for edge in self._graph[path]:
-                self.graph.edge(path, edge.to, label=edge.settings['label'], color=edge.settings['color'])
+            for edge in self.graph[path]:
+                self.gv_graph.edge(path, edge.to, label=edge.settings['label'], color=edge.settings['color'])
 
         super(self.__class__, self).render()
 
-        self.graph.render(file_to)
+        self.gv_graph.render(file_to)
+

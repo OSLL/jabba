@@ -13,10 +13,10 @@ def cyclic_test(graph):
 
     visited = set()
 
-    for node, edges in graph._graph.items():
+    for node, edges in graph:
         if node not in visited:
 
-            cycle = find_cycle(graph._graph, node, visited)
+            cycle = find_cycle(graph, node, visited)
 
             if cycle is not None:
                 cycles.append(cycle)

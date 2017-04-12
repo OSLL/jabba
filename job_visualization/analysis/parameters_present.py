@@ -11,7 +11,7 @@ def parameters_present(options, **kwargs):
 
     result = _Result()
 
-    for node, edges in call_graph._graph.items():
+    for node, edges in call_graph:
         for edge in edges:
             call_config = edge.settings
 

@@ -18,7 +18,16 @@ class Graph(object):
 
         self.draw_legend = False
 
+        self.graph = {}
+
     def render(self):
         if self.draw_legend:
             legend = self.legend.render()
-            self.graph.subgraph(legend)
+            self.gv_graph.subgraph(legend)
+
+    def __iter__(self):
+        for node, edge in self.graph.items():
+            yield node, edge
+
+    def __getitem__(self, index):
+        return self.graph[index]
