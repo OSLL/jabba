@@ -15,6 +15,7 @@ class ConfigParser(yaml_unfolder.YamlUnfolder):
         self.call_graph.active = False
 
         if os.path.exists(config):
+            v = self.unfold_yaml(config)
             self.args = self.unfold_yaml(config)['config']
         else:
             if config != ConfigParser.default_config:

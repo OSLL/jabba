@@ -43,6 +43,6 @@ class _Result(Result):
             caller = error.caller
             edge = error.edge
             parameter = error.parameter
-            ret += "{} calls {} without the required parameter {} (or synonyms)\n".format(caller, edge.call_config['project'], parameter)
+            ret += "{} calls {} without the required parameter {} (or synonyms)\n".format(caller, edge.settings['project'], parameter)
 
         return ret

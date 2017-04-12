@@ -33,6 +33,10 @@ class FileIndex:
 
         self.init_yaml_loader()
 
+        # Jobs that were unfolded while unfolding the  file
+        # Prevents goind into infinite recursion
+        self.seen = set()
+
     def init_yaml_loader(self):
         Loader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, ordered_constructor)
         Loader.add_constructor('!include:', self.include_constructor)
@@ -94,6 +98,12 @@ class FileIndex:
         set include_graph.active = False before calling
         '''
 
+        self.unfolding_stack = []
+
+        return self._unfold_yaml(path)
+
+    def _unfold_yaml(self, path):
+
         path = convert_path(path)
 
         try:
@@ -102,10 +112,16 @@ class FileIndex:
             config = file_data.yaml
 
             return config
-
         except KeyError:
             # Maybe we haven't unfolded it yet
             pass
+
+        # Found cycle
+        if path in self.unfolding_stack:
+            cyclic_call = self.unfolding_stack[-1]
+            raise Exception("Cyclic include found. {} includes {}".format(path, cyclic_call))
+
+        self.unfolding_stack.append(path)
 
         with open(path, 'r') as f:
             config = load(f)
@@ -113,6 +129,8 @@ class FileIndex:
             config = self.inject_include_info(path, config, include_type='include')
 
             self.add_file(path, config)
+
+            self.unfolding_stack.pop()
 
             return config
 
@@ -128,7 +146,7 @@ class FileIndex:
         return ret
 
     def include_constructor(self, loader, node):
-        v = self.unfold_yaml(node.value)
+        v = self._unfold_yaml(node.value)
 
         return v
 

@@ -1,13 +1,12 @@
 from .result import Result
 
 def cyclic_deps(options, **kwargs):
-    include_graph = options['include_graph']
     call_graph = options['call_graph']
 
-    include_result = _IncludeResult(cyclic_test(include_graph))
     call_result = _CallResult(cyclic_test(call_graph))
+    
+    return call_result
 
-    return _Result(include_result, call_result)
 
 def cyclic_test(graph):
     cycles = []
@@ -85,27 +84,6 @@ def remove_repetitions(cycles):
 def format_cycle(cycle):
     return " -> ".join(cycle)
 
-class _IncludeResult(Result):
-    def __init__(self, cycles):
-        super(self.__class__, self).__init__()
-
-        for cycle in cycles:
-            self.add(cycle)
-
-    def __str__(self):
-        ret = "Cyclic dependencies in include graph test\n"
-
-        if self.is_ok():
-            ret += "OK"
-
-            return ret
-
-        for error in self.errors:
-            ret += "Found cycle {}\n".format(format_cycle(error))
-
-        return ret
-
-
 class _CallResult(Result):
     def __init__(self, cycles):
 
@@ -126,14 +104,3 @@ class _CallResult(Result):
             ret += "Found cycle {}\n".format(format_cycle(error))
 
         return ret
-
-class _Result(Result):
-    def __init__(self, include_result, call_result):
-        self.include_result = include_result
-        self.call_result = call_result
-
-    def is_ok(self):
-        return self.include_result.is_ok() and self.call_result.is_ok()
-
-    def __str__(self):
-        return "{}\n{}".format(self.include_result, self.call_result)

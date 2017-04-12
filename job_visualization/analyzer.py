@@ -43,7 +43,8 @@ class Analyzer(YamlUnfolder):
             'synonyms': self.synonyms,
             'include_graph': self.include_graph,
             'call_graph': self.call_graph,
-            'file_index': self.file_index
+            'file_index': self.file_index,
+            'dep_extractor': self.dep_extractor
         }
 
         for argument in self.arguments:
