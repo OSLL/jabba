@@ -10,7 +10,6 @@ import sys
 
 from job_visualization import YamlUnfolder
 from job_visualization import Analyzer
-from job_visualization import FileIndex
 from job_visualization import ConfigParser
 from job_visualization import synonym_parser
 from job_visualization import export_shell
@@ -32,12 +31,15 @@ if __name__ == '__main__':
     parser.add_argument('--name', default=None, type=str, help='Export name. Include graphs will contain _include suffix. Call graphs will contain _call suffix. If not set, export name will be derived from the first file passed to --files')
     parser.add_argument('--analysis', nargs='+', type=str, help='Analysis functions and arguments in the format "func1;arg1=5;arg2 func2;arg1;arg2=True func3"')
     parser.add_argument('--export-shell', default=None, help="Export all shell in .yml configs to the specified directory")
+    parser.add_argument('--verbose', default=1, help="Verbosity level. 0 - no output. 1 - basic debugg output. 2 - detailed debugg output", type=int)
 
     parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False, analysis=[])
 
     args = parser.parse_args()
 
-    config_parser = ConfigParser(args.config)
+    verbose = args.verbose
+
+    config_parser = ConfigParser(args.config, verbose=verbose)
 
     if args.synonyms != []:
         args.synonyms = synonym_parser.parse_from_args(args.synonyms)
@@ -46,7 +48,7 @@ if __name__ == '__main__':
 
     yaml_root = args.yaml_root
 
-    yaml_unfolder = YamlUnfolder(root=yaml_root, rank_dir=args.rank_dir)
+    yaml_unfolder = YamlUnfolder(root=yaml_root, rank_dir=args.rank_dir, verbose=verbose)
 
     yaml_unfolder.include_graph.active = args.include_graph
     yaml_unfolder.call_graph.active = args.call_graph
@@ -75,7 +77,8 @@ if __name__ == '__main__':
         
         yaml_unfolder.include_graph.render(include_export_name)
 
-        print("Generated include graph at {}.svg".format(include_export_name))
+        if verbose > 0:
+            print("Generated include graph at {}.svg".format(include_export_name))
 
     if yaml_unfolder.call_graph.active:
         if export_name is None:
@@ -91,12 +94,13 @@ if __name__ == '__main__':
 
         yaml_unfolder.call_graph.render(call_export_name)
 
-        print("Generated call graph at {}.svg".format(call_export_name))
+        if verbose > 0:
+            print("Generated call graph at {}.svg".format(call_export_name))
 
     # Creating analyzer takes a couple of seconds for building include and call graphs of whole project
     # No need to create analyzer if there is nothing to analyze
     if len(args.analysis) > 0:
-        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index, dep_extractor=yaml_unfolder.dep_extractor)
+        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index, dep_extractor=yaml_unfolder.dep_extractor, verbose=verbose)
         analyzer.run()
         analyzer.print_result()
 

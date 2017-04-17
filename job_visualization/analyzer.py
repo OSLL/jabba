@@ -8,8 +8,10 @@ from .synonym_parser import SynonymSet
 
 class Analyzer(YamlUnfolder):
 
-    def __init__(self, root, arguments, file_index, dep_extractor, synonyms=SynonymSet()):
-        super(self.__class__, self).__init__(root=root)
+    def __init__(self, root, arguments, file_index, dep_extractor, synonyms=SynonymSet(), verbose=0):
+        super(self.__class__, self).__init__(root=root, verbose=0)
+
+        self.verbose = verbose
 
         self.arguments = parse_analyzer_arguments(arguments)
         self.synonyms = synonyms
@@ -26,10 +28,16 @@ class Analyzer(YamlUnfolder):
         self.create_call_graph()
 
     def create_include_graph(self):
+        if self.verbose == 2:
+            print("Creating full include graph for analysis")
+
         for name, file_data in self.file_index.files.items():
             self.include_graph.unfold_file(file_data.path)
 
     def create_call_graph(self):
+        if self.verbose == 2:
+            print("Creating full call graph for analysis")
+
         for name, file_data in self.file_index.files.items():
             if not is_job_config(file_data.yaml):
                 continue
@@ -54,6 +62,9 @@ class Analyzer(YamlUnfolder):
                 func = getattr(analysis, argument.function)
             except AttributeError:
                 raise AttributeError("Cannot find analysis function {}".format(argument.function))
+
+            if self.verbose == 2:
+                print("Running {} analysis function".format(argument.function))
 
             result = func(options=options, **argument.arguments)
             self.results.append(result)
