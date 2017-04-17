@@ -27,7 +27,7 @@ def get_used_configs(include_graph, call_graph):
 
     for node, edges in include_graph._graph.items():
         for edge in edges:
-            configs.add(edge.path)
+            configs.add(edge.to)
 
     return configs
 
@@ -35,9 +35,6 @@ def is_not_hidden(config):
     return not basename(config).startswith('.')
 
 class _Result(Result):
-
-    def __init__(self):
-        self.errors = []
 
     def add(self, config):
         self.errors.append(config)

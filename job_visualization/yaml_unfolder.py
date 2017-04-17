@@ -9,16 +9,22 @@ import os
 
 from . import graphs
 from .file_index import FileIndex
+from .file_data import FileData
+from .graphs import Edge
 
 from .util import convert_path
 
 '''
-Tuple for storing calls
 project_name is a name of a job that is called
 call_config is a config of call file, i.e. trigger-builds
 project_config is a config of job that is been called
 '''
-CallObject = collections.namedtuple('CallObject', ['project_name', 'call_config', 'project_config', 'caller_name'])
+class CallEdge(Edge):
+    def __init__(self, to, call_config, project_config, caller_name):
+        super(self.__class__, self).__init__(to, call_config)
+
+        self.project_config = project_config
+        self.caller_name = caller_name
 
 def ordered_constructor(loader, node):
     loader.flatten_mapping(node)
@@ -33,16 +39,37 @@ class YamlUnfolder(object):
         Loader.add_constructor('!include-raw:', self.include_raw_constructor)
         Loader.add_constructor('!include', self.include_constructor)
 
+        self.root = root
+        self.rank_dir = rank_dir
 
+        # While initing include graph 'unfold_yaml' is called
+        # but we don't want it since it is not inited yet
+        self.add_to_include_graph = False
+        self.init_file_index()
+        self.add_to_include_graph = True
+
+        self.init_include_graph()
+
+        self.init_call_graph()
+
+        
+    def init_include_graph(self):
         # Each graph should be able to have its own default rank_dir parameter
-        if rank_dir is None:
+        if self.rank_dir is None:
             self.include_graph = graphs.include_graph.IncludeGraph()
+        else:
+            self.include_graph = graphs.include_graph.IncludeGraph(self.rank_dir)
+
+    def init_file_index(self):
+        self.file_index = FileIndex(path=self.root, unfold=self.unfold_yaml, load_files=False)
+        self.file_index.files = self.file_index.load_files(self.root)
+
+    def init_call_graph(self):
+        if self.rank_dir is None:
             self.call_graph = graphs.call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
         else:
-            self.include_graph = graphs.include_graph.IncludeGraph(rank_dir)
-            self.call_graph = graphs.call_graph.CallGraph(rank_dir=rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+            self.call_graph = graphs.call_graph.CallGraph(rank_dir=self.rank_dir, get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
 
-        self.file_index = FileIndex(path=root, unfold=self.unfold_yaml)
 
     def include_constructor(self, loader, node):
         v = self.unfold_yaml(node.value)
@@ -53,9 +80,10 @@ class YamlUnfolder(object):
 
         node.value = convert_path(node.value)
 
-        self.include_graph.add_node(node.value)
-        self.include_graph.add_edge_from_last_node(node.value, 
-                    label='<<B>include-raw</B>>', color='include_raw_color')
+        if self.add_to_include_graph:
+            self.include_graph.add_node(node.value)
+            self.include_graph.add_edge_from_last_node(node.value, 
+                        label='<<B>include-raw</B>>', color='include_raw_color')
 
         with open(node.value, 'r') as f:
             text = f.read()
@@ -72,22 +100,25 @@ class YamlUnfolder(object):
 
         file_name = convert_path(file_name)
 
-        self.include_graph.add_node(file_name)
-        self.include_graph.add_to_list(file_name)
+        if self.add_to_include_graph:
+            self.include_graph.add_node(file_name)
+            self.include_graph.add_to_list(file_name)
+
 
         with open(file_name, 'r') as f:
             initial_dict = load(f)
 
-            if len(self.include_graph.include_list) >= 2:
+            if self.add_to_include_graph and len(self.include_graph.include_list) >= 2:
                 self.include_graph.pop_from_list()
                 self.include_graph.add_edge_from_last_node(file_name, 
                         label='<<B>include</B>>', color='include_color')
+
             return initial_dict
 
 
     def get_calls(self, file_name):
         '''
-        Reads file by given name and returns CallObject array
+        Reads file by given name and returns CallEdge array
         '''
         
         file_dict = self.unfold_yaml(file_name)
@@ -108,7 +139,7 @@ class YamlUnfolder(object):
 
     def get_calls_from_dict(self, file_dict, from_name, settings={}):
         '''
-        Processes unfolded yaml object to CallObject array
+        Processes unfolded yaml object to CallEdge array
 
         settings is a dict of settings for keeping information like
         in what section we are right now (e.g. builders, publishers)
@@ -143,7 +174,7 @@ class YamlUnfolder(object):
 
     def extract_call(self, call, from_name, settings):
         '''
-        Creates CallObject from call file (i.e. trigger-builds)
+        Creates CallEdge from call file (i.e. trigger-builds)
 
         Returns a list of calls
         '''
@@ -171,7 +202,7 @@ class YamlUnfolder(object):
     def create_call(self, project, call, from_name):
         file_data = self.get_data_from_name(project)
 
-        call_object = CallObject(project_name=project, call_config=call, project_config=file_data, caller_name=from_name)
+        call_object = CallEdge(to=project, call_config=call, project_config=file_data, caller_name=from_name)
         return call_object
 
     def reset(self):

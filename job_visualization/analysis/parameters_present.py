@@ -13,7 +13,7 @@ def parameters_present(options, **kwargs):
 
     for node, edges in call_graph._graph.items():
         for edge in edges:
-            call_config = edge.call_config
+            call_config = edge.settings
 
             for req_param, req_value in kwargs.items():
                 found = False
@@ -29,9 +29,6 @@ def parameters_present(options, **kwargs):
     return result
 
 class _Result(Result):
-    def __init__(self):
-        self.errors = []
-
     def add(self, node, edge, parameter):
         self.errors.append(Error(caller=node, edge=edge, parameter=parameter))
 
