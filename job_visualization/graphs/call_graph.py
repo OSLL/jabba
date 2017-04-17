@@ -15,28 +15,23 @@ class CallGraph(Graph):
     Stores all graph with file configs for further analysis
     '''
  
-    def __init__(self, get_calls, unfold, rank_dir='left-right'):
+    def __init__(self, dep_extractor, file_index, rank_dir='left-right'):
 
-        super(self.__class__, self).__init__(rank_dir)
-
+        super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
 
         self.active = False
-        self.get_calls = get_calls
-        self.unfold = unfold
 
         # Graphviz graph
-        self.graph = gv.Digraph(format='svg')
+        self.gv_graph = gv.Digraph(format='svg')
 
         if self.rank_dir == 'left-right':
-            self.graph.body.extend(['rankdir=LR'])
+            self.gv_graph.body.extend(['rankdir=LR'])
 
-        self.graph.body.extend(['size="8,5"'])
-
-        self.call_list = []
+        self.gv_graph.body.extend(['size="8,5"'])
 
         # Internal graph represented as dict mapping node names to the list of its edges
         # Edge is represented as CallEdge
-        self._graph = {}
+        self.graph = {}
         # Configs for files
         self._configs = {}
         # Roots are the jobs that were passed to `unfold_file` method
@@ -63,8 +58,8 @@ class CallGraph(Graph):
         self.add_edge(call_object.caller_name, call_object.to, call_object.settings)
 
     def add_node(self, name, project_config, is_root=False):
-        if name not in self._graph:
-            self._graph[name] = []
+        if name not in self.graph:
+            self.graph[name] = []
             self._configs[name] = project_config
             
         if is_root:
@@ -73,12 +68,12 @@ class CallGraph(Graph):
     def add_edge(self, from_name, to_name, settings):
         if not self.has_edge(from_name, to_name):
             call_edge = Edge(to=to_name, settings=settings)
-            self._graph[from_name].append(call_edge)
+            self.graph[from_name].append(call_edge)
 
     def has_edge(self, from_name, to_name):
 
         try:
-            edges = self._graph[from_name]
+            edges = self.graph[from_name]
         except KeyError:
             return False
 
@@ -89,15 +84,15 @@ class CallGraph(Graph):
             return False
 
     def unfold_file(self, path):
-        yaml_config = self.unfold(path)
+        yaml_config = self.file_index.unfold_yaml(path)
 
         self.unfold_config(path, yaml_config)
 
     def unfold_config(self, path, yaml_config):
 
         try:
-            name = yaml_config[0]['job']['name']
-        except:
+            name = self.file_index.get_job_name(yaml_config)
+        except KeyError:
             print("Warning: building call graph for not a job {}".format(yaml_config))
             return
 
@@ -106,7 +101,7 @@ class CallGraph(Graph):
         # Queue
         q = []
 
-        q.extend(self.get_calls(yaml_config, name))
+        q.extend(self.dep_extractor.get_calls(name))
 
         # What is the order of current call in call config
         current_order = 1
@@ -129,7 +124,7 @@ class CallGraph(Graph):
 
             self.add_call_object(call)
 
-            calls = self.get_calls(call.project_config.yaml, call.to)
+            calls = self.dep_extractor.get_calls(call.to)
 
             for c in calls:
                 if not self.has_edge(c.caller_name, c.to):
@@ -139,7 +134,7 @@ class CallGraph(Graph):
         for node in self._roots:
             self.render_node(node, color='red')
 
-        for node in self._graph.keys():
+        for node in self.graph.keys():
             if node not in self._roots:
                 self.render_node(node)
 
@@ -147,13 +142,13 @@ class CallGraph(Graph):
         # we have to draw the base graph after the main graph
         super(self.__class__, self).render()
 
-        self.graph.render(path)
+        self.gv_graph.render(path)
 
 
     def render_node(self, name, color='black'):
-        self.graph.node(self.get_path_from_name(name), color=color)
+        self.gv_graph.node(self.get_path_from_name(name), color=color)
 
-        edges = self._graph[name]
+        edges = self.graph[name]
 
         for edge in edges:
             edge_settings = self.get_settings(edge)
@@ -168,7 +163,7 @@ class CallGraph(Graph):
                 raise Exception('Incorrect call display option {}'.format(self.call_display))
 
     def render_simple_edge(self, name, edge, edge_settings, label="call"):
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
+        self.gv_graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
 
     def render_edge_with_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.settings)
@@ -181,7 +176,7 @@ class CallGraph(Graph):
 
         label += '>'
 
-        self.graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
+        self.gv_graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
 
     def render_edge_with_node_label(self, name, edge, edge_settings):
         props_to_display = self.extract_props(edge.settings)
@@ -192,10 +187,10 @@ class CallGraph(Graph):
 
         edge_node_name = "{}-{}".format(name, edge.to)
 
-        self.graph.node(edge_node_name, label=label, shape="record")
+        self.gv_graph.node(edge_node_name, label=label, shape="record")
 
-        self.graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none", **edge_settings)
-        self.graph.edge(edge_node_name, self.get_path_from_name(edge.to), **edge_settings)
+        self.gv_graph.edge(self.get_path_from_name(name), edge_node_name, arrowhead="none", **edge_settings)
+        self.gv_graph.edge(edge_node_name, self.get_path_from_name(edge.to), **edge_settings)
 
     def get_label(self, prop, value):
         if value is None:

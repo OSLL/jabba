@@ -19,23 +19,21 @@ graph_settings = {
 
 class IncludeGraph(Graph):
 
-    def __init__(self, rank_dir='left-right'):
-        super(self.__class__, self).__init__(rank_dir)
+    def __init__(self, dep_extractor, file_index, rank_dir='left-right'):
+        super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
 
-        self.graph = gv.Digraph(format='svg')
+        self.gv_graph = gv.Digraph(format='svg')
 
         if self.rank_dir == 'left-right':
-            self.graph.body.extend(['rankdir=LR'])
+            self.gv_graph.body.extend(['rankdir=LR'])
 
-        self.graph.body.extend(['size="8,5"'])
+        self.gv_graph.body.extend(['size="8,5"'])
 
         self.active = False
 
-        self.include_list = []
-
         # Internal graph
         # Represented as hashmap (path -> edges) where edges is list of IncludeEdge objects
-        self._graph = {}
+        self.graph = {}
 
         self.init_legend()
 
@@ -48,12 +46,13 @@ class IncludeGraph(Graph):
         if not self.active:
             return
 
-        if name not in self._graph:
-            self._graph[name] = []
+        if name not in self.graph:
+            self.graph[name] = []
 
-    def add_edge(self, node_from, node_to, label, color):
+    def add_edge(self, node_from, node_to, type):
         if not self.active:
             return
+
 
         self.add_node(node_from)
         self.add_node(node_to)
@@ -61,14 +60,17 @@ class IncludeGraph(Graph):
         if self.has_edge(node_from, node_to):
             return
 
-        edges = self._graph[node_from]
+        edges = self.graph[node_from]
 
-        if color == 'include_color':
+        if type == 'include':
             color = graph_settings['edges']['include_color']
-        elif color == 'include_raw_color':
+            label='<<B>include</B>>'
+        elif type == 'include-raw':
             color = graph_settings['edges']['include_raw_color']
+            label='<<B>include-raw</B>>'
         else:
             color = graph_settings['edges']['default_color']
+            label=''
 
         edges.append(Edge(to=node_to, settings = {
             'label': label,
@@ -79,10 +81,10 @@ class IncludeGraph(Graph):
         if not self.active:
             return False
 
-        if not from_node in self._graph:
+        if not from_node in self.graph:
             return False
 
-        edges = self._graph[from_node]
+        edges = self.graph[from_node]
 
         for edge in edges:
             if edge.to == to_node:
@@ -90,35 +92,49 @@ class IncludeGraph(Graph):
 
         return False
 
-    def add_edge_from_last_node(self, text, label, color):
-        if not self.active:
-            return
+    def unfold_file(self, path):
+        yaml_config = self.file_index.unfold_yaml(path)
 
-        self.add_edge(self.include_list[-1], text, label=label, color=color)
+        self.unfold_config(path, yaml_config)
 
-    def add_to_list(self, v):
-        if self.active:
-            self.include_list.append(v)
+    def unfold_config(self, path, yaml_config):
 
-    def pop_from_list(self):
-        if not self.active:
-            return
+        # Queue stores config files and who includes them
+        q = [(path, None)]
 
-        return self.include_list.pop()
+        # To speed things up
+        seen = set()
+
+        while len(q) != 0:
+            config_name, included_from = q.pop(0)
+
+            if config_name in seen:
+                continue
+
+            seen.add(config_name)
+
+            self.add_node(config_name)
+            
+            if included_from is not None:
+                self.add_edge(included_from['name'], config_name, type=included_from['type'])
+
+            includes = self.dep_extractor.get_includes(config_name)
+
+            for include in includes:
+                el = (include.path, {'name': config_name, 'type': include.type})
+                q.append(el)
 
     def render(self, file_to):
         if not self.active:
             return
 
-        for path in self._graph.keys():
-            self.graph.node(path)
+        for path in self.graph.keys():
+            self.gv_graph.node(path)
 
-            for edge in self._graph[path]:
-                self.graph.edge(path, edge.to, label=edge.settings['label'], color=edge.settings['color'])
+            for edge in self.graph[path]:
+                self.gv_graph.edge(path, edge.to, label=edge.settings['label'], color=edge.settings['color'])
 
         super(self.__class__, self).render()
 
-        self.graph.render(file_to)
+        self.gv_graph.render(file_to)
 
-    def reset(self):
-        self.include_list = []

@@ -1,0 +1,6 @@
+- job:
+    name: job1
+
+    publishers:
+        trigger-builds:
+            - project: 'job2'

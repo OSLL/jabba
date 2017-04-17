@@ -61,18 +61,18 @@ if __name__ == '__main__':
     export_name = args.name
 
     if yaml_unfolder.include_graph.active: 
-        for name in files:
-            if os.path.isdir(name):
-                continue
-
-            yaml_unfolder.unfold_yaml(name, is_root=True)
-            yaml_unfolder.reset()
-        
         if export_name is None:
             include_export_name = basename(files[0]) + '_include'
         else:
             include_export_name = "{}_include".format(export_name)
 
+
+        for name in files:
+            if os.path.isdir(name):
+                continue
+
+            yaml_unfolder.include_graph.unfold_file(name)
+        
         yaml_unfolder.include_graph.render(include_export_name)
 
         print("Generated include graph at {}.svg".format(include_export_name))
@@ -82,7 +82,6 @@ if __name__ == '__main__':
             call_export_name = basename(files[0]) + '_call'
         else:
             call_export_name = "{}_call".format(export_name)
-
 
         for name in files:
             if os.path.isdir(name):
@@ -97,7 +96,7 @@ if __name__ == '__main__':
     # Creating analyzer takes a couple of seconds for building include and call graphs of whole project
     # No need to create analyzer if there is nothing to analyze
     if len(args.analysis) > 0:
-        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index)
+        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index, dep_extractor=yaml_unfolder.dep_extractor)
         analyzer.run()
         analyzer.print_result()
 

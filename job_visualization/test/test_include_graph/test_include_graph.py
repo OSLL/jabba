@@ -15,7 +15,7 @@ class TestIncludeGraph(GraphTest):
     def setUpYamlUnfolder(self, main_file):
         export_name = self.yaml_root + main_file + self.ext
 
-        self.yaml_unfolder.unfold_yaml(self.test_data + main_file, is_root=True)
+        self.yaml_unfolder.include_graph.unfold_file(self.test_data + main_file)
         self.yaml_unfolder.include_graph.render(export_name)
 
     def setUp(self):

@@ -9,43 +9,43 @@
 <g id="graph0" class="graph" transform="scale(0.521022 0.521022) rotate(0) translate(4 94)">
 <title>%3</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-94 1101.52,-94 1101.52,4 -4,4"/>
-<!-- test/test_include_graph/test_data/1.txt -->
-<g id="node1" class="node"><title>test/test_include_graph/test_data/1.txt</title>
-<ellipse fill="none" stroke="black" cx="570.059" cy="-72" rx="144.075" ry="18"/>
-<text text-anchor="middle" x="570.059" y="-68.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/1.txt</text>
+<!-- test/test_include_graph/test_data/3.yml -->
+<g id="node1" class="node"><title>test/test_include_graph/test_data/3.yml</title>
+<ellipse fill="none" stroke="black" cx="948.032" cy="-72" rx="149.473" ry="18"/>
+<text text-anchor="middle" x="948.032" y="-68.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/3.yml</text>
 </g>
 <!-- test/test_include_graph/test_data/test.yml -->
 <g id="node2" class="node"><title>test/test_include_graph/test_data/test.yml</title>
-<ellipse fill="none" stroke="black" cx="157.286" cy="-49" rx="157.072" ry="18"/>
-<text text-anchor="middle" x="157.286" y="-45.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/test.yml</text>
-</g>
-<!-- test/test_include_graph/test_data/test.yml&#45;&gt;test/test_include_graph/test_data/1.txt -->
-<g id="edge2" class="edge"><title>test/test_include_graph/test_data/test.yml&#45;&gt;test/test_include_graph/test_data/1.txt</title>
-<path fill="none" stroke="red" d="M298.789,-56.867C340.428,-59.1985 386.033,-61.752 427.724,-64.0864"/>
-<polygon fill="red" stroke="red" points="427.773,-67.5945 437.953,-64.6591 428.164,-60.6054 427.773,-67.5945"/>
-<text text-anchor="start" x="332.572" y="-66.8" font-family="Times,serif" font-weight="bold" font-size="14.00">include&#45;raw</text>
+<ellipse fill="none" stroke="black" cx="157.286" cy="-41" rx="157.072" ry="18"/>
+<text text-anchor="middle" x="157.286" y="-37.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/test.yml</text>
 </g>
 <!-- test/test_include_graph/test_data/2.yml -->
 <g id="node3" class="node"><title>test/test_include_graph/test_data/2.yml</title>
-<ellipse fill="none" stroke="black" cx="570.059" cy="-18" rx="149.473" ry="18"/>
-<text text-anchor="middle" x="570.059" y="-14.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/2.yml</text>
+<ellipse fill="none" stroke="black" cx="570.059" cy="-72" rx="149.473" ry="18"/>
+<text text-anchor="middle" x="570.059" y="-68.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/2.yml</text>
 </g>
 <!-- test/test_include_graph/test_data/test.yml&#45;&gt;test/test_include_graph/test_data/2.yml -->
 <g id="edge1" class="edge"><title>test/test_include_graph/test_data/test.yml&#45;&gt;test/test_include_graph/test_data/2.yml</title>
-<path fill="none" stroke="green" d="M289.104,-39.1275C334.944,-35.6681 386.517,-31.776 432.792,-28.2837"/>
-<polygon fill="green" stroke="green" points="433.18,-31.7645 442.888,-27.5218 432.653,-24.7843 433.18,-31.7645"/>
-<text text-anchor="start" x="346.072" y="-39.8" font-family="Times,serif" font-weight="bold" font-size="14.00">include</text>
+<path fill="none" stroke="green" d="M289.104,-50.8725C334.944,-54.3319 386.517,-58.224 432.792,-61.7163"/>
+<polygon fill="green" stroke="green" points="432.653,-65.2157 442.888,-62.4782 433.18,-58.2355 432.653,-65.2157"/>
+<text text-anchor="start" x="346.072" y="-64.8" font-family="Times,serif" font-weight="bold" font-size="14.00">include</text>
 </g>
-<!-- test/test_include_graph/test_data/3.yml -->
-<g id="node4" class="node"><title>test/test_include_graph/test_data/3.yml</title>
-<ellipse fill="none" stroke="black" cx="948.032" cy="-18" rx="149.473" ry="18"/>
-<text text-anchor="middle" x="948.032" y="-14.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/3.yml</text>
+<!-- test/test_include_graph/test_data/1.txt -->
+<g id="node4" class="node"><title>test/test_include_graph/test_data/1.txt</title>
+<ellipse fill="none" stroke="black" cx="570.059" cy="-18" rx="144.075" ry="18"/>
+<text text-anchor="middle" x="570.059" y="-14.3" font-family="Times,serif" font-size="14.00">test/test_include_graph/test_data/1.txt</text>
+</g>
+<!-- test/test_include_graph/test_data/test.yml&#45;&gt;test/test_include_graph/test_data/1.txt -->
+<g id="edge2" class="edge"><title>test/test_include_graph/test_data/test.yml&#45;&gt;test/test_include_graph/test_data/1.txt</title>
+<path fill="none" stroke="red" d="M283.902,-30.2743C300.268,-29.0635 316.815,-27.9323 332.572,-27 360.731,-25.334 390.795,-23.9142 419.717,-22.7285"/>
+<polygon fill="red" stroke="red" points="420.044,-26.2183 429.895,-22.3188 419.762,-19.224 420.044,-26.2183"/>
+<text text-anchor="start" x="332.572" y="-31.8" font-family="Times,serif" font-weight="bold" font-size="14.00">include&#45;raw</text>
 </g>
 <!-- test/test_include_graph/test_data/2.yml&#45;&gt;test/test_include_graph/test_data/3.yml -->
 <g id="edge3" class="edge"><title>test/test_include_graph/test_data/2.yml&#45;&gt;test/test_include_graph/test_data/3.yml</title>
-<path fill="none" stroke="green" d="M719.653,-18C742.182,-18 765.501,-18 788.236,-18"/>
-<polygon fill="green" stroke="green" points="788.286,-21.5001 798.286,-18 788.286,-14.5001 788.286,-21.5001"/>
-<text text-anchor="start" x="737.546" y="-22.8" font-family="Times,serif" font-weight="bold" font-size="14.00">include</text>
+<path fill="none" stroke="green" d="M719.653,-72C742.182,-72 765.501,-72 788.236,-72"/>
+<polygon fill="green" stroke="green" points="788.286,-75.5001 798.286,-72 788.286,-68.5001 788.286,-75.5001"/>
+<text text-anchor="start" x="737.546" y="-76.8" font-family="Times,serif" font-weight="bold" font-size="14.00">include</text>
 </g>
 </g>
 </svg>

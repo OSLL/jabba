@@ -11,7 +11,7 @@ def parameters_present(options, **kwargs):
 
     result = _Result()
 
-    for node, edges in call_graph._graph.items():
+    for node, edges in call_graph:
         for edge in edges:
             call_config = edge.settings
 
@@ -43,6 +43,6 @@ class _Result(Result):
             caller = error.caller
             edge = error.edge
             parameter = error.parameter
-            ret += "{} calls {} without the required parameter {} (or synonyms)\n".format(caller, edge.call_config['project'], parameter)
+            ret += "{} calls {} without the required parameter {} (or synonyms)\n".format(caller, edge.settings['project'], parameter)
 
         return ret

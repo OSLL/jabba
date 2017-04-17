@@ -1,0 +1,5 @@
+- job:
+    name: multiple
+    builders:
+        - !include './test/test_call_graph/test_data/call_empty.yml'
+        - !include './test/test_call_graph/test_data/call_empty_2.yml'

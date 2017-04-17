@@ -7,7 +7,6 @@ sys.path.append("../")
 sys.path.append("../../")
 
 from job_visualization import Analyzer
-from job_visualization import FileIndex
 from job_visualization import SynonymSet
 from job_visualization.yaml_unfolder import YamlUnfolder
 
@@ -18,11 +17,10 @@ class TestUnusedConfigs(unittest.TestCase):
         self.yaml_unfolder = YamlUnfolder(root=self.test_data)
 
     def testUnusedConfigs(self):
-        file_index = FileIndex(self.test_data, unfold=self.yaml_unfolder.unfold_yaml)
 
         arguments = ["unused_configs"]
 
-        analyzer = Analyzer(root=self.test_data, arguments=arguments, file_index=file_index)
+        analyzer = Analyzer(root=self.test_data, arguments=arguments, file_index=self.yaml_unfolder.file_index, dep_extractor=self.yaml_unfolder.dep_extractor)
         analyzer.run()
 
         result = analyzer.results[0]

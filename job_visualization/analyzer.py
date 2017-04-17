@@ -8,7 +8,7 @@ from .synonym_parser import SynonymSet
 
 class Analyzer(YamlUnfolder):
 
-    def __init__(self, root, arguments, file_index, synonyms=SynonymSet()):
+    def __init__(self, root, arguments, file_index, dep_extractor, synonyms=SynonymSet()):
         super(self.__class__, self).__init__(root=root)
 
         self.arguments = parse_analyzer_arguments(arguments)
@@ -16,9 +16,9 @@ class Analyzer(YamlUnfolder):
         self.root = root
         self.file_index = file_index
 
-        self.include_graph = graphs.include_graph.IncludeGraph()
+        self.include_graph = graphs.include_graph.IncludeGraph(dep_extractor=dep_extractor, file_index=file_index)
         self.include_graph.active = True
-        self.call_graph = graphs.call_graph.CallGraph(get_calls=self.get_calls_from_dict, unfold=self.unfold_yaml)
+        self.call_graph = graphs.call_graph.CallGraph(dep_extractor=dep_extractor, file_index=self.file_index)
 
         self.results = []
 
@@ -27,8 +27,7 @@ class Analyzer(YamlUnfolder):
 
     def create_include_graph(self):
         for name, file_data in self.file_index.files.items():
-            self.unfold_yaml(file_data.path)
-            self.include_graph.reset()
+            self.include_graph.unfold_file(file_data.path)
 
     def create_call_graph(self):
         for name, file_data in self.file_index.files.items():
@@ -44,7 +43,8 @@ class Analyzer(YamlUnfolder):
             'synonyms': self.synonyms,
             'include_graph': self.include_graph,
             'call_graph': self.call_graph,
-            'file_index': self.file_index
+            'file_index': self.file_index,
+            'dep_extractor': self.dep_extractor
         }
 
         for argument in self.arguments:

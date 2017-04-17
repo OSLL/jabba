@@ -18,7 +18,7 @@ class TestExportShell(unittest.TestCase):
         self.yaml_unfolder = YamlUnfolder(root=self.test_data)
 
     def testExportShell(self):
-        file_index = FileIndex(self.test_data, unfold=self.yaml_unfolder.unfold_yaml)
+        file_index = FileIndex(self.test_data)
 
         export_shell(file_index, to_dir=self.exported_shell)
 

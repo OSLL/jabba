@@ -11,7 +11,7 @@ def unused_configs(options, **kwargs):
 
     result = _Result()
 
-    for config, edges in include_graph._graph.items():
+    for config, edges in include_graph:
         if config not in used_configs and is_not_hidden(config): 
             result.add(config)
 
@@ -21,11 +21,11 @@ def get_used_configs(include_graph, call_graph):
     # Call graphs contains all the jobs. Assume all the jobs are used
     configs = set()
 
-    for job, edges in call_graph._graph.items():
+    for job, edges in call_graph:
         path_to_job = call_graph.get_path_from_name(job)
         configs.add(path_to_job)
 
-    for node, edges in include_graph._graph.items():
+    for node, edges in include_graph:
         for edge in edges:
             configs.add(edge.to)
 

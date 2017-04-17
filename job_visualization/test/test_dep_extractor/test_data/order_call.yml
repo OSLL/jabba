@@ -1,0 +1,6 @@
+- job:
+    name: order_call
+    builders:
+        - !include './test/test_call_graph/test_data/call_empty.yml'
+        - !include './test/test_call_graph/test_data/call_with_params.yml'
+        - !include './test/test_call_graph/test_data/call_multiple_calls.yml'
