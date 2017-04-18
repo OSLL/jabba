@@ -6,9 +6,9 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization.yaml_unfolder import YamlUnfolder
-from job_visualization import FileIndex
-from job_visualization import export_shell
+from jabba.yaml_unfolder import YamlUnfolder
+from jabba import FileIndex
+from jabba import export_shell
 
 class TestExportShell(unittest.TestCase):
     def setUp(self):

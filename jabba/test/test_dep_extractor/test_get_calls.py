@@ -6,7 +6,7 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization import FileIndex, DepExtractor
+from jabba import FileIndex, DepExtractor
 
 test_data = 'test/test_call_graph/test_data/'
 

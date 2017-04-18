@@ -6,7 +6,7 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization.analysis import parse_analyzer_arguments as parse
+from jabba.analysis import parse_analyzer_arguments as parse
 
 class TestParseAnalyzerArguments(unittest.TestCase):
 

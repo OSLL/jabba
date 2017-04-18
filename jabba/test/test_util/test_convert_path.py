@@ -6,7 +6,7 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization import util
+from jabba import util
 
 class TestConvertPath(unittest.TestCase):
 

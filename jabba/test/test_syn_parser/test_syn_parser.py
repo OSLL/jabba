@@ -6,7 +6,7 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization.synonym_parser import *
+from jabba.synonym_parser import *
 
 class TestSynonymParser(unittest.TestCase):
 

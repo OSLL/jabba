@@ -6,8 +6,8 @@ import os
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization import Analyzer
-from job_visualization.yaml_unfolder import YamlUnfolder
+from jabba import Analyzer
+from jabba.yaml_unfolder import YamlUnfolder
 
 class TestParametersPresent(unittest.TestCase):
     def setUp(self):

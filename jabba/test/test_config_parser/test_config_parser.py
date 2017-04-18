@@ -8,7 +8,7 @@ from argparse import Namespace
 sys.path.append("../")
 sys.path.append("../../")
 
-from job_visualization.config_parser import ConfigParser
+from jabba.config_parser import ConfigParser
 
 class TestConfigParser(unittest.TestCase):
 
