@@ -8,11 +8,11 @@ from os.path import basename
 
 import sys
 
-from job_visualization import YamlUnfolder
-from job_visualization import Analyzer
-from job_visualization import ConfigParser
-from job_visualization import synonym_parser
-from job_visualization import export_shell
+from jabba import YamlUnfolder
+from jabba import Analyzer
+from jabba import ConfigParser
+from jabba import synonym_parser
+from jabba import export_shell
 
 if __name__ == '__main__':
 

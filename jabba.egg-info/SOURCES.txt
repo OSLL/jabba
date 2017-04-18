@@ -1,0 +1,16 @@
+setup.cfg
+bin/jabba
+jabba/__init__.py
+jabba/analyzer.py
+jabba/config_parser.py
+jabba/dep_extractor.py
+jabba/export_shell.py
+jabba/file_data.py
+jabba/file_index.py
+jabba/synonym_parser.py
+jabba/util.py
+jabba/yaml_unfolder.py
+jabba.egg-info/PKG-INFO
+jabba.egg-info/SOURCES.txt
+jabba.egg-info/dependency_links.txt
+jabba.egg-info/top_level.txt
