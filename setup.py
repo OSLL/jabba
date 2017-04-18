@@ -1,9 +1,10 @@
 
 from distutils.core import setup
+from setuptools import find_packages
 
 setup(
     name='jabba',
-    packages=['jabba'],
+    packages=find_packages(exclude=['docs', 'doc', 'test']),
     version='0.1',
     description='Jenkins And Job Builder Analysis',
     author='Missingdays',

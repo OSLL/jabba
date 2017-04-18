@@ -14,6 +14,14 @@ from jabba import ConfigParser
 from jabba import synonym_parser
 from jabba import export_shell
 
+'''
+import jabba.YamlUnfolder as YamlUnfolder
+import jabba.Analyzer as Analyzer
+import jabba.ConfigParser as ConfigParser
+import jabba.synonym_parser as synonym_parser
+import jabba.export_shell as export_shell
+'''
+
 if __name__ == '__main__':
 
     parser = ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)

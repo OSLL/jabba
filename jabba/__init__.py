@@ -7,3 +7,6 @@ from .analyzer import Analyzer
 from .synonym_parser import SynonymSet
 from .export_shell import export_shell
 from .dep_extractor import DepExtractor
+
+#import analysis
+#import graphs
