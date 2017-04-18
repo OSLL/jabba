@@ -1,12 +1,12 @@
 Metadata-Version: 1.1
 Name: jabba
-Version: 0.1
+Version: 0.1.1
 Summary: Jenkins And Job Builder Analysis
 Home-page: https://github.com/OSLL/jenkins_job_builder_visualization
 Author: Missingdays
 Author-email: rebovykin@gmail.com
 License: UNKNOWN
-Download-URL: https://github.com/OSLL/jenkins_job_builder_visualization/arhive/0.1.tar.gz
+Download-URL: https://github.com/OSLL/jenkins_job_builder_visualization/arhive/0.1.1.tar.gz
 Description: UNKNOWN
 Keywords: jenkins,job buider,visualization
 Platform: UNKNOWN
