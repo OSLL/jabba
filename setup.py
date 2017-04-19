@@ -13,7 +13,8 @@ setup(
     download_url='https://github.com/OSLL/jenkins_job_builder_visualization/arhive/0.1.1.tar.gz',
     keywords=['jenkins', 'job buider', 'visualization'],
     scripts=['bin/jabba'],
-    classifiers=[]
+    classifiers=[],
+    install_requires=['pyyaml', 'graphviz']
 )
 
 
