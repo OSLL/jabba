@@ -6,6 +6,8 @@ from ..graphs.include_graph import IncludeGraph
 def depends_on(options, **kwargs):
     include_graph = options['include_graph']
 
+    result = _Result()
+
     if 'graph' in kwargs:
         name = kwargs['graph']
         del kwargs['graph']
@@ -14,17 +16,15 @@ def depends_on(options, **kwargs):
 
         dep_graph.render(name)
 
-        print("Rendered graph at {}".format(name))
-
-        return _Result("Rendered dep graph at {}".format(name))
+        result.add_result("Rendered dep graph at {}".format(name))
 
     else:
         dep_graph = build_dependency_graph(include_graph, **kwargs)
 
         for node, edges in dep_graph:
-            print(node)
+            result.add_result(node)
 
-    return _Result("")
+    return result
 
 def build_dependency_graph(include_graph, **kwargs):
 
@@ -73,9 +73,20 @@ def _get_files_depend_on(include_graph, config):
 
     return files
 
-def _Result(Result):
-    def __init__(self, mess):
-        self.mess = mess
+class _Result(Result):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+
+        self.results = []
+
+    def add_result(self, result):
+        self.results.append(result)
+
     def __str__(self):
-        return mess
+        ret = ""
+
+        for result in self.results:
+            ret += result + "\n"
+
+        return ret
 

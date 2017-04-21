@@ -68,8 +68,7 @@ class Analyzer(YamlUnfolder):
 
             result = func(options=options, **argument.arguments)
 
-            if result is not None:
-                self.results.append(result)
+            self.results.append(result)
 
     def is_ok(self):
         return all(result.is_ok() for result in self.results)
