@@ -67,7 +67,9 @@ class Analyzer(YamlUnfolder):
                 print("Running {} analysis function".format(argument.function))
 
             result = func(options=options, **argument.arguments)
-            self.results.append(result)
+
+            if result is not None:
+                self.results.append(result)
 
     def is_ok(self):
         return all(result.is_ok() for result in self.results)
