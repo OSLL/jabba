@@ -22,7 +22,8 @@ def depends_on(options, **kwargs):
         dep_graph = build_dependency_graph(include_graph, **kwargs)
 
         for node, edges in dep_graph:
-            result.add_result(node)
+            if node not in kwargs:
+                result.add_result(node)
 
     return result
 

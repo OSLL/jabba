@@ -24,5 +24,4 @@ class TestParametersPresent(unittest.TestCase):
         result = analyzer.results[0]
 
         assert set(result.results) == {
-                self.test_data + "a.yml", self.test_data + "b.yml", self.test_data + "c.yml", self.test_data + "d.yml", self.test_data + "e.yml"
-                }
+                self.test_data + "a.yml", self.test_data + "b.yml", self.test_data + "d.yml"}
