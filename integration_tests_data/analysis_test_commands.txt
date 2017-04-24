@@ -1,3 +1,3 @@
-main.py --analysis parameters_present:same-node --synonyms {same-node, node-parameters}
-main.py --analysis unused_configs
-main.py --analysis cyclic_deps
+jabba --analysis parameters_present:same-node --synonyms {same-node, node-parameters}
+jabba --analysis unused_configs
+jabba --analysis cyclic_deps

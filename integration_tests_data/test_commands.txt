@@ -1,15 +1,15 @@
-main.py --files maxscale_jobs/build_all.yaml --call-graph --yaml-root maxscale_jobs/
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph 
-main.py --files maxscale_jobs/build_all.yaml --include-graph 
-main.py --files maxscale_jobs/build_all.yaml --call-graph 
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph 
-main.py --files maxscale_jobs/build_all.yaml --call-graph --call-display edge
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --call-display edge
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --legend
-main.py --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --legend --rank-dir up-down
-main.py --files maxscale_jobs/build_all.yaml --call-graph --config .config_with_synonyms.yml
-main.py --files maxscale_jobs/build_all.yaml --call-graph --synonyms {same-node, node-parameters} {a, b, c}
-main.py --files maxscale_jobs/build_all.yaml --call-graph --call-parameters call-order
-main.py  --include-graph --name all_files --files maxscale_jobs/*.yaml
-main.py  --call-graph --name all_files --files maxscale_jobs/*.yaml
-main.py --export-shell exported_shell
+jabba --files maxscale_jobs/build_all.yaml --call-graph --yaml-root maxscale_jobs/
+jabba --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph 
+jabba --files maxscale_jobs/build_all.yaml --include-graph 
+jabba --files maxscale_jobs/build_all.yaml --call-graph 
+jabba --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph 
+jabba --files maxscale_jobs/build_all.yaml --call-graph --call-display edge
+jabba --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --call-display edge
+jabba --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --legend
+jabba --files maxscale_jobs/build_all.yaml maxscale_jobs/build_and_test.yaml --call-graph --legend --rank-dir up-down
+jabba --files maxscale_jobs/build_all.yaml --call-graph --config .config_with_synonyms.yml
+jabba --files maxscale_jobs/build_all.yaml --call-graph --synonyms {same-node, node-parameters} {a, b, c}
+jabba --files maxscale_jobs/build_all.yaml --call-graph --call-parameters call-order
+jabba  --include-graph --name all_files --files maxscale_jobs/*.yaml
+jabba  --call-graph --name all_files --files maxscale_jobs/*.yaml
+jabba --export-shell exported_shell

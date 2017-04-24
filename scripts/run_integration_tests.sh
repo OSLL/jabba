@@ -18,7 +18,7 @@ do
     cd /tmp/maxscale-jenkins-jobs
     echo running ${command}
 
-    if !(eval "${cwd}${command}")
+    if !(eval "${command}")
     then echo error; exit_code=1; total_ER=$(($total_ER+1))
     else total_OK=$(($total_OK+1)); echo "OK"; fi
 
@@ -32,7 +32,7 @@ do
     cd $cwd/integration_tests_data/analysis_tests
     echo running ${command}
 
-    if !(eval "${cwd}${command}")
+    if !(eval "${command}")
     then echo error; exit_code=1; total_ER=$(($total_ER+1))
     else total_OK=$(($total_OK+1)); fi
 
