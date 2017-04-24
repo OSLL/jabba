@@ -74,6 +74,7 @@ class IncludeGraph(Graph):
 
         edges.append(Edge(to=node_to, settings = {
             'label': label,
+            'type': type,
             'color': color
         }))
 

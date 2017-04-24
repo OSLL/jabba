@@ -1,3 +1,4 @@
 jabba --analysis parameters_present:same-node --synonyms {same-node, node-parameters}
 jabba --analysis unused_configs
 jabba --analysis cyclic_deps
+jabba --analysis depends_on:call_job2.yml:graph=depends_on_slave
