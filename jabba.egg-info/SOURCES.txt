@@ -33,6 +33,7 @@ jabba/test/__init__.py
 jabba/test/graph_test.py
 jabba/test/test_analysis/__init__.py
 jabba/test/test_analysis/test_cyclic_deps.py
+jabba/test/test_analysis/test_depends_on.py
 jabba/test/test_analysis/test_parameters_present.py
 jabba/test/test_analysis/test_parse.py
 jabba/test/test_analysis/test_unused_configs.py
