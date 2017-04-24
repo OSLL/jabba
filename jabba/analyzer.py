@@ -67,6 +67,7 @@ class Analyzer(YamlUnfolder):
                 print("Running {} analysis function".format(argument.function))
 
             result = func(options=options, **argument.arguments)
+
             self.results.append(result)
 
     def is_ok(self):

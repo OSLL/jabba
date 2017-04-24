@@ -1,7 +1,0 @@
-digraph {
-rankdir=LR
-size="8,5"
-	"job.yml"
-		"job.yml" -> "call_job2.yml" [label=<<B>include</B>> color=green]
-	"call_job2.yml"
-}

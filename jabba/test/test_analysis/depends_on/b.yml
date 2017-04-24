@@ -1,0 +1,5 @@
+- job:
+    name: b
+    builders:
+        - !include 'test/test_analysis/depends_on/c.yml'
+        - !include 'test/test_analysis/depends_on/e.yml'

@@ -5,7 +5,7 @@ from setuptools import find_packages
 setup(
     name='jabba',
     packages=find_packages(exclude=['docs', 'doc', 'test']),
-    version='0.1.1',
+    version='0.1.2',
     description='Jenkins And Job Builder Analysis',
     author='Missingdays',
     author_email='rebovykin@gmail.com',

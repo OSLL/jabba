@@ -14,9 +14,11 @@ jabba/yaml_unfolder.py
 jabba.egg-info/PKG-INFO
 jabba.egg-info/SOURCES.txt
 jabba.egg-info/dependency_links.txt
+jabba.egg-info/requires.txt
 jabba.egg-info/top_level.txt
 jabba/analysis/__init__.py
 jabba/analysis/cyclic_deps.py
+jabba/analysis/depends_on.py
 jabba/analysis/parameters_present.py
 jabba/analysis/parse.py
 jabba/analysis/result.py
