@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pip install jabba --user
+pip install jabba --user --upgrade
