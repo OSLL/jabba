@@ -1,5 +1,6 @@
 
 from imp import load_source
+from importlib import import_module
 
 from .yaml_unfolder import YamlUnfolder
 from . import graphs
@@ -15,7 +16,7 @@ def get_analysis_function(argument, export_analysis):
         func = getattr(analysis, argument.function)
     except AttributeError:
         if export_analysis is not None:
-            module = load_source('user_analysis', export_analysis)
+            module = load_module(export_analysis)
 
             func = getattr(module, argument.function)
 
@@ -24,12 +25,11 @@ def get_analysis_function(argument, export_analysis):
 
     return func
 
-def load_module(export_analysis):
-    if export_analysis.endswith(".py"):
-        return load_source(export_analysis)
+def load_module(name):
+    if name.endswith(".py"):
+        return load_source('user_analysis', name)
     else:
-        # Load as module
-        pass
+        return import_module(name)
 
 class Analyzer(YamlUnfolder):
 

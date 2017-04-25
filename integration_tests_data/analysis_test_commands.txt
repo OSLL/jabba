@@ -2,4 +2,5 @@ jabba --analysis parameters_present:same-node --synonyms {same-node, node-parame
 jabba --analysis unused_configs
 jabba --analysis cyclic_deps
 jabba --analysis depends_on:call_job2.yml:graph=depends_on_slave
-jabba --analysis extension_name --export-analysis ../analysis_extensions/extension_test.py
+jabba --analysis dummy_check --export-analysis ../analysis_extensions/extension_test.py
+jabba --analysis dummy_check --export-analysis jabba_analysis

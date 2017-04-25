@@ -1,7 +1,7 @@
 
 from jabba.analysis import Result
 
-def extension_name(options, **kwargs):
+def dummy_check(options, **kwargs):
     return _Result()
 
 class _Result(Result):
