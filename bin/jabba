@@ -39,6 +39,7 @@ if __name__ == '__main__':
     parser.add_argument('--name', default=None, type=str, help='Export name. Include graphs will contain _include suffix. Call graphs will contain _call suffix. If not set, export name will be derived from the first file passed to --files')
     parser.add_argument('--analysis', nargs='+', type=str, help='Analysis functions and arguments in the format "func1;arg1=5;arg2 func2;arg1;arg2=True func3"')
     parser.add_argument('--export-shell', default=None, help="Export all shell in .yml configs to the specified directory")
+    parser.add_argument('--export-analysis', default=None, help="File or module that is used to import additional analysis functions")
     parser.add_argument('--verbose', default=1, help="Verbosity level. 0 - no output. 1 - basic debugg output. 2 - detailed debugg output", type=int)
 
     parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False, analysis=[])
@@ -108,7 +109,7 @@ if __name__ == '__main__':
     # Creating analyzer takes a couple of seconds for building include and call graphs of whole project
     # No need to create analyzer if there is nothing to analyze
     if len(args.analysis) > 0:
-        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index, dep_extractor=yaml_unfolder.dep_extractor, verbose=verbose)
+        analyzer = Analyzer(root=yaml_root, arguments=args.analysis, synonyms=args.synonyms, file_index = yaml_unfolder.file_index, dep_extractor=yaml_unfolder.dep_extractor, verbose=verbose, export_analysis=args.export_analysis)
         analyzer.run()
         analyzer.print_result()
 

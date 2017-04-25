@@ -1,4 +1,6 @@
 
+from imp import load_source
+
 from .yaml_unfolder import YamlUnfolder
 from . import graphs
 from . import analysis
@@ -6,9 +8,32 @@ from .analysis import parse_analyzer_arguments
 from .util import is_job_config
 from .synonym_parser import SynonymSet
 
+def get_analysis_function(argument, export_analysis):
+    func = None
+
+    try:
+        func = getattr(analysis, argument.function)
+    except AttributeError:
+        if export_analysis is not None:
+            module = load_source('user_analysis', export_analysis)
+
+            func = getattr(module, argument.function)
+
+    if func is None:
+        raise AttributeError("Cannot find analysis function {}".format(argument.function))
+
+    return func
+
+def load_module(export_analysis):
+    if export_analysis.endswith(".py"):
+        return load_source(export_analysis)
+    else:
+        # Load as module
+        pass
+
 class Analyzer(YamlUnfolder):
 
-    def __init__(self, root, arguments, file_index, dep_extractor, synonyms=SynonymSet(), verbose=0):
+    def __init__(self, root, arguments, file_index, dep_extractor, export_analysis=None, synonyms=SynonymSet(), verbose=0):
         super(self.__class__, self).__init__(root=root, verbose=0)
 
         self.verbose = verbose
@@ -17,6 +42,7 @@ class Analyzer(YamlUnfolder):
         self.synonyms = synonyms
         self.root = root
         self.file_index = file_index
+        self.export_analysis = export_analysis
 
         self.include_graph = graphs.include_graph.IncludeGraph(dep_extractor=dep_extractor, file_index=file_index)
         self.include_graph.active = True
@@ -56,12 +82,7 @@ class Analyzer(YamlUnfolder):
         }
 
         for argument in self.arguments:
-            func = None
-
-            try:
-                func = getattr(analysis, argument.function)
-            except AttributeError:
-                raise AttributeError("Cannot find analysis function {}".format(argument.function))
+            func = get_analysis_function(argument, self.export_analysis)
 
             if self.verbose == 2:
                 print("Running {} analysis function".format(argument.function))
