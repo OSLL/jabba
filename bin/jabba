@@ -41,7 +41,7 @@ if __name__ == '__main__':
     parser.add_argument('--export-shell', default=None, help="Export all shell in .yml configs to the specified directory")
     parser.add_argument('--verbose', default=1, help="Verbosity level. 0 - no output. 1 - basic debugg output. 2 - detailed debugg output", type=int)
 
-    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False, analysis=[])
+    parser.set_defaults(include_graph=False, call_graph=False, draw_legend=False, call_parameters=[], synonyms=[], call_order=False, analysis=[], files=[])
 
     args = parser.parse_args()
 
@@ -65,9 +65,17 @@ if __name__ == '__main__':
     yaml_unfolder.call_graph.draw_legend = args.legend
 
     yaml_unfolder.call_graph.call_display = args.call_display
+
+    # subprocess.call for some reason passes all arguments in a single string
+    if len(args.call_parameters) == 1:
+        args.call_parameters = args.call_parameters[0].split(" ")
     yaml_unfolder.call_graph.call_parameters = set(args.call_parameters)
 
     files = args.files
+
+    if len(files) == 1:
+        files = files[0].split(" ")
+
     export_name = args.name
 
     if yaml_unfolder.include_graph.active: 
