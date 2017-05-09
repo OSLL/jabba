@@ -1,7 +1,7 @@
-job_visualization
-=================
+jabba
+=====
 
 .. toctree::
    :maxdepth: 4
 
-   job_visualization
+   jabba

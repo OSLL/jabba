@@ -4,6 +4,12 @@ from .result import Result
 from ..graphs.include_graph import IncludeGraph
 
 def depends_on(options, **kwargs):
+    """
+    Analysis function
+
+    Get list of files that depend on given configs
+    If there is 'graph=name' in analysis parameters, instead graph of includes will be rendered into name.svg
+    """
     include_graph = options['include_graph']
 
     result = _Result()

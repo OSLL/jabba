@@ -7,8 +7,16 @@ from .util import is_job_config
 from .synonym_parser import SynonymSet
 
 class Analyzer(YamlUnfolder):
+    """
+    Class for running internal and external analyzer functions
+    """
 
     def __init__(self, root, arguments, file_index, dep_extractor, synonyms=SynonymSet(), verbose=0):
+        """
+        arguments is a list of strings in format function_name:parameter1=value:parameter2
+        where function_name is a name of analysis function and parameter=value is the parameter and value
+        that will be passed into analysis function
+        """
         super(self.__class__, self).__init__(root=root, verbose=0)
 
         self.verbose = verbose

@@ -3,6 +3,11 @@ from .result import Result
 from os.path import basename
 
 def unused_configs(options, **kwargs):
+    """
+    Analysis functions
+    Find all configs that are never used and return it as a list
+    Jobs configs are always considered used
+    """
 
     include_graph = options['include_graph']
     call_graph = options['call_graph']

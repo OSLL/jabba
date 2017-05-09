@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>jabba.analysis package &#8212; Jenkins Job Visualization 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jabba-analysis-package">
+<h1>jabba.analysis package<a class="headerlink" href="#jabba-analysis-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-jabba.analysis.cyclic_deps">
+<span id="jabba-analysis-cyclic-deps-module"></span><h2>jabba.analysis.cyclic_deps module<a class="headerlink" href="#module-jabba.analysis.cyclic_deps" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="jabba.analysis.cyclic_deps.cyclic_deps">
+<code class="descclassname">jabba.analysis.cyclic_deps.</code><code class="descname">cyclic_deps</code><span class="sig-paren">(</span><em>options</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.cyclic_deps.cyclic_deps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analysis function
+Check whether there are any cyclic dependencies in a call graph
+Cyclic dependencies in include graph are prevented at a parsing stage with FileIndex</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.cyclic_deps.cyclic_test">
+<code class="descclassname">jabba.analysis.cyclic_deps.</code><code class="descname">cyclic_test</code><span class="sig-paren">(</span><em>graph</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.cyclic_deps.cyclic_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.cyclic_deps.find_cycle">
+<code class="descclassname">jabba.analysis.cyclic_deps.</code><code class="descname">find_cycle</code><span class="sig-paren">(</span><em>graph</em>, <em>node</em>, <em>visited</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.cyclic_deps.find_cycle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.cyclic_deps.format_cycle">
+<code class="descclassname">jabba.analysis.cyclic_deps.</code><code class="descname">format_cycle</code><span class="sig-paren">(</span><em>cycle</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.cyclic_deps.format_cycle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.cyclic_deps.remove_repetitions">
+<code class="descclassname">jabba.analysis.cyclic_deps.</code><code class="descname">remove_repetitions</code><span class="sig-paren">(</span><em>cycles</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.cyclic_deps.remove_repetitions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.cyclic_deps.unwrap_cycle">
+<code class="descclassname">jabba.analysis.cyclic_deps.</code><code class="descname">unwrap_cycle</code><span class="sig-paren">(</span><em>node</em>, <em>stack</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.cyclic_deps.unwrap_cycle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-jabba.analysis.depends_on">
+<span id="jabba-analysis-depends-on-module"></span><h2>jabba.analysis.depends_on module<a class="headerlink" href="#module-jabba.analysis.depends_on" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="jabba.analysis.depends_on.build_dependency_graph">
+<code class="descclassname">jabba.analysis.depends_on.</code><code class="descname">build_dependency_graph</code><span class="sig-paren">(</span><em>include_graph</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.depends_on.build_dependency_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.depends_on.depends_on">
+<code class="descclassname">jabba.analysis.depends_on.</code><code class="descname">depends_on</code><span class="sig-paren">(</span><em>options</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.depends_on.depends_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analysis function</p>
+<p>Get list of files that depend on given configs
+If there is &#8216;graph=name&#8217; in analysis parameters, instead graph of includes will be rendered into name.svg</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.depends_on.get_files_depend_on">
+<code class="descclassname">jabba.analysis.depends_on.</code><code class="descname">get_files_depend_on</code><span class="sig-paren">(</span><em>include_graph</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.depends_on.get_files_depend_on" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.depends_on.invert_graph">
+<code class="descclassname">jabba.analysis.depends_on.</code><code class="descname">invert_graph</code><span class="sig-paren">(</span><em>include_graph</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.depends_on.invert_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: move this to include_graph</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.analysis.parameters_present">
+<span id="jabba-analysis-parameters-present-module"></span><h2>jabba.analysis.parameters_present module<a class="headerlink" href="#module-jabba.analysis.parameters_present" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.analysis.parameters_present.Error">
+<em class="property">class </em><code class="descclassname">jabba.analysis.parameters_present.</code><code class="descname">Error</code><span class="sig-paren">(</span><em>caller</em>, <em>edge</em>, <em>parameter</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.parameters_present.Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="jabba.analysis.parameters_present.Error.caller">
+<code class="descname">caller</code><a class="headerlink" href="#jabba.analysis.parameters_present.Error.caller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="jabba.analysis.parameters_present.Error.edge">
+<code class="descname">edge</code><a class="headerlink" href="#jabba.analysis.parameters_present.Error.edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="jabba.analysis.parameters_present.Error.parameter">
+<code class="descname">parameter</code><a class="headerlink" href="#jabba.analysis.parameters_present.Error.parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.parameters_present.parameters_present">
+<code class="descclassname">jabba.analysis.parameters_present.</code><code class="descname">parameters_present</code><span class="sig-paren">(</span><em>options</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.parameters_present.parameters_present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analysis function
+Check whether all calls contain a given parameters or their synonyms</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.analysis.parse">
+<span id="jabba-analysis-parse-module"></span><h2>jabba.analysis.parse module<a class="headerlink" href="#module-jabba.analysis.parse" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.analysis.parse.FunctionArguments">
+<em class="property">class </em><code class="descclassname">jabba.analysis.parse.</code><code class="descname">FunctionArguments</code><span class="sig-paren">(</span><em>function</em>, <em>arguments</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.parse.FunctionArguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="jabba.analysis.parse.FunctionArguments.arguments">
+<code class="descname">arguments</code><a class="headerlink" href="#jabba.analysis.parse.FunctionArguments.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="jabba.analysis.parse.FunctionArguments.function">
+<code class="descname">function</code><a class="headerlink" href="#jabba.analysis.parse.FunctionArguments.function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.parse.parse_analyzer_arguments">
+<code class="descclassname">jabba.analysis.parse.</code><code class="descname">parse_analyzer_arguments</code><span class="sig-paren">(</span><em>arguments</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.parse.parse_analyzer_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse string in format <cite>function_1:param1=value:param2 function_2:param</cite> into array of FunctionArguments</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.parse.parse_arg">
+<code class="descclassname">jabba.analysis.parse.</code><code class="descname">parse_arg</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.parse.parse_arg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-jabba.analysis.result">
+<span id="jabba-analysis-result-module"></span><h2>jabba.analysis.result module<a class="headerlink" href="#module-jabba.analysis.result" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.analysis.result.Result">
+<em class="property">class </em><code class="descclassname">jabba.analysis.result.</code><code class="descname">Result</code><a class="headerlink" href="#jabba.analysis.result.Result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Base class for analysis results</p>
+<dl class="method">
+<dt id="jabba.analysis.result.Result.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>err</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.result.Result.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.analysis.result.Result.is_ok">
+<code class="descname">is_ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.result.Result.is_ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.analysis.unused_configs">
+<span id="jabba-analysis-unused-configs-module"></span><h2>jabba.analysis.unused_configs module<a class="headerlink" href="#module-jabba.analysis.unused_configs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="jabba.analysis.unused_configs.get_used_configs">
+<code class="descclassname">jabba.analysis.unused_configs.</code><code class="descname">get_used_configs</code><span class="sig-paren">(</span><em>include_graph</em>, <em>call_graph</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.unused_configs.get_used_configs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.unused_configs.is_not_hidden">
+<code class="descclassname">jabba.analysis.unused_configs.</code><code class="descname">is_not_hidden</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.unused_configs.is_not_hidden" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.analysis.unused_configs.unused_configs">
+<code class="descclassname">jabba.analysis.unused_configs.</code><code class="descname">unused_configs</code><span class="sig-paren">(</span><em>options</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analysis.unused_configs.unused_configs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analysis functions
+Find all configs that are never used and return it as a list
+Jobs configs are always considered used</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.analysis">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-jabba.analysis" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">jabba.analysis package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-jabba.analysis.cyclic_deps">jabba.analysis.cyclic_deps module</a></li>
+<li><a class="reference internal" href="#module-jabba.analysis.depends_on">jabba.analysis.depends_on module</a></li>
+<li><a class="reference internal" href="#module-jabba.analysis.parameters_present">jabba.analysis.parameters_present module</a></li>
+<li><a class="reference internal" href="#module-jabba.analysis.parse">jabba.analysis.parse module</a></li>
+<li><a class="reference internal" href="#module-jabba.analysis.result">jabba.analysis.result module</a></li>
+<li><a class="reference internal" href="#module-jabba.analysis.unused_configs">jabba.analysis.unused_configs module</a></li>
+<li><a class="reference internal" href="#module-jabba.analysis">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/jabba.analysis.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, zmm missingdays.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/jabba.analysis.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

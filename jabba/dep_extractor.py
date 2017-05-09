@@ -3,13 +3,16 @@ from collections import namedtuple, defaultdict
 
 from .graphs import Edge
 
-'''
-project_name is a name of a job that is called
-call_config is a config of call file, i.e. trigger-builds
-project_config is a config of job that is been called
-'''
 class CallEdge(Edge):
+    """
+    Edge representing one job calling another
+    """
     def __init__(self, to, call_config, project_config, caller_name):
+        '''
+        project_name is a name of a job that is called
+        call_config is a config of call file, i.e. trigger-builds
+        project_config is a config of job that is been called
+        '''
         super(self.__class__, self).__init__(to, call_config)
 
         self.project_config = project_config
@@ -127,6 +130,9 @@ class DepExtractor(object):
     '''
 
     def get_includes(self, path):
+        """
+        Get all includes from a config in a given path
+        """
         config = self.file_index.unfold_yaml(path)
 
         return self.get_includes_from_dict(config, extract=True)

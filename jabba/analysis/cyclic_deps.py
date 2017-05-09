@@ -1,6 +1,11 @@
 from .result import Result
 
 def cyclic_deps(options, **kwargs):
+    """
+    Analysis function
+    Check whether there are any cyclic dependencies in a call graph
+    Cyclic dependencies in include graph are prevented at a parsing stage with FileIndex
+    """
     call_graph = options['call_graph']
 
     call_result = _CallResult(cyclic_test(call_graph))

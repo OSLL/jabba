@@ -1,4 +1,8 @@
 class SynonymSet:
+    """
+    A set of synonyms set
+    If two parameters are in the same set, they are considered synonyms
+    """
 
     def __init__(self):
         self.synonyms = []
@@ -73,6 +77,10 @@ def parse_from_args(synonyms):
     return syn_set
 
 def parse_from_array(arr):
+    """
+    Parse 2d array into synonym set
+    Every array inside arr is considered a set of synonyms
+    """
     syn_set = SynonymSet()
 
     for synonyms in arr:

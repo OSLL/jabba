@@ -6,6 +6,10 @@ from .result import Result
 Error = collections.namedtuple('Error', ['caller', 'edge', 'parameter'])
 
 def parameters_present(options, **kwargs):
+    """
+    Analysis function
+    Check whether all calls contain a given parameters or their synonyms
+    """
     synonyms = options['synonyms']
     call_graph = options['call_graph']
 

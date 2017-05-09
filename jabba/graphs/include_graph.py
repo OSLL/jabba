@@ -18,6 +18,9 @@ graph_settings = {
 }
 
 class IncludeGraph(Graph):
+    """
+    Graph representing '!include' dependencies between configs
+    """
 
     def __init__(self, dep_extractor, file_index, rank_dir='left-right'):
         super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
@@ -94,6 +97,9 @@ class IncludeGraph(Graph):
         return False
 
     def unfold_file(self, path):
+        """
+        Parse given file and add it to graph
+        """
         yaml_config = self.file_index.unfold_yaml(path)
 
         self.unfold_config(path, yaml_config)

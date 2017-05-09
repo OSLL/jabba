@@ -46,413 +46,35 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.call_graph">
-<span id="job-visualization-call-graph-module"></span><h2>job_visualization.call_graph module<a class="headerlink" href="#module-job_visualization.call_graph" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.call_graph.CallEdge">
-<em class="property">class </em><code class="descclassname">job_visualization.call_graph.</code><code class="descname">CallEdge</code><span class="sig-paren">(</span><em>project_name</em>, <em>call_config</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallEdge" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
-<dl class="attribute">
-<dt id="job_visualization.call_graph.CallEdge.call_config">
-<code class="descname">call_config</code><a class="headerlink" href="#job_visualization.call_graph.CallEdge.call_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 1</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="job_visualization.call_graph.CallEdge.project_name">
-<code class="descname">project_name</code><a class="headerlink" href="#job_visualization.call_graph.CallEdge.project_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 0</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="job_visualization.call_graph.CallGraph">
-<em class="property">class </em><code class="descclassname">job_visualization.call_graph.</code><code class="descname">CallGraph</code><span class="sig-paren">(</span><em>get_calls</em>, <em>unfold</em>, <em>rank_dir='left-right'</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#job_visualization.graph.Graph" title="job_visualization.graph.Graph"><code class="xref py py-class docutils literal"><span class="pre">job_visualization.graph.Graph</span></code></a></p>
-<p>Class for manipulating call graph
-Stores all graph with file configs for further analysis</p>
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.add_call_object">
-<code class="descname">add_call_object</code><span class="sig-paren">(</span><em>call_object</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.add_call_object" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.add_edge">
-<code class="descname">add_edge</code><span class="sig-paren">(</span><em>from_name</em>, <em>to_name</em>, <em>call_config</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.add_edge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.add_node">
-<code class="descname">add_node</code><span class="sig-paren">(</span><em>name</em>, <em>project_config</em>, <em>is_root=False</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.add_node" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.extract_props">
-<code class="descname">extract_props</code><span class="sig-paren">(</span><em>call_config</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.extract_props" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract all valuable properties to be displayed</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.get_label">
-<code class="descname">get_label</code><span class="sig-paren">(</span><em>prop</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.get_label" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.get_path_from_name">
-<code class="descname">get_path_from_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.get_path_from_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.get_settings">
-<code class="descname">get_settings</code><span class="sig-paren">(</span><em>edge</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.get_settings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.has_edge">
-<code class="descname">has_edge</code><span class="sig-paren">(</span><em>from_name</em>, <em>to_name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.has_edge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.init_legend">
-<code class="descname">init_legend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.init_legend" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.render">
-<code class="descname">render</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.render" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.render_edge_with_label">
-<code class="descname">render_edge_with_label</code><span class="sig-paren">(</span><em>name</em>, <em>edge</em>, <em>edge_settings</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.render_edge_with_label" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.render_edge_with_node_label">
-<code class="descname">render_edge_with_node_label</code><span class="sig-paren">(</span><em>name</em>, <em>edge</em>, <em>edge_settings</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.render_edge_with_node_label" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.render_node">
-<code class="descname">render_node</code><span class="sig-paren">(</span><em>name</em>, <em>color='black'</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.render_node" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.render_simple_edge">
-<code class="descname">render_simple_edge</code><span class="sig-paren">(</span><em>name</em>, <em>edge</em>, <em>edge_settings</em>, <em>label='call'</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.render_simple_edge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.should_display_prop">
-<code class="descname">should_display_prop</code><span class="sig-paren">(</span><em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.should_display_prop" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.call_graph.CallGraph.unfold_file">
-<code class="descname">unfold_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.call_graph.CallGraph.unfold_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="job-visualization-call-graph-module">
+<h2>job_visualization.call_graph module<a class="headerlink" href="#job-visualization-call-graph-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.config_parser">
-<span id="job-visualization-config-parser-module"></span><h2>job_visualization.config_parser module<a class="headerlink" href="#module-job_visualization.config_parser" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.config_parser.ConfigParser">
-<em class="property">class </em><code class="descclassname">job_visualization.config_parser.</code><code class="descname">ConfigParser</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.config_parser.ConfigParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#job_visualization.yaml_unfolder.YamlUnfolder" title="job_visualization.yaml_unfolder.YamlUnfolder"><code class="xref py py-class docutils literal"><span class="pre">job_visualization.yaml_unfolder.YamlUnfolder</span></code></a></p>
-<dl class="attribute">
-<dt id="job_visualization.config_parser.ConfigParser.default_config">
-<code class="descname">default_config</code><em class="property"> = '.jjv_config.yml'</em><a class="headerlink" href="#job_visualization.config_parser.ConfigParser.default_config" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.config_parser.ConfigParser.merge_args">
-<code class="descname">merge_args</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.config_parser.ConfigParser.merge_args" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="job-visualization-config-parser-module">
+<h2>job_visualization.config_parser module<a class="headerlink" href="#job-visualization-config-parser-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.file_data">
-<span id="job-visualization-file-data-module"></span><h2>job_visualization.file_data module<a class="headerlink" href="#module-job_visualization.file_data" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.file_data.FileData">
-<em class="property">class </em><code class="descclassname">job_visualization.file_data.</code><code class="descname">FileData</code><span class="sig-paren">(</span><em>path</em>, <em>yaml</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.file_data.FileData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
-<dl class="attribute">
-<dt id="job_visualization.file_data.FileData.path">
-<code class="descname">path</code><a class="headerlink" href="#job_visualization.file_data.FileData.path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 0</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="job_visualization.file_data.FileData.yaml">
-<code class="descname">yaml</code><a class="headerlink" href="#job_visualization.file_data.FileData.yaml" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 1</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="job-visualization-file-data-module">
+<h2>job_visualization.file_data module<a class="headerlink" href="#job-visualization-file-data-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.file_index">
-<span id="job-visualization-file-index-module"></span><h2>job_visualization.file_index module<a class="headerlink" href="#module-job_visualization.file_index" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.file_index.FileIndex">
-<em class="property">class </em><code class="descclassname">job_visualization.file_index.</code><code class="descname">FileIndex</code><span class="sig-paren">(</span><em>path</em>, <em>unfold</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.file_index.FileIndex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Indexes files for quick search by name or path</p>
-<dl class="method">
-<dt id="job_visualization.file_index.FileIndex.get_by_name">
-<code class="descname">get_by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.file_index.FileIndex.get_by_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.file_index.FileIndex.load_file">
-<code class="descname">load_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.file_index.FileIndex.load_file" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.file_index.FileIndex.load_files">
-<code class="descname">load_files</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.file_index.FileIndex.load_files" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="job-visualization-file-index-module">
+<h2>job_visualization.file_index module<a class="headerlink" href="#job-visualization-file-index-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.graph">
-<span id="job-visualization-graph-module"></span><h2>job_visualization.graph module<a class="headerlink" href="#module-job_visualization.graph" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.graph.Graph">
-<em class="property">class </em><code class="descclassname">job_visualization.graph.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em>rank_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.graph.Graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Abstract class for render graphs</p>
-<dl class="method">
-<dt id="job_visualization.graph.Graph.render">
-<code class="descname">render</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.graph.Graph.render" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="job-visualization-graph-module">
+<h2>job_visualization.graph module<a class="headerlink" href="#job-visualization-graph-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.include_graph">
-<span id="job-visualization-include-graph-module"></span><h2>job_visualization.include_graph module<a class="headerlink" href="#module-job_visualization.include_graph" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.include_graph.IncludeEdge">
-<em class="property">class </em><code class="descclassname">job_visualization.include_graph.</code><code class="descname">IncludeEdge</code><span class="sig-paren">(</span><em>path</em>, <em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeEdge" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
-<dl class="attribute">
-<dt id="job_visualization.include_graph.IncludeEdge.path">
-<code class="descname">path</code><a class="headerlink" href="#job_visualization.include_graph.IncludeEdge.path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 0</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="job_visualization.include_graph.IncludeEdge.settings">
-<code class="descname">settings</code><a class="headerlink" href="#job_visualization.include_graph.IncludeEdge.settings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 1</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="job_visualization.include_graph.IncludeGraph">
-<em class="property">class </em><code class="descclassname">job_visualization.include_graph.</code><code class="descname">IncludeGraph</code><span class="sig-paren">(</span><em>rank_dir='left-right'</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#job_visualization.graph.Graph" title="job_visualization.graph.Graph"><code class="xref py py-class docutils literal"><span class="pre">job_visualization.graph.Graph</span></code></a></p>
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.add_edge">
-<code class="descname">add_edge</code><span class="sig-paren">(</span><em>node_from</em>, <em>node_to</em>, <em>label</em>, <em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.add_edge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.add_edge_from_last_node">
-<code class="descname">add_edge_from_last_node</code><span class="sig-paren">(</span><em>text</em>, <em>label</em>, <em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.add_edge_from_last_node" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.add_node">
-<code class="descname">add_node</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.add_node" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.add_to_list">
-<code class="descname">add_to_list</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.add_to_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.has_edge">
-<code class="descname">has_edge</code><span class="sig-paren">(</span><em>from_node</em>, <em>to_node</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.has_edge" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.pop_from_list">
-<code class="descname">pop_from_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.pop_from_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.render">
-<code class="descname">render</code><span class="sig-paren">(</span><em>file_to</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.render" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.include_graph.IncludeGraph.reset">
-<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.include_graph.IncludeGraph.reset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="job-visualization-include-graph-module">
+<h2>job_visualization.include_graph module<a class="headerlink" href="#job-visualization-include-graph-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.legend">
-<span id="job-visualization-legend-module"></span><h2>job_visualization.legend module<a class="headerlink" href="#module-job_visualization.legend" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.legend.Legend">
-<em class="property">class </em><code class="descclassname">job_visualization.legend.</code><code class="descname">Legend</code><a class="headerlink" href="#job_visualization.legend.Legend" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<dl class="method">
-<dt id="job_visualization.legend.Legend.add_item">
-<code class="descname">add_item</code><span class="sig-paren">(</span><em>name</em>, <em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.legend.Legend.add_item" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.legend.Legend.render">
-<code class="descname">render</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.legend.Legend.render" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="job-visualization-legend-module">
+<h2>job_visualization.legend module<a class="headerlink" href="#job-visualization-legend-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.synonym_parser">
-<span id="job-visualization-synonym-parser-module"></span><h2>job_visualization.synonym_parser module<a class="headerlink" href="#module-job_visualization.synonym_parser" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.synonym_parser.SynonymSet">
-<em class="property">class </em><code class="descclassname">job_visualization.synonym_parser.</code><code class="descname">SynonymSet</code><a class="headerlink" href="#job_visualization.synonym_parser.SynonymSet" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="job_visualization.synonym_parser.SynonymSet.add_set">
-<code class="descname">add_set</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.synonym_parser.SynonymSet.add_set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.synonym_parser.SynonymSet.are_synonyms">
-<code class="descname">are_synonyms</code><span class="sig-paren">(</span><em>param_1</em>, <em>param_2</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.synonym_parser.SynonymSet.are_synonyms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="job_visualization.synonym_parser.parse_from_args">
-<code class="descclassname">job_visualization.synonym_parser.</code><code class="descname">parse_from_args</code><span class="sig-paren">(</span><em>synonyms</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.synonym_parser.parse_from_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse an array of string from argparser
-to SynonymSet</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="job_visualization.synonym_parser.parse_from_array">
-<code class="descclassname">job_visualization.synonym_parser.</code><code class="descname">parse_from_array</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.synonym_parser.parse_from_array" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<div class="section" id="job-visualization-synonym-parser-module">
+<h2>job_visualization.synonym_parser module<a class="headerlink" href="#job-visualization-synonym-parser-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization.yaml_unfolder">
-<span id="job-visualization-yaml-unfolder-module"></span><h2>job_visualization.yaml_unfolder module<a class="headerlink" href="#module-job_visualization.yaml_unfolder" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="job_visualization.yaml_unfolder.CallObject">
-<em class="property">class </em><code class="descclassname">job_visualization.yaml_unfolder.</code><code class="descname">CallObject</code><span class="sig-paren">(</span><em>project_name</em>, <em>call_config</em>, <em>project_config</em>, <em>caller_name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.CallObject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
-<dl class="attribute">
-<dt id="job_visualization.yaml_unfolder.CallObject.call_config">
-<code class="descname">call_config</code><a class="headerlink" href="#job_visualization.yaml_unfolder.CallObject.call_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 1</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="job_visualization.yaml_unfolder.CallObject.caller_name">
-<code class="descname">caller_name</code><a class="headerlink" href="#job_visualization.yaml_unfolder.CallObject.caller_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 3</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="job_visualization.yaml_unfolder.CallObject.project_config">
-<code class="descname">project_config</code><a class="headerlink" href="#job_visualization.yaml_unfolder.CallObject.project_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 2</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="job_visualization.yaml_unfolder.CallObject.project_name">
-<code class="descname">project_name</code><a class="headerlink" href="#job_visualization.yaml_unfolder.CallObject.project_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for field number 0</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder">
-<em class="property">class </em><code class="descclassname">job_visualization.yaml_unfolder.</code><code class="descname">YamlUnfolder</code><span class="sig-paren">(</span><em>root</em>, <em>rank_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.create_call">
-<code class="descname">create_call</code><span class="sig-paren">(</span><em>project</em>, <em>call</em>, <em>from_name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.create_call" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.extract_call">
-<code class="descname">extract_call</code><span class="sig-paren">(</span><em>call</em>, <em>from_name</em>, <em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.extract_call" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates CallObject from call file (i.e. trigger-builds)</p>
-<p>Returns a list of calls</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.get_calls">
-<code class="descname">get_calls</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.get_calls" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads file by given name and returns CallObject array</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.get_calls_from_dict">
-<code class="descname">get_calls_from_dict</code><span class="sig-paren">(</span><em>file_dict</em>, <em>from_name</em>, <em>settings={}</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.get_calls_from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Processes unfolded yaml object to CallObject array</p>
-<p>settings is a dict of settings for keeping information like
-in what section we are right now (e.g. builders, publishers)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.get_data_from_name">
-<code class="descname">get_data_from_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.get_data_from_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds .yaml config by given name
-Slow version that will scan all files in the directory for each call</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.include_constructor">
-<code class="descname">include_constructor</code><span class="sig-paren">(</span><em>loader</em>, <em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.include_constructor" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.include_raw_constructor">
-<code class="descname">include_raw_constructor</code><span class="sig-paren">(</span><em>loader</em>, <em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.include_raw_constructor" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.reset">
-<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.reset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="job_visualization.yaml_unfolder.YamlUnfolder.unfold_yaml">
-<code class="descname">unfold_yaml</code><span class="sig-paren">(</span><em>file_name</em>, <em>is_root=False</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.YamlUnfolder.unfold_yaml" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unfolds file by given name</p>
-<p>Also adds all included files as nodes to include graph. To disable this,
-set include_graph.active = False before calling</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="job_visualization.yaml_unfolder.convert_path">
-<code class="descclassname">job_visualization.yaml_unfolder.</code><code class="descname">convert_path</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#job_visualization.yaml_unfolder.convert_path" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<div class="section" id="job-visualization-yaml-unfolder-module">
+<h2>job_visualization.yaml_unfolder module<a class="headerlink" href="#job-visualization-yaml-unfolder-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-job_visualization">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-job_visualization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -466,16 +88,16 @@ set include_graph.active = False before calling</p>
   <ul>
 <li><a class="reference internal" href="#">job_visualization package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-job_visualization.call_graph">job_visualization.call_graph module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.config_parser">job_visualization.config_parser module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.file_data">job_visualization.file_data module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.file_index">job_visualization.file_index module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.graph">job_visualization.graph module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.include_graph">job_visualization.include_graph module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.legend">job_visualization.legend module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.synonym_parser">job_visualization.synonym_parser module</a></li>
-<li><a class="reference internal" href="#module-job_visualization.yaml_unfolder">job_visualization.yaml_unfolder module</a></li>
-<li><a class="reference internal" href="#module-job_visualization">Module contents</a></li>
+<li><a class="reference internal" href="#job-visualization-call-graph-module">job_visualization.call_graph module</a></li>
+<li><a class="reference internal" href="#job-visualization-config-parser-module">job_visualization.config_parser module</a></li>
+<li><a class="reference internal" href="#job-visualization-file-data-module">job_visualization.file_data module</a></li>
+<li><a class="reference internal" href="#job-visualization-file-index-module">job_visualization.file_index module</a></li>
+<li><a class="reference internal" href="#job-visualization-graph-module">job_visualization.graph module</a></li>
+<li><a class="reference internal" href="#job-visualization-include-graph-module">job_visualization.include_graph module</a></li>
+<li><a class="reference internal" href="#job-visualization-legend-module">job_visualization.legend module</a></li>
+<li><a class="reference internal" href="#job-visualization-synonym-parser-module">job_visualization.synonym_parser module</a></li>
+<li><a class="reference internal" href="#job-visualization-yaml-unfolder-module">job_visualization.yaml_unfolder module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>

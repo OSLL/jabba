@@ -1,4 +1,7 @@
 class Result(object):
+    """
+    Base class for analysis results
+    """
 
     def __init__(self):
         self.errors = []

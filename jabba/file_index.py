@@ -47,6 +47,10 @@ class FileIndex:
 
 
     def load_files(self, path):
+        """
+        Loads files in a given path and all its subdirectories
+        """
+
         if self.verbose == 2:
             print("Indexing {}".format(path))
 
@@ -60,6 +64,10 @@ class FileIndex:
                 self.unfold_yaml(file_path)
 
     def add_file(self, path, yaml):
+        """
+        Adds given file to the file index
+        """
+
         if is_job_config(yaml):
             name = self.get_job_name(yaml)
 
@@ -71,6 +79,10 @@ class FileIndex:
 
 
     def get_job_name(self, file_config):
+        """
+        Extract name from job config
+        """
+
         # Job is represented as list
         name = file_config['config']['job']['name']
 
@@ -145,6 +157,10 @@ class FileIndex:
             return config
 
     def inject_include_info(self, path, config, include_type):
+        """
+        Wrap a dictionary into dict that contains config itself
+        and include info
+        """
         if isinstance(config, list):
             config = config[0]
 
@@ -156,11 +172,17 @@ class FileIndex:
         return ret
 
     def include_constructor(self, loader, node):
+        """
+        Called when PyYaml encounters '!include'
+        """
         v = self._unfold_yaml(node.value)
 
         return v
 
     def include_raw_constructor(self, loader, node):
+        """
+        Called when PyYaml encounters '!include-raw'
+        """
 
         path = convert_path(node.value)
 

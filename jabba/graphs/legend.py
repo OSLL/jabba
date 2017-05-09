@@ -2,6 +2,9 @@
 import graphviz as gv
 
 class Legend(object):
+    """
+    GraphViz graph for rendering legend
+    """
     def __init__(self):
         # Legend is presented as map (name -> settings)
         self.items = {}
