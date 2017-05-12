@@ -42,16 +42,17 @@ def is_not_hidden(config):
 class _Result(Result):
 
     def add(self, config):
-        self.errors.append(config)
+       self.results.append(config)
+       self.header = "Unused configs"
 
     def __str__(self):
-        ret = "\nUnused configs test\n---------\n"
+        ret = self.format_header()
 
-        if len(self.errors) == 0:
+        if len(self.results) == 0:
             ret += "OK"
             return ret
 
-        for config in self.errors:
+        for config in self.results:
             ret += "{} is not used\n".format(config)
 
         return ret

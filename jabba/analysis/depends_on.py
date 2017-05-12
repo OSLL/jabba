@@ -12,11 +12,15 @@ def depends_on(options, **kwargs):
     """
     include_graph = options['include_graph']
 
-    result = _Result()
+    include_graph.render('full_graph')
+
+    result = None
 
     if 'graph' in kwargs:
         name = kwargs['graph']
         del kwargs['graph']
+
+        result = _Result(kwargs)
 
         dep_graph = build_dependency_graph(include_graph, **kwargs)
 
@@ -25,6 +29,8 @@ def depends_on(options, **kwargs):
         result.add_result("Rendered dep graph at {}".format(name))
 
     else:
+        result = _Result(kwargs)
+
         dep_graph = build_dependency_graph(include_graph, **kwargs)
 
         for node, edges in dep_graph:
@@ -37,9 +43,13 @@ def build_dependency_graph(include_graph, **kwargs):
 
     inverted_graph = invert_graph(include_graph)
 
+    inverted_graph.render('inverted_graph')
+
     depends_on_files = get_files_depend_on(inverted_graph, **kwargs)
 
     inverted_graph.graph = {node: edges for node, edges in inverted_graph if node in depends_on_files}
+    
+    inverted_graph.render('cleared_graph')
 
     return invert_graph(inverted_graph)
 
@@ -81,16 +91,20 @@ def _get_files_depend_on(include_graph, config):
     return files
 
 class _Result(Result):
-    def __init__(self):
+    def __init__(self, files):
         super(self.__class__, self).__init__()
 
-        self.results = []
+        files = ", ".join(files)
+        self.header = "Depends on {}".format(files)
 
     def add_result(self, result):
         self.results.append(result)
 
+    def is_ok(self):
+        return True
+
     def __str__(self):
-        ret = ""
+        ret = self.format_header()
 
         for result in self.results:
             ret += result + "\n"

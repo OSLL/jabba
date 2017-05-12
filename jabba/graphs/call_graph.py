@@ -20,15 +20,6 @@ class CallGraph(Graph):
         super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
 
         self.active = False
-
-        # Graphviz graph
-        self.gv_graph = gv.Digraph(format='svg')
-
-        if self.rank_dir == 'left-right':
-            self.gv_graph.body.extend(['rankdir=LR'])
-
-        self.gv_graph.body.extend(['size="8,5"'])
-
         # Internal graph represented as dict mapping node names to the list of its edges
         # Edge is represented as CallEdge
         self.graph = {}

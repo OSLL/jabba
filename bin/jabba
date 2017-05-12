@@ -66,6 +66,9 @@ if __name__ == '__main__':
 
     yaml_unfolder.call_graph.call_display = args.call_display
 
+    with open('log', 'w+') as f:
+        f.write(str(args))
+
     # subprocess.call for some reason passes all arguments in a single string
     if len(args.call_parameters) == 1:
         args.call_parameters = args.call_parameters[0].split(" ")

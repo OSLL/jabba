@@ -94,18 +94,20 @@ class _CallResult(Result):
 
         super(self.__class__, self).__init__()
 
+        self.header = 'Cyclic dependencies'
+
         for cycle in cycles:
             self.add(cycle)
 
     def __str__(self):
-        ret = "\nCyclic dependencies in call graph test\n-------------\n"
+        ret = self.format_header()
 
         if self.is_ok():
             ret += "OK"
 
             return ret
 
-        for error in self.errors:
+        for error in self.results:
             ret += "Found cycle {}\n".format(format_cycle(error))
 
         return ret

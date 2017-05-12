@@ -25,13 +25,6 @@ class IncludeGraph(Graph):
     def __init__(self, dep_extractor, file_index, rank_dir='left-right'):
         super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
 
-        self.gv_graph = gv.Digraph(format='svg')
-
-        if self.rank_dir == 'left-right':
-            self.gv_graph.body.extend(['rankdir=LR'])
-
-        self.gv_graph.body.extend(['size="8,5"'])
-
         self.active = False
 
         # Internal graph
@@ -134,6 +127,8 @@ class IncludeGraph(Graph):
     def render(self, file_to):
         if not self.active:
             return
+
+        self.init_gv_graph()
 
         for path in self.graph.keys():
             self.gv_graph.node(path)

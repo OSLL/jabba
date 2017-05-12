@@ -29,6 +29,6 @@ class TestParametersPresent(unittest.TestCase):
 
         result = analyzer.results[0]
 
-        self.assertEqual(result.errors[0].caller, 'publisher')
-        self.assertEqual(result.errors[0].edge.to, 'test')
-        self.assertEqual(result.errors[0].parameter, 'same-node')
+        self.assertEqual(result.results[0].caller, 'publisher')
+        self.assertEqual(result.results[0].edge.to, 'test')
+        self.assertEqual(result.results[0].parameter, 'same-node')

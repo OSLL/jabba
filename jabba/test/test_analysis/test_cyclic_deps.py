@@ -24,5 +24,5 @@ class TestParametersPresent(unittest.TestCase):
 
         self.assertEqual(len(analyzer.results), 1)
 
-        self.assertEqual(analyzer.results[0].errors[0], ['job3', 'job1', 'job2', 'job3'])
+        self.assertEqual(analyzer.results[0].results[0], ['job3', 'job1', 'job2', 'job3'])
 
