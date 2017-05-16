@@ -18,6 +18,8 @@ class Graph(object):
 
         self.draw_legend = False
 
+        self.init_gv_graph()
+
         self.graph = {}
 
     def render(self):
@@ -31,3 +33,14 @@ class Graph(object):
 
     def __getitem__(self, index):
         return self.graph[index]
+
+    def init_gv_graph(self):
+        # Graphviz graph
+        self.gv_graph = gv.Digraph(format='svg')
+
+        if self.rank_dir == 'left-right':
+            self.gv_graph.body.extend(['rankdir=LR'])
+
+        self.gv_graph.body.extend(['size="8,5"'])
+
+

@@ -12,6 +12,9 @@ from .dep_extractor import DepExtractor
 
   
 class YamlUnfolder(object):
+    """
+    Utility class for managing file index, dependency extractor, call and include graphs
+    """
 
     def __init__(self, root, rank_dir=None, verbose=0):
 
@@ -49,11 +52,20 @@ class YamlUnfolder(object):
             self.call_graph = graphs.call_graph.CallGraph(rank_dir=self.rank_dir, dep_extractor=self.dep_extractor, file_index=self.file_index)
 
     def unfold_yaml(self, path):
+        """
+        Parses yaml at given path and returns it as object
+        """
         return self.file_index.unfold_yaml(path)
 
     def get_calls(self, path):
+        """
+        If a given path is a job config, get all jobs that it calls
+        """
         return self.dep_extractor.get_calls(path)
 
     def get_includes(self, path):
+        """
+        Get all configs a given config includes
+        """
         return self.dep_extractor.get_includes(path)
 

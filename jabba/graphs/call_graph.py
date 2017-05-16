@@ -20,15 +20,6 @@ class CallGraph(Graph):
         super(self.__class__, self).__init__(dep_extractor, file_index, rank_dir)
 
         self.active = False
-
-        # Graphviz graph
-        self.gv_graph = gv.Digraph(format='svg')
-
-        if self.rank_dir == 'left-right':
-            self.gv_graph.body.extend(['rankdir=LR'])
-
-        self.gv_graph.body.extend(['size="8,5"'])
-
         # Internal graph represented as dict mapping node names to the list of its edges
         # Edge is represented as CallEdge
         self.graph = {}
@@ -84,12 +75,14 @@ class CallGraph(Graph):
             return False
 
     def unfold_file(self, path):
+        """
+        Adds given file info graph
+        """
         yaml_config = self.file_index.unfold_yaml(path)
 
         self.unfold_config(path, yaml_config)
 
     def unfold_config(self, path, yaml_config):
-
         try:
             name = self.file_index.get_job_name(yaml_config)
         except KeyError:
@@ -163,9 +156,15 @@ class CallGraph(Graph):
                 raise Exception('Incorrect call display option {}'.format(self.call_display))
 
     def render_simple_edge(self, name, edge, edge_settings, label="call"):
+        """
+        Render edge without label
+        """
         self.gv_graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
 
     def render_edge_with_label(self, name, edge, edge_settings):
+        """
+        Render edge with label as text
+        """
         props_to_display = self.extract_props(edge.settings)
 
         label = '<'
@@ -179,6 +178,9 @@ class CallGraph(Graph):
         self.gv_graph.edge(self.get_path_from_name(name), self.get_path_from_name(edge.to), label=label, **edge_settings)
 
     def render_edge_with_node_label(self, name, edge, edge_settings):
+        """
+        Render edge with label as separate node
+        """
         props_to_display = self.extract_props(edge.settings)
 
         label = '<'
@@ -193,12 +195,19 @@ class CallGraph(Graph):
         self.gv_graph.edge(edge_node_name, self.get_path_from_name(edge.to), **edge_settings)
 
     def get_label(self, prop, value):
+        """
+        Format label
+        If value is missing, label will be colored red
+        """
         if value is None:
             return '{}: <FONT color="red">{}</FONT>'.format(prop, "not set")
         else:
             return "{}:{}".format(prop, value)
 
     def get_settings(self, edge):
+        """
+        Get render settings for edge
+        """
         if 'section' not in edge.settings:
             return {}
 

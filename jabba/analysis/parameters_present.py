@@ -5,7 +5,20 @@ from .result import Result
 
 Error = collections.namedtuple('Error', ['caller', 'edge', 'parameter'])
 
+class Error:
+    def __init__(self, caller, edge, parameter):
+        self.caller = caller
+        self.edge = edge
+        self.parameter = parameter
+
+    def __str__(self):
+        return "{} calls {} without the required parameter {} (or synonyms)\n".format(self.caller, self.edge.settings['project'], self.parameter)
+
 def parameters_present(options, **kwargs):
+    """
+    Analysis function
+    Check whether all calls contain a given parameters or their synonyms
+    """
     synonyms = options['synonyms']
     call_graph = options['call_graph']
 
@@ -30,19 +43,17 @@ def parameters_present(options, **kwargs):
 
 class _Result(Result):
     def add(self, node, edge, parameter):
-        self.errors.append(Error(caller=node, edge=edge, parameter=parameter))
+        self.results.append(Error(caller=node, edge=edge, parameter=parameter))
+        self.header = "Parameters present test"
 
     def __str__(self):
-        ret = "\nParameters present test\n---------\n"
+        ret = self.format_header()
 
-        if len(self.errors) == 0:
+        if len(self.results) == 0:
             ret += "OK"
             return ret
 
-        for error in self.errors:
-            caller = error.caller
-            edge = error.edge
-            parameter = error.parameter
-            ret += "{} calls {} without the required parameter {} (or synonyms)\n".format(caller, edge.settings['project'], parameter)
+        for error in self.results:
+            ret += str(error)
 
         return ret

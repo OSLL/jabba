@@ -6,6 +6,9 @@ from os import makedirs
 from .util import extract_from_config
 
 def export_shell(file_index, to_dir):
+    """
+    Export all shell commands from files in the file index into given directory
+    """
     if not exists(to_dir):
         makedirs(to_dir)
 

@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>jabba package &#8212; Jenkins Job Visualization 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jabba-package">
+<h1>jabba package<a class="headerlink" href="#jabba-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="jabba.analysis.html">jabba.analysis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#module-jabba.analysis.cyclic_deps">jabba.analysis.cyclic_deps module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#module-jabba.analysis.depends_on">jabba.analysis.depends_on module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#module-jabba.analysis.parameters_present">jabba.analysis.parameters_present module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#module-jabba.analysis.parse">jabba.analysis.parse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#module-jabba.analysis.result">jabba.analysis.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#module-jabba.analysis.unused_configs">jabba.analysis.unused_configs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.analysis.html#module-jabba.analysis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jabba.graphs.html">jabba.graphs package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jabba.graphs.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.graphs.html#module-jabba.graphs.call_graph">jabba.graphs.call_graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.graphs.html#module-jabba.graphs.edge">jabba.graphs.edge module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.graphs.html#module-jabba.graphs.graph">jabba.graphs.graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.graphs.html#module-jabba.graphs.include_graph">jabba.graphs.include_graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.graphs.html#module-jabba.graphs.legend">jabba.graphs.legend module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jabba.graphs.html#module-jabba.graphs">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-jabba.analyzer">
+<span id="jabba-analyzer-module"></span><h2>jabba.analyzer module<a class="headerlink" href="#module-jabba.analyzer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.analyzer.Analyzer">
+<em class="property">class </em><code class="descclassname">jabba.analyzer.</code><code class="descname">Analyzer</code><span class="sig-paren">(</span><em>root</em>, <em>arguments</em>, <em>file_index</em>, <em>dep_extractor</em>, <em>synonyms=&lt;jabba.synonym_parser.SynonymSet instance&gt;</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analyzer.Analyzer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jabba.yaml_unfolder.YamlUnfolder" title="jabba.yaml_unfolder.YamlUnfolder"><code class="xref py py-class docutils literal"><span class="pre">jabba.yaml_unfolder.YamlUnfolder</span></code></a></p>
+<p>Class for running internal and external analyzer functions</p>
+<dl class="method">
+<dt id="jabba.analyzer.Analyzer.create_call_graph">
+<code class="descname">create_call_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analyzer.Analyzer.create_call_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.analyzer.Analyzer.create_include_graph">
+<code class="descname">create_include_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analyzer.Analyzer.create_include_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.analyzer.Analyzer.is_ok">
+<code class="descname">is_ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analyzer.Analyzer.is_ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.analyzer.Analyzer.print_result">
+<code class="descname">print_result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analyzer.Analyzer.print_result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.analyzer.Analyzer.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.analyzer.Analyzer.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.config_parser">
+<span id="jabba-config-parser-module"></span><h2>jabba.config_parser module<a class="headerlink" href="#module-jabba.config_parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.config_parser.ConfigParser">
+<em class="property">class </em><code class="descclassname">jabba.config_parser.</code><code class="descname">ConfigParser</code><span class="sig-paren">(</span><em>config</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.config_parser.ConfigParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jabba.yaml_unfolder.YamlUnfolder" title="jabba.yaml_unfolder.YamlUnfolder"><code class="xref py py-class docutils literal"><span class="pre">jabba.yaml_unfolder.YamlUnfolder</span></code></a></p>
+<dl class="attribute">
+<dt id="jabba.config_parser.ConfigParser.default_config">
+<code class="descname">default_config</code><em class="property"> = '.jjv_config.yml'</em><a class="headerlink" href="#jabba.config_parser.ConfigParser.default_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.config_parser.ConfigParser.merge_args">
+<code class="descname">merge_args</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.config_parser.ConfigParser.merge_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.dep_extractor">
+<span id="jabba-dep-extractor-module"></span><h2>jabba.dep_extractor module<a class="headerlink" href="#module-jabba.dep_extractor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.dep_extractor.CallEdge">
+<em class="property">class </em><code class="descclassname">jabba.dep_extractor.</code><code class="descname">CallEdge</code><span class="sig-paren">(</span><em>to</em>, <em>call_config</em>, <em>project_config</em>, <em>caller_name</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.CallEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="jabba.graphs.html#jabba.graphs.edge.Edge" title="jabba.graphs.edge.Edge"><code class="xref py py-class docutils literal"><span class="pre">jabba.graphs.edge.Edge</span></code></a></p>
+<p>Edge representing one job calling another</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="jabba.dep_extractor.DepExtractor">
+<em class="property">class </em><code class="descclassname">jabba.dep_extractor.</code><code class="descname">DepExtractor</code><span class="sig-paren">(</span><em>file_index</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.DepExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="jabba.dep_extractor.DepExtractor.create_call">
+<code class="descname">create_call</code><span class="sig-paren">(</span><em>project</em>, <em>call</em>, <em>from_name</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.DepExtractor.create_call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.dep_extractor.DepExtractor.extract_call">
+<code class="descname">extract_call</code><span class="sig-paren">(</span><em>call</em>, <em>from_name</em>, <em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.DepExtractor.extract_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates CallEdge from call file (i.e. trigger-builds)</p>
+<p>Returns a list of calls</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.dep_extractor.DepExtractor.get_calls">
+<code class="descname">get_calls</code><span class="sig-paren">(</span><em>job_name</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.DepExtractor.get_calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads file by given name and returns CallEdge array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.dep_extractor.DepExtractor.get_calls_from_dict">
+<code class="descname">get_calls_from_dict</code><span class="sig-paren">(</span><em>file_dict</em>, <em>from_name</em>, <em>settings={}</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.DepExtractor.get_calls_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes unfolded yaml object to CallEdge array</p>
+<p>settings is a dict of settings for keeping information like
+in what section we are right now (e.g. builders, publishers)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.dep_extractor.DepExtractor.get_includes">
+<code class="descname">get_includes</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.DepExtractor.get_includes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all includes from a config in a given path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.dep_extractor.DepExtractor.get_includes_from_dict">
+<code class="descname">get_includes_from_dict</code><span class="sig-paren">(</span><em>config</em>, <em>extract=False</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.DepExtractor.get_includes_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="jabba.dep_extractor.IncludeInfo">
+<em class="property">class </em><code class="descclassname">jabba.dep_extractor.</code><code class="descname">IncludeInfo</code><span class="sig-paren">(</span><em>type</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.dep_extractor.IncludeInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="jabba.dep_extractor.IncludeInfo.path">
+<code class="descname">path</code><a class="headerlink" href="#jabba.dep_extractor.IncludeInfo.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="jabba.dep_extractor.IncludeInfo.type">
+<code class="descname">type</code><a class="headerlink" href="#jabba.dep_extractor.IncludeInfo.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="data">
+<dt id="jabba.dep_extractor.include_flag">
+<code class="descclassname">jabba.dep_extractor.</code><code class="descname">include_flag</code><em class="property"> = '__jenkins_job_builder_analysis_include_flag__'</em><a class="headerlink" href="#jabba.dep_extractor.include_flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Info about included file
+type is either &#8216;include&#8217; or &#8216;include-raw&#8217;
+path is the original path to the file included</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.export_shell">
+<span id="jabba-export-shell-module"></span><h2>jabba.export_shell module<a class="headerlink" href="#module-jabba.export_shell" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="jabba.export_shell.export_from_file">
+<code class="descclassname">jabba.export_shell.</code><code class="descname">export_from_file</code><span class="sig-paren">(</span><em>file_data</em>, <em>to_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.export_shell.export_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.export_shell.export_shell">
+<code class="descclassname">jabba.export_shell.</code><code class="descname">export_shell</code><span class="sig-paren">(</span><em>file_index</em>, <em>to_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.export_shell.export_shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export all shell commands from files in the file index into given directory</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.export_shell.extract_shells_from_dict">
+<code class="descclassname">jabba.export_shell.</code><code class="descname">extract_shells_from_dict</code><span class="sig-paren">(</span><em>yaml</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.export_shell.extract_shells_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="jabba.export_shell.flatten_path">
+<code class="descclassname">jabba.export_shell.</code><code class="descname">flatten_path</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.export_shell.flatten_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-jabba.file_data">
+<span id="jabba-file-data-module"></span><h2>jabba.file_data module<a class="headerlink" href="#module-jabba.file_data" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.file_data.FileData">
+<em class="property">class </em><code class="descclassname">jabba.file_data.</code><code class="descname">FileData</code><span class="sig-paren">(</span><em>path</em>, <em>yaml</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_data.FileData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="jabba.file_data.FileData.path">
+<code class="descname">path</code><a class="headerlink" href="#jabba.file_data.FileData.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="jabba.file_data.FileData.yaml">
+<code class="descname">yaml</code><a class="headerlink" href="#jabba.file_data.FileData.yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.file_index">
+<span id="jabba-file-index-module"></span><h2>jabba.file_index module<a class="headerlink" href="#module-jabba.file_index" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.file_index.FileIndex">
+<em class="property">class </em><code class="descclassname">jabba.file_index.</code><code class="descname">FileIndex</code><span class="sig-paren">(</span><em>path</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indexes files for quick search by name or path</p>
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.add_file">
+<code class="descname">add_file</code><span class="sig-paren">(</span><em>path</em>, <em>yaml</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.add_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds given file to the file index</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.default_load">
+<code class="descname">default_load</code><span class="sig-paren">(</span><em>name</em>, <em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.default_load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.get_by_name">
+<code class="descname">get_by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.get_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.get_by_path">
+<code class="descname">get_by_path</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.get_by_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.get_job_name">
+<code class="descname">get_job_name</code><span class="sig-paren">(</span><em>file_config</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.get_job_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract name from job config</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.include_constructor">
+<code class="descname">include_constructor</code><span class="sig-paren">(</span><em>loader</em>, <em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.include_constructor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when PyYaml encounters &#8216;!include&#8217;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.include_raw_constructor">
+<code class="descname">include_raw_constructor</code><span class="sig-paren">(</span><em>loader</em>, <em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.include_raw_constructor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when PyYaml encounters &#8216;!include-raw&#8217;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.init_yaml_loader">
+<code class="descname">init_yaml_loader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.init_yaml_loader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.inject_include_info">
+<code class="descname">inject_include_info</code><span class="sig-paren">(</span><em>path</em>, <em>config</em>, <em>include_type</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.inject_include_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap a dictionary into dict that contains config itself
+and include info</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.load_files">
+<code class="descname">load_files</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.load_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads files in a given path and all its subdirectories</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.file_index.FileIndex.unfold_yaml">
+<code class="descname">unfold_yaml</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.FileIndex.unfold_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unfolds file by given name</p>
+<p>Also adds all included files as nodes to include graph. To disable this,
+set include_graph.active = False before calling</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.file_index.ordered_constructor">
+<code class="descclassname">jabba.file_index.</code><code class="descname">ordered_constructor</code><span class="sig-paren">(</span><em>loader</em>, <em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.file_index.ordered_constructor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-jabba.synonym_parser">
+<span id="jabba-synonym-parser-module"></span><h2>jabba.synonym_parser module<a class="headerlink" href="#module-jabba.synonym_parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.synonym_parser.SynonymSet">
+<em class="property">class </em><code class="descclassname">jabba.synonym_parser.</code><code class="descname">SynonymSet</code><a class="headerlink" href="#jabba.synonym_parser.SynonymSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of synonyms set
+If two parameters are in the same set, they are considered synonyms</p>
+<dl class="method">
+<dt id="jabba.synonym_parser.SynonymSet.add_set">
+<code class="descname">add_set</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.synonym_parser.SynonymSet.add_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.synonym_parser.SynonymSet.are_synonyms">
+<code class="descname">are_synonyms</code><span class="sig-paren">(</span><em>param_1</em>, <em>param_2</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.synonym_parser.SynonymSet.are_synonyms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.synonym_parser.SynonymSet.get_synonyms">
+<code class="descname">get_synonyms</code><span class="sig-paren">(</span><em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.synonym_parser.SynonymSet.get_synonyms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.synonym_parser.parse_from_args">
+<code class="descclassname">jabba.synonym_parser.</code><code class="descname">parse_from_args</code><span class="sig-paren">(</span><em>synonyms</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.synonym_parser.parse_from_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse an array of string from argparser
+to SynonymSet</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.synonym_parser.parse_from_array">
+<code class="descclassname">jabba.synonym_parser.</code><code class="descname">parse_from_array</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.synonym_parser.parse_from_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse 2d array into synonym set
+Every array inside arr is considered a set of synonyms</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.util">
+<span id="jabba-util-module"></span><h2>jabba.util module<a class="headerlink" href="#module-jabba.util" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="jabba.util.convert_path">
+<code class="descclassname">jabba.util.</code><code class="descname">convert_path</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.util.convert_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert path to a normalized format</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.util.extract_from_config">
+<code class="descclassname">jabba.util.</code><code class="descname">extract_from_config</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.util.extract_from_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>When parsing, config can be wraped at dictionary where &#8216;config&#8217; contains given config</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="jabba.util.is_job_config">
+<code class="descclassname">jabba.util.</code><code class="descname">is_job_config</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.util.is_job_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether given dict of config is job config</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.yaml_unfolder">
+<span id="jabba-yaml-unfolder-module"></span><h2>jabba.yaml_unfolder module<a class="headerlink" href="#module-jabba.yaml_unfolder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.yaml_unfolder.YamlUnfolder">
+<em class="property">class </em><code class="descclassname">jabba.yaml_unfolder.</code><code class="descname">YamlUnfolder</code><span class="sig-paren">(</span><em>root</em>, <em>rank_dir=None</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.yaml_unfolder.YamlUnfolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Utility class for managing file index, dependency extractor, call and include graphs</p>
+<dl class="method">
+<dt id="jabba.yaml_unfolder.YamlUnfolder.get_calls">
+<code class="descname">get_calls</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.yaml_unfolder.YamlUnfolder.get_calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a given path is a job config, get all jobs that it calls</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.yaml_unfolder.YamlUnfolder.get_includes">
+<code class="descname">get_includes</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.yaml_unfolder.YamlUnfolder.get_includes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all configs a given config includes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.yaml_unfolder.YamlUnfolder.init_call_graph">
+<code class="descname">init_call_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.yaml_unfolder.YamlUnfolder.init_call_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.yaml_unfolder.YamlUnfolder.init_file_index">
+<code class="descname">init_file_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.yaml_unfolder.YamlUnfolder.init_file_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.yaml_unfolder.YamlUnfolder.init_include_graph">
+<code class="descname">init_include_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.yaml_unfolder.YamlUnfolder.init_include_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.yaml_unfolder.YamlUnfolder.unfold_yaml">
+<code class="descname">unfold_yaml</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.yaml_unfolder.YamlUnfolder.unfold_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses yaml at given path and returns it as object</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-jabba" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">jabba package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-jabba.analyzer">jabba.analyzer module</a></li>
+<li><a class="reference internal" href="#module-jabba.config_parser">jabba.config_parser module</a></li>
+<li><a class="reference internal" href="#module-jabba.dep_extractor">jabba.dep_extractor module</a></li>
+<li><a class="reference internal" href="#module-jabba.export_shell">jabba.export_shell module</a></li>
+<li><a class="reference internal" href="#module-jabba.file_data">jabba.file_data module</a></li>
+<li><a class="reference internal" href="#module-jabba.file_index">jabba.file_index module</a></li>
+<li><a class="reference internal" href="#module-jabba.synonym_parser">jabba.synonym_parser module</a></li>
+<li><a class="reference internal" href="#module-jabba.util">jabba.util module</a></li>
+<li><a class="reference internal" href="#module-jabba.yaml_unfolder">jabba.yaml_unfolder module</a></li>
+<li><a class="reference internal" href="#module-jabba">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/jabba.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, zmm missingdays.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/jabba.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

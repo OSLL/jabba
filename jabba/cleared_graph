@@ -1,0 +1,13 @@
+digraph {
+rankdir=LR
+size="8,5"
+	"test/test_analysis/depends_on/b.yml"
+		"test/test_analysis/depends_on/b.yml" -> "test/test_analysis/depends_on/a.yml" [label=<<B>include</B>> color=green]
+	"test/test_analysis/depends_on/c.yml"
+		"test/test_analysis/depends_on/c.yml" -> "test/test_analysis/depends_on/d.yml" [label=<<B>include</B>> color=green]
+		"test/test_analysis/depends_on/c.yml" -> "test/test_analysis/depends_on/b.yml" [label=<<B>include</B>> color=green]
+	"test/test_analysis/depends_on/d.yml"
+	"test/test_analysis/depends_on/e.yml"
+		"test/test_analysis/depends_on/e.yml" -> "test/test_analysis/depends_on/b.yml" [label=<<B>include</B>> color=green]
+	"test/test_analysis/depends_on/a.yml"
+}

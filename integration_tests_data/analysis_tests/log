@@ -1,0 +1,1 @@
+Namespace(analysis=['depends_on:call_job2.yml:graph=depends_on_slave'], call_display='text', call_graph=False, call_order=False, call_parameters=[], config='.jjv_config.yml', draw_legend=False, export_shell=None, files=[], include_graph=False, legend=False, name=None, rank_dir='left-right', synonyms=[], verbose=1, yaml_root='.')

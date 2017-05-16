@@ -1,6 +1,11 @@
 from .result import Result
 
 def cyclic_deps(options, **kwargs):
+    """
+    Analysis function
+    Check whether there are any cyclic dependencies in a call graph
+    Cyclic dependencies in include graph are prevented at a parsing stage with FileIndex
+    """
     call_graph = options['call_graph']
 
     call_result = _CallResult(cyclic_test(call_graph))
@@ -89,18 +94,20 @@ class _CallResult(Result):
 
         super(self.__class__, self).__init__()
 
+        self.header = 'Cyclic dependencies'
+
         for cycle in cycles:
             self.add(cycle)
 
     def __str__(self):
-        ret = "\nCyclic dependencies in call graph test\n-------------\n"
+        ret = self.format_header()
 
         if self.is_ok():
             ret += "OK"
 
             return ret
 
-        for error in self.errors:
+        for error in self.results:
             ret += "Found cycle {}\n".format(format_cycle(error))
 
         return ret

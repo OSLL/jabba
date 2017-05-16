@@ -25,7 +25,7 @@ class TestUnusedConfigs(unittest.TestCase):
 
         result = analyzer.results[0]
 
-        self.assertEquals(len(result.errors), 2)
+        self.assertEquals(len(result.results), 2)
 
-        self.assertEquals(result.errors[0], 'test/test_analysis/unused_configs/unused_1.yaml')
-        self.assertEquals(result.errors[1], 'test/test_analysis/unused_configs/unused_2.yml')
+        self.assertEquals(result.results[0], 'test/test_analysis/unused_configs/unused_1.yaml')
+        self.assertEquals(result.results[1], 'test/test_analysis/unused_configs/unused_2.yml')

@@ -6,6 +6,9 @@ FunctionArguments = collections.namedtuple('FunctionArguments', ['function', 'ar
 argument_splitter = ":"
 
 def parse_analyzer_arguments(arguments):
+    """
+    Parse string in format `function_1:param1=value:param2 function_2:param` into array of FunctionArguments
+    """
 
     rets = []
 

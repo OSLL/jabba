@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>jabba.graphs package &#8212; Jenkins Job Visualization 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jabba-graphs-package">
+<h1>jabba.graphs package<a class="headerlink" href="#jabba-graphs-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-jabba.graphs.call_graph">
+<span id="jabba-graphs-call-graph-module"></span><h2>jabba.graphs.call_graph module<a class="headerlink" href="#module-jabba.graphs.call_graph" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.graphs.call_graph.CallGraph">
+<em class="property">class </em><code class="descclassname">jabba.graphs.call_graph.</code><code class="descname">CallGraph</code><span class="sig-paren">(</span><em>dep_extractor</em>, <em>file_index</em>, <em>rank_dir='left-right'</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jabba.graphs.graph.Graph" title="jabba.graphs.graph.Graph"><code class="xref py py-class docutils literal"><span class="pre">jabba.graphs.graph.Graph</span></code></a></p>
+<p>Class for manipulating call graph
+Stores all graph with file configs for further analysis</p>
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.add_call_object">
+<code class="descname">add_call_object</code><span class="sig-paren">(</span><em>call_object</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.add_call_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.add_edge">
+<code class="descname">add_edge</code><span class="sig-paren">(</span><em>from_name</em>, <em>to_name</em>, <em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.add_node">
+<code class="descname">add_node</code><span class="sig-paren">(</span><em>name</em>, <em>project_config</em>, <em>is_root=False</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.add_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.extract_props">
+<code class="descname">extract_props</code><span class="sig-paren">(</span><em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.extract_props" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract all valuable properties to be displayed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.get_label">
+<code class="descname">get_label</code><span class="sig-paren">(</span><em>prop</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.get_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format label
+If value is missing, label will be colored red</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.get_path_from_name">
+<code class="descname">get_path_from_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.get_path_from_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.get_settings">
+<code class="descname">get_settings</code><span class="sig-paren">(</span><em>edge</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.get_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get render settings for edge</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.has_edge">
+<code class="descname">has_edge</code><span class="sig-paren">(</span><em>from_name</em>, <em>to_name</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.has_edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.init_legend">
+<code class="descname">init_legend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.init_legend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.render">
+<code class="descname">render</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.render" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.render_edge_with_label">
+<code class="descname">render_edge_with_label</code><span class="sig-paren">(</span><em>name</em>, <em>edge</em>, <em>edge_settings</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.render_edge_with_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render edge with label as text</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.render_edge_with_node_label">
+<code class="descname">render_edge_with_node_label</code><span class="sig-paren">(</span><em>name</em>, <em>edge</em>, <em>edge_settings</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.render_edge_with_node_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render edge with label as separate node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.render_node">
+<code class="descname">render_node</code><span class="sig-paren">(</span><em>name</em>, <em>color='black'</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.render_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.render_simple_edge">
+<code class="descname">render_simple_edge</code><span class="sig-paren">(</span><em>name</em>, <em>edge</em>, <em>edge_settings</em>, <em>label='call'</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.render_simple_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render edge without label</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.should_display_prop">
+<code class="descname">should_display_prop</code><span class="sig-paren">(</span><em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.should_display_prop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.unfold_config">
+<code class="descname">unfold_config</code><span class="sig-paren">(</span><em>path</em>, <em>yaml_config</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.unfold_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.call_graph.CallGraph.unfold_file">
+<code class="descname">unfold_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.call_graph.CallGraph.unfold_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds given file info graph</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.graphs.edge">
+<span id="jabba-graphs-edge-module"></span><h2>jabba.graphs.edge module<a class="headerlink" href="#module-jabba.graphs.edge" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.graphs.edge.Edge">
+<em class="property">class </em><code class="descclassname">jabba.graphs.edge.</code><code class="descname">Edge</code><span class="sig-paren">(</span><em>to</em>, <em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.edge.Edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.graphs.graph">
+<span id="jabba-graphs-graph-module"></span><h2>jabba.graphs.graph module<a class="headerlink" href="#module-jabba.graphs.graph" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.graphs.graph.Graph">
+<em class="property">class </em><code class="descclassname">jabba.graphs.graph.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em>dep_extractor</em>, <em>file_index</em>, <em>rank_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.graph.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Abstract class for render graphs</p>
+<dl class="method">
+<dt id="jabba.graphs.graph.Graph.render">
+<code class="descname">render</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.graph.Graph.render" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.graphs.include_graph">
+<span id="jabba-graphs-include-graph-module"></span><h2>jabba.graphs.include_graph module<a class="headerlink" href="#module-jabba.graphs.include_graph" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.graphs.include_graph.IncludeGraph">
+<em class="property">class </em><code class="descclassname">jabba.graphs.include_graph.</code><code class="descname">IncludeGraph</code><span class="sig-paren">(</span><em>dep_extractor</em>, <em>file_index</em>, <em>rank_dir='left-right'</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jabba.graphs.graph.Graph" title="jabba.graphs.graph.Graph"><code class="xref py py-class docutils literal"><span class="pre">jabba.graphs.graph.Graph</span></code></a></p>
+<p>Graph representing &#8216;!include&#8217; dependencies between configs</p>
+<dl class="method">
+<dt id="jabba.graphs.include_graph.IncludeGraph.add_edge">
+<code class="descname">add_edge</code><span class="sig-paren">(</span><em>node_from</em>, <em>node_to</em>, <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.include_graph.IncludeGraph.add_node">
+<code class="descname">add_node</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph.add_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.include_graph.IncludeGraph.has_edge">
+<code class="descname">has_edge</code><span class="sig-paren">(</span><em>from_node</em>, <em>to_node</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph.has_edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.include_graph.IncludeGraph.init_legend">
+<code class="descname">init_legend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph.init_legend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.include_graph.IncludeGraph.render">
+<code class="descname">render</code><span class="sig-paren">(</span><em>file_to</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph.render" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.include_graph.IncludeGraph.unfold_config">
+<code class="descname">unfold_config</code><span class="sig-paren">(</span><em>path</em>, <em>yaml_config</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph.unfold_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.include_graph.IncludeGraph.unfold_file">
+<code class="descname">unfold_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.include_graph.IncludeGraph.unfold_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse given file and add it to graph</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.graphs.legend">
+<span id="jabba-graphs-legend-module"></span><h2>jabba.graphs.legend module<a class="headerlink" href="#module-jabba.graphs.legend" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="jabba.graphs.legend.Legend">
+<em class="property">class </em><code class="descclassname">jabba.graphs.legend.</code><code class="descname">Legend</code><a class="headerlink" href="#jabba.graphs.legend.Legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>GraphViz graph for rendering legend</p>
+<dl class="method">
+<dt id="jabba.graphs.legend.Legend.add_item">
+<code class="descname">add_item</code><span class="sig-paren">(</span><em>name</em>, <em>settings</em><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.legend.Legend.add_item" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="jabba.graphs.legend.Legend.render">
+<code class="descname">render</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jabba.graphs.legend.Legend.render" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-jabba.graphs">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-jabba.graphs" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">jabba.graphs package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-jabba.graphs.call_graph">jabba.graphs.call_graph module</a></li>
+<li><a class="reference internal" href="#module-jabba.graphs.edge">jabba.graphs.edge module</a></li>
+<li><a class="reference internal" href="#module-jabba.graphs.graph">jabba.graphs.graph module</a></li>
+<li><a class="reference internal" href="#module-jabba.graphs.include_graph">jabba.graphs.include_graph module</a></li>
+<li><a class="reference internal" href="#module-jabba.graphs.legend">jabba.graphs.legend module</a></li>
+<li><a class="reference internal" href="#module-jabba.graphs">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/jabba.graphs.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, zmm missingdays.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/jabba.graphs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -6,8 +6,10 @@ from .yaml_unfolder import YamlUnfolder
 from . import graphs
 from . import analysis
 from .analysis import parse_analyzer_arguments
+from .dep_extractor import DepExtractor
+from .file_index import FileIndex
 from .util import is_job_config
-from .synonym_parser import SynonymSet
+from .synonym_parser import SynonymSet, parse_from_args
 
 def get_analysis_function(argument, export_analysis):
     func = None
@@ -32,21 +34,44 @@ def load_module(name):
         return import_module(name)
 
 class Analyzer(YamlUnfolder):
+<<<<<<< HEAD
 
-    def __init__(self, root, arguments, file_index, dep_extractor, export_analysis=None, synonyms=SynonymSet(), verbose=0):
+    """
+    Class for running internal and external analyzer functions
+    """
+
+    def __init__(self, root, arguments, file_index=None, dep_extractor=None, synonyms=SynonymSet(), verbose=0):
+        """
+        arguments is a list of strings in format function_name:parameter1=value:parameter2
+        where function_name is a name of analysis function and parameter=value is the parameter and value
+        that will be passed into analysis function
+        """
         super(self.__class__, self).__init__(root=root, verbose=0)
 
         self.verbose = verbose
 
         self.arguments = parse_analyzer_arguments(arguments)
-        self.synonyms = synonyms
-        self.root = root
-        self.file_index = file_index
-        self.export_analysis = export_analysis
 
-        self.include_graph = graphs.include_graph.IncludeGraph(dep_extractor=dep_extractor, file_index=file_index)
+        if isinstance(synonyms, str):
+            self.synonyms = parse_from_args(synonyms)
+        else:
+            self.synonyms = synonyms
+        self.root = root
+
+        if file_index is None:
+            self.file_index = FileIndex(path=root)
+            self.file_index.load_files(root)
+        else:
+            self.file_index = file_index
+
+        if dep_extractor is None:
+            self.dep_extractor = DepExtractor(self.file_index)
+        else:
+            self.dep_extractor = dep_extractor
+
+        self.include_graph = graphs.include_graph.IncludeGraph(dep_extractor=self.dep_extractor, file_index=self.file_index)
         self.include_graph.active = True
-        self.call_graph = graphs.call_graph.CallGraph(dep_extractor=dep_extractor, file_index=self.file_index)
+        self.call_graph = graphs.call_graph.CallGraph(dep_extractor=self.dep_extractor, file_index=self.file_index)
 
         self.results = []
 
