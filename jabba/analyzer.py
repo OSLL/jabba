@@ -34,13 +34,11 @@ def load_module(name):
         return import_module(name)
 
 class Analyzer(YamlUnfolder):
-<<<<<<< HEAD
-
     """
     Class for running internal and external analyzer functions
     """
 
-    def __init__(self, root, arguments, file_index=None, dep_extractor=None, synonyms=SynonymSet(), verbose=0):
+    def __init__(self, root, arguments, file_index=None, dep_extractor=None, export_analysis=None, synonyms=SynonymSet(), verbose=0):
         """
         arguments is a list of strings in format function_name:parameter1=value:parameter2
         where function_name is a name of analysis function and parameter=value is the parameter and value
@@ -68,6 +66,8 @@ class Analyzer(YamlUnfolder):
             self.dep_extractor = DepExtractor(self.file_index)
         else:
             self.dep_extractor = dep_extractor
+
+        self.export_analysis = export_analysis
 
         self.include_graph = graphs.include_graph.IncludeGraph(dep_extractor=self.dep_extractor, file_index=self.file_index)
         self.include_graph.active = True

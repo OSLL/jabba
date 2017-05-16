@@ -19,10 +19,16 @@ class GraphTest(unittest.TestCase):
 
             try:
                 with open(self.test_refs + main_file + self.ext, 'r') as ref_file:
-                    ref_graph = ref_file.read()
-                    test_graph = test_file.read()
+                    ref_graph = str(ref_file.read())
+                    test_graph = str(test_file.read())
 
-                    self.assertEquals(ref_graph, test_graph)
+                    _ref_graph = ref_graph.replace("\n", " ")
+                    _test_graph = test_graph.replace("\n", " ")
+
+                    _ref_graph = _ref_graph.split(" ")
+                    _test_graph = _test_graph.split(" ")
+
+                    self.assertEquals(_ref_graph, _test_graph)
             except IOError:
                 print('Generating new ref graph for ' + self.test_data + main_file)
 

@@ -9,15 +9,15 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
 <title>%3</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-40 279.283,-40 279.283,4 -4,4"/>
-<!-- job.yml -->
-<g id="node1" class="node"><title>job.yml</title>
-<ellipse fill="none" stroke="black" cx="38.3466" cy="-18" rx="38.1938" ry="18"/>
-<text text-anchor="middle" x="38.3466" y="-14.3" font-family="Times,serif" font-size="14.00">job.yml</text>
-</g>
 <!-- call_job2.yml -->
-<g id="node2" class="node"><title>call_job2.yml</title>
+<g id="node1" class="node"><title>call_job2.yml</title>
 <ellipse fill="none" stroke="black" cx="215.488" cy="-18" rx="59.5901" ry="18"/>
 <text text-anchor="middle" x="215.488" y="-14.3" font-family="Times,serif" font-size="14.00">call_job2.yml</text>
+</g>
+<!-- job.yml -->
+<g id="node2" class="node"><title>job.yml</title>
+<ellipse fill="none" stroke="black" cx="38.3466" cy="-18" rx="38.1938" ry="18"/>
+<text text-anchor="middle" x="38.3466" y="-14.3" font-family="Times,serif" font-size="14.00">job.yml</text>
 </g>
 <!-- job.yml&#45;&gt;call_job2.yml -->
 <g id="edge1" class="edge"><title>job.yml&#45;&gt;call_job2.yml</title>

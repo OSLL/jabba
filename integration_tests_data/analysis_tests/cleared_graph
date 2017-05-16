@@ -1,7 +1,7 @@
 digraph {
 rankdir=LR
 size="8,5"
-	"job.yml"
 	"call_job2.yml"
 		"call_job2.yml" -> "job.yml" [label=<<B>include</B>> color=green]
+	"job.yml"
 }

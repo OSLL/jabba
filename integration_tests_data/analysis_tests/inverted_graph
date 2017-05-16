@@ -1,12 +1,12 @@
 digraph {
 rankdir=LR
 size="8,5"
-	".jjv_config.yml"
-	"call_job3.yml"
-		"call_job3.yml" -> "job2.yml" [label=<<B>include</B>> color=green]
-	"job.yml"
-	"call_job2.yml"
-		"call_job2.yml" -> "job.yml" [label=<<B>include</B>> color=green]
 	"job3.yml"
 	"job2.yml"
+	"call_job3.yml"
+		"call_job3.yml" -> "job2.yml" [label=<<B>include</B>> color=green]
+	"call_job2.yml"
+		"call_job2.yml" -> "job.yml" [label=<<B>include</B>> color=green]
+	"job.yml"
+	".jjv_config.yml"
 }
